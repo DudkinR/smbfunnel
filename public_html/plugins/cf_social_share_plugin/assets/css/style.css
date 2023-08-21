@@ -1,0 +1,108 @@
+.social_icons .fab {
+    padding: 6px;
+    font-size: 20px;
+    width: 35px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.social_icons .fa-facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.social_icons .fa-twitter {
+    background: #55acee;
+    color: white;
+}
+
+.social_icons .fa-google {
+    background: #ed1710;
+    color: white;
+}
+
+.social_icons .fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.social_icons .fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.social_icons .fa-instagram {
+    background: #fa55d4;
+    color: white;
+}
+
+.social_icons .fa-pinterest {
+    background: #cb2027;
+    color: white;
+}
+
+.social_icons .fa-skype {
+    background: #00aff0;
+    color: white;
+}
+
+.social_icons .fa-tumblr {
+    background: #2c4762;
+    color: white;
+}
+
+.social_icons .fa-yahoo {
+    background: #430297;
+    color: white;
+}
+
+.fa-reddit {
+    background: #ff5700;
+    color: white;
+}
+
+.social_icons .fa-whatsapp {
+    background: #13f848;
+    color: white;
+}
+
+.social_icons .fa-digg {
+    background: #2217ff;
+    color: white;
+}
+
+.social_icons .fa-blogger {
+    background: #ff930d;
+    color: white;
+}
+
+.social_icons .fa-buffer {
+    background: #000000;
+    color: rgb(255, 255, 255);
+}
+
+.social_icons .fa-vk {
+    background: #1f38b5;
+    color: white;
+}
+
+.social_icons .fa-xing {
+    background: #23825a;
+    color: white;
+}
+
+.social_icons .fa-telegram {
+    background: #559ede;
+    color: white;
+}
+
+@media screen and (max-width: 540px) {
+    .submit_btn {
+        font-size: 10px;
+    }
+    .add_social_btn
+    {
+        font-size: 10px;
+        margin-left: 80px;
+    }
+}

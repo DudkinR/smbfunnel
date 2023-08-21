@@ -1,0 +1,14 @@
+>> Open only one editor page (Done)
+>> In login screen show option to hide it
+>> Make funnel analysis as Pro feature
+>> Add free or paid feature to templates
+>> Modify .htaccess
+>> Remove first sales template
+>> Remove 3rd optin template
+>> Place the first two optin templates at the end
+>> Issue with Upsell
+>> Add option to modify sales detail
+
+>> Add functionality when price is 0 in COD payment method.
+>> Replace all the extra values of lists.
+>> Replace the data when user enters the data in registered form.

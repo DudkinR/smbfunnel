@@ -1,0 +1,91 @@
+[{
+        "icon": "fab fa-facebook",
+        "name": "Facebook",
+        "url": "https://www.facebook.com/sharer/sharer.php?u="
+    },
+
+    {
+        "icon": "fab fa-twitter",
+        "name": "Twitter",
+        "url": "https://twitter.com/intent/tweet?text="
+    },
+    {
+        "icon": "fab fa-google",
+        "name": "Google",
+        "url": "https://plus.google.com/share?url="
+    },
+
+    {
+        "icon": "fab fa-instagram",
+        "name": "Instagram",
+        "url": "https://www.instagram.com/accounts/login/?next="
+    },
+    {
+        "icon": "fab fa-pinterest",
+        "name": "Pinterest",
+        "url": "https://www.pinterest.com/pin/create/bookmarklet/?media="
+    },
+    {
+        "icon": "fab fa-linkedin",
+        "name": "Linkedin",
+        "url": "https://www.linkedin.com/sharing/share-offsite/?url="
+    },
+    {
+        "icon": "fab fa-skype",
+        "name": "Skype",
+        "url": "https://web.skype.com/share?url="
+    },
+    {
+        "icon": "fab fa-yahoo",
+        "name": "Yahoo",
+        "url": "https://compose.mail.yahoo.com/?Subject="
+    },
+    {
+        "icon": "fab fa-reddit",
+        "name": "Reddit",
+        "url": "https://www.reddit.com/submit?url="
+    },
+    {
+        "icon": "fab fa-whatsapp",
+        "name": "Whatsapp",
+        "url": "https://api.whatsapp.com/send?text="
+    },
+    {
+        "icon": "fab fa-digg",
+        "name": "Digg",
+        "url": "https://digg.com/"
+    },
+
+    {
+        "icon": "fab fa-blogger",
+        "name": "Blogger",
+        "url": "https://www.blogger.com/blog_this.pyra?t&amp;u="
+    },
+    {
+        "icon": "fab fa-buffer",
+        "name": "Buffer",
+        "url": "https://buffer.com/add?url="
+    },
+    {
+        "icon": "fab fa-vk",
+        "name": "Vkontakte",
+        "url": "http://vk.com/share.php?url="
+    },
+
+    {
+        "icon": "fab fa-xing",
+        "name": "Xing",
+        "url": "https://www.xing.com/spi/shares/new?cb=0&amp;url="
+    },
+
+    {
+        "icon": "fab fa-tumblr",
+        "name": "Tumblr",
+        "url": "https://www.tumblr.com/tagged/social%2Bmedia?sort=top"
+    },
+    {
+        "icon": "fab fa-fab fa-telegram",
+        "name": "Telegram",
+        "url": "https://telegram.me/share/url?url="
+    }
+]

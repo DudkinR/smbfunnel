@@ -1,0 +1,12 @@
+<?php
+    $plugin_cb=$plugin_page[0]['cb'];
+    if(is_array($plugin_cb))
+    {
+        $plg_func=$plugin_cb[1];
+        $plugin_cb[0]->$plg_func();
+    }
+    else
+    {
+        $plugin_cb();
+    }
+?>

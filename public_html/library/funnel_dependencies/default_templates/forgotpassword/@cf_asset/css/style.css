@@ -1,0 +1,37 @@
+body
+{
+    background:linear-gradient(to right, #0f2027,#203a43,#2c5364)
+}
+.container-fpwd .logo
+{
+    max-height:60px;
+}
+.container-fpwd
+{
+    margin-top:30% !important;
+}
+.container-fpwd h4
+{
+    margin-top:10px;
+    font-size:20px;
+}
+.container-fpwd button
+{
+    margin-top:10px;
+}
+.container-fpwd label
+{
+    font-weight:500;
+}
+.container-fpwd .mb-3
+{
+    margin-top:20px;
+}
+.lblreenter
+{
+    margin-top:10px;
+}
+.container-fpwd h6
+{
+    font-size:12px;
+}

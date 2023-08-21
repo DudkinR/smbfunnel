@@ -1,0 +1,289 @@
+<div class="page-wrapper chiller-theme toggled">
+
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+
+    <i class="fas fa-bars"></i>
+
+  </a>
+
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <img class="img-responsive img-thumbnail" src="@cf_asset/img/brand-logo.png">
+        <div id="close-sidebar" data-bs-toggle="tooltip" data-placement="right" title="" data-original-title="Hide Sidebar">
+          <i class="fas fa-chevron-circle-left"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-responsive rounded-circle dynamic-image"   data-src="@cf_asset/img/user.jpg"  src="{student_image}" alt="User picture" width="50" height="50">
+        </div>
+        <div class="user-info">
+          <span class="user-name">Hi! <strong>{first_name}</strong> </span>
+          <span class="user-role">Welcome</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul id="myDiv">
+          <li class="tablinks btn1" style="cursor:pointer">
+            <a class="dropdown-btn active" onclick="openTab(event, 'item')" href="#item" id="defaultOpen">
+              <i class="fa fa-shopping-cart"></i>
+              <span>My Product</span>
+              <!-- <span class="badge badge-pill">2</span> -->
+            </a>
+          </li>
+          <li class="tablinks btn1" style="cursor:pointer">
+            <a class="dropdown-btn" onclick="openTab(event,'profile')"  href="#profile">
+              <i class="fa fa-user"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li class="tablinks btn1" style="cursor:pointer">
+            <a class="dropdown-btn" onclick="openTab(event,'aboutus')"  href="#aboutus">
+              <i class="fa fa-exclamation-circle"></i>
+              <span>About Us</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-btn" href="{logout_url}">
+              <i class="fa fa-power-off"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <a href="{logout_url}" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Logout">
+        <i class="fa fa-power-off"></i>
+      </a>
+    </div>
+  </nav>
+
+  <main class="page-content docs" >
+
+    <div class="container-fluid">
+      <div id="item" class="tabContent" style="display: block;">
+        <h3 class="headline">Documentation</h3>
+        <div class="course-tile row">
+          <div class="col-md-4">
+
+            <div class="card">
+
+              <img src="@cf_asset/img/png-inc.png" alt="Product Image" class="img-fluid card-img-top">
+
+              <div class="card-body">
+
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                  <div class="btn-group">
+
+                    <a href="#" class="btn btn-md viewbutton">Download Now <i class="fa fa-download" aria-hidden="true"></i>
+
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-md-4">
+
+            <div class="card">
+
+              <img src="@cf_asset/img/png-inc.png" alt="Product Image" class="img-fluid card-img-top">
+
+              <div class="card-body">
+
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                  <div class="btn-group">
+
+                    <a href="#" class="btn btn-md viewbutton">Download Now <i class="fa fa-download" aria-hidden="true"></i>
+
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-md-4">
+
+            <div class="card">
+
+              <img src="@cf_asset/img/png-inc.png" alt="Product Image" class="img-fluid card-img-top">
+
+              <div class="card-body">
+
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                  <div class="btn-group">
+
+                    <a href="#" class="btn btn-md viewbutton">Download Now <i class="fa fa-download" aria-hidden="true"></i>
+
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div id="profile" class="tabContent" style="display: none;">
+        <h3 class="headline">Profile</h3>
+        <hr>
+        <div class="container">
+          <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="account-settings">
+                    <div class="user-profile">
+                      <div class="user-avatar">
+                        <img class="dynamic-image" data-src="https://bootdey.com/img/Content/avatar/avatar7.png" src="{student_image}" alt="{name}">
+                      </div>
+                      <h5 class="user-name">{name}</h5>
+                      <h6 class="user-email">{email}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+              <div class="card h-100">
+                <div class="card-body">
+                  <form action="" method="post">
+                    <input type="hidden" name="memberupdate" value="update">
+                    <div class="row gutters">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h6 class="mb-2 text-primary">Personal Details</h6>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="mb-3">
+                          <label for="fullName">Name*</label>
+                          <input type="text" class="form-control" id="fullName" value="{name}" name="name" placeholder="Enter full name">
+                        </div>
+                        <div class="mb-3">
+                          <label for="eMail">Email*</label>
+                          <input type="email" class="form-control" id="eMail" value="{email}" name="email" placeholder="Enter email ID">
+                        </div>
+                        <div class="mb-3">
+                          <p class="validationerr">{validation_error}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row gutters">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="text-left">
+                          <button type="submit" name="submit" class="btn btn-primary" >Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <hr>
+                  <form action="" method="post">
+                    <input type="hidden" name="passwordupdate" value="update" />
+                        <div class="mb-3">
+                          <label>Current Password</label>
+                          <input type="password" name="oldpassword" id="oldpassword" placeholder="Enter Older Password" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label>Enter New Password</label>
+                          <input type="password" name="password" id="password"  placeholder="Enter New Password" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label>Re-enter New Password</label>
+                          <input type="password" name="cpassword" id="repassword"  placeholder="Re-rnter new password" class="form-control">
+                        </div>
+                        <div>
+                          <p class="validationerr">{validation_error}</p>
+                        </div>
+                        <div class="mb-3">
+                          <button class="btn btn-primary"  type="submit">
+                            <i class="fas fa-user-check"></i>&nbsp;Update Password</button>
+                        </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="aboutus" class="tabContent" style="display: none;">
+        <h3 class="headline">About Us</h3>
+        <hr>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+  openDefaultTab();
+dynmaicImage();
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabContent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("dropdown-btn");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+// document.getElementById("defaultOpen").click();
+function openDefaultTab() {
+  let dn = window.location.hash;
+  if( dn !="" )
+  {
+    tabcontent = document.getElementsByClassName("tabContent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    dn = dn.replace("#", "");
+    document.getElementById(`${dn}`).style.display = "block";
+  }
+}
+
+function dynmaicImage()
+{
+  var images = document.querySelectorAll('.dynamic-image');
+  for (var i = 0; i < images.length; i++) {
+    var image = images[i];
+    var src = image.getAttribute('data-src');
+    if( src.length > 0 )
+    {
+      image.src = src;
+    }
+  }
+}
+</script>

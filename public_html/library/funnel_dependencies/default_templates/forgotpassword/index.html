@@ -1,0 +1,81 @@
+<div class="container-fluid">
+
+    <div class="row">
+
+
+
+        <div class="col-sm-4 offset-sm-4">
+
+            <div class="card container-fpwd">
+
+                <div class="card-body">
+
+                    <center><a href="#" class="logourl"><img class="logo" src="@cf_asset/img/logo.png" alt="logo"></a></center>
+
+                    <center><h4>Forgot Password?</h4></center>
+
+                    <center><span style="color:firebrick"><strong>{validation_error}</strong></span></center>
+
+
+
+                    <div class="mb-3">
+
+                        <form action="" method="post">
+
+                        {insert_email}
+
+                        <label>Enter Your Email Id</label>
+
+                        <input type="email" name="email" class="form-control" placeholder="Enter Your Email ID where the send the OTP">
+
+                        
+
+                        <button type="submit" class="btn btn-info btn-block">Send Reset Link</button>
+
+                        {/insert_email}
+
+                        {confirmation_message}
+
+                        <div class="alert alert-info"><strong>We have sent a password reset link to the email id you provided, please visit.</strong></div>
+
+                        {/confirmation_message}
+
+                        {update_password}
+
+                        <label>Enter New Password</label>
+
+                        <input type="password" name="password" class="form-control" placeholder="Enter New Password">
+
+
+
+                        <label class="lblreenter">Re-enter New Password</label>
+
+                        <input type="password" class="form-control" name="reenterpassword" placeholder="Re-enter Password">
+
+                        <button type="submit" class="btn btn-info btn-block" >Update Password</button>
+
+                        {/update_password}
+
+                        </form>
+
+                    </div>
+
+
+
+                    <center><h6>2020 @<a href="#">yourdomain.dotcom</a></h6></center>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
