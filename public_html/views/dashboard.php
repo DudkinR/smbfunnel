@@ -64,8 +64,7 @@ else{
 $members_data =
 
   //total visitor
-
-  $viewquery = $mysqli->query($sql_text);
+ $viewquery = $mysqli->query($sql_text);
 
 $totalviews = 0;
 if ($viewquery) {
@@ -76,7 +75,17 @@ if ($viewquery) {
 }
 // print_r($salescount);
 
+if($_SESSION['access' . get_option('site_token')]==='admin'){
 $member = "select count(`id`) as `countid` from `" . $dbpref . "quick_member`";
+}
+else{
+  $member = "SELECT count(`a`.`id`) as `countid`
+  FROM `" . $dbpref . "quick_member` AS `a`
+  LEFT JOIN `" . $dbpref . "quick_pagefunnel` AS `b` ON `a`.`pageid` = `b`.`id`
+  LEFT JOIN `" . $dbpref . "quick_funnels` AS `c` ON `b`.`funnelid` = `c`.`id`
+  LEFT JOIN `" . $dbpref . "user_funnel` AS `d` ON `c`.`id` = `d`.`funnel_id`
+  WHERE `d`.`user_id` =".$_SESSION['user' . get_option('site_token')] ;
+}
 $query = $mysqli->query($member);
 $membercount = 0;
 if ($query) {
@@ -86,12 +95,22 @@ if ($query) {
 
 // print_r($membercount);
 
-
+if($_SESSION['access' . get_option('site_token')]==='admin'){
 $sentmails = "select `id` from `" . $dbpref . "quick_subscription_mail_schedule` where status=0 or status=1 or status=2";
+}
+else{
+ $sentmails = "select `id` from `" . $dbpref . "quick_subscription_mail_schedule` where status=0 or status=1 or status=2 and `user_id` =".$_SESSION['user' . get_option('site_token')];
+}
+
 $query = $mysqli->query($sentmails);
 $sentmailscount = $query->num_rows;
 
+if($_SESSION['access' . get_option('site_token')]==='admin'){
 $total_products = "SELECT `id` FROM `" . $dbpref . "all_products`";
+}
+else{
+  $total_products = "SELECT `id` FROM `" . $dbpref . "all_products` WHERE `user_id` =".$_SESSION['user' . get_option('site_token')];
+}
 $pquery = $mysqli->query($total_products);
 $products = $pquery->num_rows;
 
@@ -104,9 +123,12 @@ else{
 $equery = $mysqli->query($emailists);
 $lists = $equery->num_rows;
 
-
-
+if($_SESSION['access' . get_option('site_token')]==='admin'){
 $sent = "select count(`id`) as `countid` from `" . $dbpref . "quick_subscription_mail_schedule` where status in ('1','2','3')";
+}
+else{
+  $sent = "select count(`id`) as `countid` from `" . $dbpref . "quick_subscription_mail_schedule` where status in ('1','2','3') and `user_id` =".$_SESSION['user' . get_option('site_token')];
+}
 $query = $mysqli->query($sent);
 $sentcount = 0;
 if ($query) {
@@ -114,7 +136,12 @@ if ($query) {
   $sentcount = $r->countid;
 }
 
+if($_SESSION['access' . get_option('site_token')]==='admin'){
 $seen = "select count(`id`) as `countid` from `" . $dbpref . "quick_subscription_mail_schedule` where status in ('2','3')";
+}
+else{
+  $seen = "select count(`id`) as `countid` from `" . $dbpref . "quick_subscription_mail_schedule` where status in ('2','3') and `user_id` =".$_SESSION['user' . get_option('site_token')];
+}
 $query = $mysqli->query($seen);
 $seencount = 0;
 if ($query) {
@@ -122,14 +149,26 @@ if ($query) {
   $seencount = $r->countid;
 }
 
-$totalmembers_qry = $mysqli->query("select count(distinct(concat(`email`,`funnelid`,`pageid`))) as `countid` from `" . $dbpref . "quick_member` where `email` not in ('', ' ')");
+if($_SESSION['access' . get_option('site_token')]==='admin'){
+  $total_sql="select count(distinct(concat(`email`,`funnelid`,`pageid`))) as `countid` from `" . $dbpref . "quick_member` where `email` not in ('', ' ')";
+}
+else{
+  $total_sql = "SELECT count(distinct(concat(`a`.`email`, `a`.`funnelid`, `a`.`pageid`))) as `countid`
+  FROM `" . $dbpref . "quick_member` AS `a`
+  LEFT JOIN `" . $dbpref . "quick_pagefunnel` AS `b` ON `a`.`pageid` = `b`.`id`
+  LEFT JOIN `" . $dbpref . "quick_funnels` AS `c` ON `b`.`funnelid` = `c`.`id`
+  LEFT JOIN `" . $dbpref . "user_funnel` AS `d` ON `c`.`id` = `d`.`funnel_id`
+  WHERE `d`.`user_id` =".$_SESSION['user' . get_option('site_token')]." and `a`.`email` not in ('', ' ')
+  ";
+}
+$totalmembers_qry = $mysqli->query($total_sql);
 $totalmembers = 0;
 if ($totalmembers_qry) {
   $tatalmemberob = $totalmembers_qry->fetch_object();
   $totalmembers = $tatalmemberob->countid;
 }
 
-
+/// What is the permission of the user
 $sql_text="SELECT * FROM `" . $dbpref . "users` WHERE `id` = " . $user_id;
  $permission_query = $mysqli->query($sql_text);
 //$arr=explode(',',$data->permission); if(in_array($_GET['page'],$arr)||in_array('admin',$arr))
@@ -154,7 +193,6 @@ $permission = explode(',', $res_permission->permission);
 <div class="container-fluid  no-padding">
   <?php
  // echo "<hr>"; print_r($permission);  echo "<hr>";
-
   ?>
   <?php if ($funnels_data['total_rows'] > 0) { ?>
     <div class="row">
@@ -162,12 +200,14 @@ $permission = explode(',', $res_permission->permission);
         <div class="col-md-12 nopadding ">
           <div class="row">
             <div class="col-md-12 dashboard-nav d-flex">
+            
               <ul class="dashboard-topnav">
                 <?php if (in_array('create_funnel', $permission) || in_array('admin', $permission)) { ?>
                   <a href="index.php?page=create_funnel">
                   <li><i class="fas fa-funnel-dollar"></i>&nbsp;<?php w('Create&nbsp;Funnel'); ?>1</li>
                 </a>
                 <?php } ?>
+               
                 <?php if (in_array('products', $permission) || in_array('admin', $permission)) { ?>
                 <a href="index.php?page=products">
                   <li><i class="fas fa-box-open"></i>&nbsp;<?php w('Create&nbsp;Product'); ?></li>
@@ -196,6 +236,7 @@ $permission = explode(',', $res_permission->permission);
               </ul>
             </div>
           </div>
+          
           <div class="row">
             <div class="col-md-12 row nopadding">
             <?php if (in_array('all_funnels', $permission) || in_array('admin', $permission)) { ?>    
@@ -310,6 +351,7 @@ $permission = explode(',', $res_permission->permission);
             <!-- graphes-->
 
             <?php
+             
                         $lastthirtydays = array();
                         $lastthirtydayviews = array();
                         $lastthirtdayconverts = array();
@@ -331,6 +373,7 @@ $permission = explode(',', $res_permission->permission);
                             $lastthirtydaylinksvisits[$temponeofthirtydays] = 0;
                         }
                         //members
+                       
                         $hold_mdates = array();
                         $lastthirtymembershipquery = $mysqli->query("select `date_created`, `email`, `funnelid` from `" . $dbpref . "quick_member` where `date_created`>='" . $sfshop_twentynine_minus . "' and email not in('',' ')");
                         if ($lastthirtymembershipquery->num_rows) {
@@ -368,7 +411,7 @@ $permission = explode(',', $res_permission->permission);
                             while ($r = $visitsviewlastthirtyquery->fetch_object()) {
                                 ++$lastthirtydayviews[date('d-M-Y', $r->visitedon)];
                             }
-                        }
+                        }  
                         //convertedon
                         if($_SESSION['access' . get_option('site_token')]==='admin')
                         { 
@@ -506,6 +549,7 @@ $permission = explode(',', $res_permission->permission);
                         }
 
                         //print_r($viewslastthirtydatearr);
+                      
                         ?>
 
             <div class="col-md-12">
@@ -706,6 +750,7 @@ $permission = explode(',', $res_permission->permission);
 
                         echo "<tr><td>" . t($hashcount) . "</td><td>" .$r->payment_id . "</td><td>" . $r->purchase_name . "</td><td>" . $r->purchase_email . "</td><td>" . $date . "</td><td onclick='viewPurchaseDetail(".$r->id.")' style='cursor:pointer;'><i class='fas fa-eye' style='margin-right:4px;'></i></td></tr>";
                       }
+                      
                       ?>
                       <!--/srch-->
                     </tbody>
@@ -717,7 +762,9 @@ $permission = explode(',', $res_permission->permission);
             </div>
           </div>
         </div>
-        <?php } ?>
+        <?php } 
+       
+        ?>
         <?php if (in_array('sequence', $permission) || in_array('admin', $permission)) { ?>
                 <!-- Sequence Table -->
                 <div class="row justify-content-center">
@@ -840,7 +887,8 @@ $permission = explode(',', $res_permission->permission);
           </div>
 
         </div>
-        <?php } ?>
+        <?php } 
+            ?>
         <?php if (in_array('all_funnels', $permission) || in_array('admin', $permission)) { ?>
         <!-- Members Table -->
         <div class="row justify-content-center">

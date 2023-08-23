@@ -45,6 +45,9 @@ if (isset($_GET['pagecount'])) {
 			<div class="row productcontainer">
 				<div class="col-sm-12">
 					<div class="table-responsive">
+						<?php
+					//	print_r($products);
+						?>
 						<table class="table table-striped" id="tableforsearch">
 							<thead>
 								<tr>
@@ -61,6 +64,7 @@ if (isset($_GET['pagecount'])) {
 							<tbody id="keywordsearchresult">
 								<!-- keyword search -->
 								<?php
+								
 								if (($products !== 0) && is_object($products['data'])) {
 									while ($r = $products['data']->fetch_object()) {
 										$count_product_used = $data_arr['sell']->getNubmerOfTimesTheProductUsed($r->id);

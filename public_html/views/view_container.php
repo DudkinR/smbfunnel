@@ -5,6 +5,8 @@ if (isset($_POST['cf_do_change_language'])) {
     update_option('app_language', $_POST['cf_do_change_language']);
     update_option('qfnl_setup_token', time());
 }
+$mysqli = $info['mysqli'];
+$dbpref = $info['dbpref'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -187,7 +189,14 @@ if (isset($_POST['cf_do_change_language'])) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                    <?php if($_SESSION['access' . get_option('site_token')]==='admin') {?>
+                    <?php 
+                    $user_id=$_SESSION['user' . get_option('site_token')];
+                    $sql_text="SELECT * FROM `" . $dbpref . "administrator` WHERE `user_id` = " . $user_id;
+                    $access_query = $mysqli->query($sql_text);
+                    $access_data = $access_query->fetch_assoc();
+                    $_SESSION['access' . get_option('site_token')]= $access_data['type'];
+               
+                    if($_SESSION['access' . get_option('site_token')]==='admin') {?>
                        <li class="user-pro"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="assets/img/profile/qfnlladdprofile.png" alt="user-img" class="img-circle"><span class="hide-menu">
                             Admin
                         </span></a>

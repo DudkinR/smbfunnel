@@ -66,7 +66,9 @@ class Sellcontrol
 		$chk=$mysqli->query("select `id` from `".$table."` where `productid`='".$product."'");
         if($chk->num_rows>0)
         return "Product Already Exists";
-		$in=$mysqli->query("insert into `".$table."` (`productid`,`title`,`url`,`download_url`,`image`,`description`,`price`,`currency`,`shipping`,`subproducts`,`opproducts`,`tax`,`createdon`) values ('".$product."','".$title."','".$url."','".$download_url."','".$p_image."','".$description."','".$price."','".$currency."','".$sheeping."','".$subproducts."','".$opproducts."','".$tax."','".time()."')");
+		$user_id=$_SESSION['user'.get_option('site_token')];
+		 $insert_sql="insert into `".$table."`(`id`,`productid`,`title`,`url`,`download_url`,`image`,`description`,`price`,`currency`,`shipping`,`subproducts`,`opproducts`,`tax`,`createdon`,`user_id`) values ( NULL, '".$product."','".$title."','".$url."','".$download_url."','".$p_image."','".$description."','".$price."','".$currency."','".$sheeping."','".$subproducts."','".$opproducts."','".$tax."','".time()."',".$user_id.")";
+		$in=$mysqli->query($insert_sql);
 
 			if($in){
 				$data_to_provide_inplugins['id']=$mysqli->insert_id;
@@ -145,10 +147,24 @@ class Sellcontrol
 		$mysqli=$this->mysqli;
 		$pref=$this->dbpref;
 		$table=$pref."all_products";
+	$user_id=$_SESSION['user'.get_option('site_token')];
+		$access=$_SESSION['access'.get_option('site_token')];
+		if($access=='admin')
+		{
+			$add_user="";
+			$first_add_user="";
+		}
+		else
+		{
+		$add_user=" and `user_id`=".$user_id."";
+		$first_add_user=" where `user_id`=".$user_id."";
 
-		$totalrecord=$mysqli->query("select count(`id`) as countid from `".$table."`");
+			
+		}
+		$totalrecord=$mysqli->query("select count(`id`) as countid from `".$table."` ".$first_add_user." ");
 		$totalrecord=$totalrecord->fetch_object();
 		$totalrecord=$totalrecord->countid;
+	
 
 		$condition=1;
 		$date_between=dateBetween('createdon');
@@ -156,11 +172,17 @@ class Sellcontrol
 		{
 			$condition=$date_between[0];
 		}
-		$salescountquery="(select count(`id`) from `".$pref."all_sales` where `productid`=`a`.id) as `sales_count`";
+		$salescountquery="(select count(`id`) from `".$pref."all_sales`
+		 where `productid`=`a`.id) as `sales_count`";
 		if(isset($_POST['onpage_search']) && strlen($_POST['onpage_search'])>0)
 		{
 			$search=$mysqli->real_escape_string($_POST['onpage_search']);
-			$qry="select `a`.*,".$salescountquery." from `".$table."` as `a`  where `productid` like '%".$search."%' or `title` like '%".$search."%' or `download_url` like '%".$search."%' or `url` like '%".$search."%' or `description` like '%".$search."%' order by `id` desc";
+			$qry="select `a`.*,".$salescountquery."
+			 from `".$table."` as `a`  where `productid` like '%".$search."%' 
+			 or `title` like '%".$search."%' or `download_url` like '%".$search."%' 
+			 or `url` like '%".$search."%' or `description` like '%".$search."%' 
+			 ".$add_user."
+			  order by `id` desc";
 		}
 		else
 		{
@@ -171,17 +193,21 @@ class Sellcontrol
 		}
 		if($last==0)
 		{
-			$qry="select `a`.*,".$salescountquery." from `".$table."` as `a` where ".$condition." order by ".$order_by." limit ".get_option('qfnl_max_records_per_page')."";
+			$qry="select `a`.*,".$salescountquery." 
+			from `".$table."` as `a` where ".$condition." ".$add_user." order by ".$order_by." 
+			limit ".get_option('qfnl_max_records_per_page')."";
 		}
 		else
 		{
 			$limitstart=($last*get_option('qfnl_max_records_per_page'))-get_option('qfnl_max_records_per_page');
 			$limitend=get_option('qfnl_max_records_per_page');
 
-			$qry="select `a`.*,".$salescountquery." from `".$table."` as `a` where ".$condition." order by ".$order_by." limit ".$limitstart.",".$limitend."";
+			$qry="select `a`.*,".$salescountquery." 
+			from `".$table."` as `a` where ".$condition." ".$add_user."
+			order by ".$order_by." limit ".$limitstart.",".$limitend."";
 		}
 		}
-	//	echo $qry;
+		
 		$qry=$mysqli->query($qry);
 		if($qry->num_rows>0)
 		{
@@ -273,7 +299,18 @@ class Sellcontrol
 		$mysqli=$this->mysqli;
 		$pref=$this->dbpref;
 		$table=$pref."all_products";
-		$qry=$mysqli->query("select `id`,`productid`,`title` from `".$table."` order by id desc");
+		$user_id=$_SESSION['user'.get_option('site_token')];
+		$access=$_SESSION['access'.get_option('site_token')];
+		if($access=='admin')
+		{
+			$text_sql="select `id`,`productid`,`title` from `".$table."` order by id desc";
+		}
+		else
+		{
+			$text_sql="select `id`,`productid`,`title` from `".$table."` where `user_id`=".$user_id." order by id desc";
+			
+		}
+		$qry=$mysqli->query($text_sql);
 		if($qry->num_rows>0)
 		{
 			return $qry;
