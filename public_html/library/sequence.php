@@ -43,7 +43,7 @@ class Sequence
 		$updater = $mysqli->real_escape_string($update);
 		$checkexist = $mysqli->real_escape_string($checkexist);
 		$title = $mysqli->real_escape_string($title);
-
+		$user_id = $_SESSION['user' . get_option('site_token')];
 		// echo strpos($listid,"all");
 		if (strpos($listid,"all") == 1) {
 			$listid = "@all@";
@@ -92,7 +92,7 @@ class Sequence
 		$description = $_POST['description'];
 		$title = $_POST['title'];
 		$updater = $_POST['update'];
-
+		$user_id = $_SESSION['user' . get_option('site_token')];
 		$description = $mysqli->real_escape_string($description);
 		$title = $mysqli->real_escape_string($title);
 		$updater = $mysqli->real_escape_string($updater);
@@ -103,7 +103,7 @@ class Sequence
 			$insert = $updater;
 		}
 		else{
-			$insert = "INSERT INTO `$table` (`title`,`description`, `created_on`) VALUES ('$title','$description','".time()."')";
+			$insert = "INSERT INTO `$table` (`title`,`description`, `created_on`,`user_id`) VALUES ('$title','$description','".time()."', '$user_id')";
 			$res = $mysqli->query($insert);
 			$insert = $mysqli->insert_id;
 		}

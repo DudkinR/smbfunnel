@@ -9,7 +9,8 @@ if (isset($_POST['delrecid'])) {
   $mysqli->query($delete);
   $mysqli->query($delete1);
 }
-
+$user_id = $_SESSION['user' . get_option('site_token')];
+$access=$_SESSION['access'. get_option('site_token')];
 $start_from = 0;
 if (isset($_GET["pagecount"])) {
   $start_from = ($_GET["pagecount"] * get_option('qfnl_max_records_per_page')) - get_option('qfnl_max_records_per_page');
@@ -22,20 +23,36 @@ if (strlen($date_between[0]) > 1) {
 }
 if (isset($_POST['onpage_search']) && strlen($_POST['onpage_search']) > 0) {
   $_POST['onpage_search'] = $mysqli->real_escape_string($_POST['onpage_search']);
-  $query = "SELECT * FROM `" . $pref . "new_sequence` where `title` like '%" . $_POST['onpage_search'] . "%'";
+  if($access=='admin'){
+    $query = "SELECT * FROM `" . $pref . "new_sequence` where `title` like '%" . $_POST['onpage_search'] . "%'";
+  }
+  else{
+    $query = "SELECT * FROM `" . $pref . "new_sequence` where `title` like '%" . $_POST['onpage_search'] . "%' and `user_id`=$user_id";
+  }
+  
 } else {
   $order_by = '`id` desc';
   if (isset($_GET['arrange_records_order'])) {
     $order_by = base64_decode($_GET['arrange_records_order']);
   }
-
-  $query = "SELECT * FROM `" . $pref . "new_sequence` where  " . $timelimit_condition . " order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
-}
+  if($access=='admin'){
+    $query = "SELECT * FROM `" . $pref . "new_sequence` where  " . $timelimit_condition . " order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
+  }
+  else{
+    $query = "SELECT * FROM `" . $pref . "new_sequence` where  " . $timelimit_condition . " and `user_id`=$user_id order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
+  }
+  }
 
 //echo $query;
 $result = $mysqli->query($query);
+if($access=='admin'){
+  $sql_text = "select count(`id`) as `countid` from `" . $pref . "new_sequence` where  " . $timelimit_condition . "";
+}
+else{
+  $sql_text = "select count(`id`) as `countid` from `" . $pref . "new_sequence` where  " . $timelimit_condition . " and `user_id`=$user_id";
+}
 
-$page_query = $mysqli->query("select count(`id`) as `countid` from `" . $pref . "new_sequence` where  " . $timelimit_condition . "");
+$page_query = $mysqli->query($sql_text);
 $page_ob =  $page_query->fetch_object();
 ?>
 <div class="container-fluid">

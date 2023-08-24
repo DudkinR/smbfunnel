@@ -1409,7 +1409,7 @@ class Sellcontrol
 			
 		}
 	}
-		 echo $sql;
+		// echo $sql;
 		$qry=$mysqli->query($sql);
 
 		return array('sales'=>$qry,'total'=>$total,'extracols'=>$extrafields);
