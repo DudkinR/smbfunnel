@@ -1,5 +1,6 @@
 <?php
 $sales_ob=$data_arr['sales_ob'];
+//print_r($sales_ob);
 ?>
 <div class="container-fluid">
 <div class="card pb-2  br-rounded" id="hidecard1">
@@ -94,6 +95,7 @@ if(isset($_GET['page_count']))
 {
 	$hashcount=($_GET['page_count']*10)-10;
 }
+//print_r($sales['sales']);
 while($r=$sales['sales']->fetch_object())
 {
 	
@@ -122,6 +124,7 @@ while($r=$sales['sales']->fetch_object())
 	$product="";
 
 	$productdata=$sales_ob->getProduct($r->productid);
+
 
 	if($productdata)
 	{

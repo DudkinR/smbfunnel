@@ -161,7 +161,8 @@ class Sellcontrol
 
 			
 		}
-		$totalrecord=$mysqli->query("select count(`id`) as countid from `".$table."` ".$first_add_user." ");
+		echo $text_sql_count="select count(`id`) as countid from `".$table."` ".$first_add_user." ";
+		$totalrecord=$mysqli->query($text_sql_count);
 		$totalrecord=$totalrecord->fetch_object();
 		$totalrecord=$totalrecord->countid;
 	
@@ -1170,41 +1171,43 @@ class Sellcontrol
 		$pref=$this->dbpref;
 		$table=$pref."all_sales";
 		$cod_table=$pref.'qfnl_cod';
+		$user_id=$_SESSION['user'.get_option('site_token')];
+		$access=$_SESSION['access'.get_option('site_token')];
 
 		$cod_type="";
 		$cod_type_where="";
 
 		if($type=='cod')
 		{
-			$cod_type=" `id` in (select `sell_id` from `".$cod_table."`)";
+			$cod_type=" `a`.`id` in (select `sell_id` from `".$cod_table."`)";
 		}
 		else if($type=='cod_shipped')
 		{
-			$cod_type=" `id` in (select `sell_id` from `".$cod_table."`) and `shipped`='1'";
+			$cod_type=" `a`.`id` in (select `sell_id` from `".$cod_table."`) and `shipped`='1'";
 		}
 		else if($type=='cod_pending')
 		{
-			$cod_type=" `id` in (select `sell_id` from `".$cod_table."`) and `shipped`='0'";
+			$cod_type=" `a`.`id` in (select `sell_id` from `".$cod_table."`) and `shipped`='0'";
 		}
 		else if($type=='non_cod')
 		{
-			$cod_type=" `id` not in (select `sell_id` from `".$cod_table."`)";
+			$cod_type=" `a`.`id` not in (select `sell_id` from `".$cod_table."`)";
 		}
 		else if($type=='non_cod_shipped')
 		{
-			$cod_type=" `id` not in (select `sell_id` from `".$cod_table."`) and `shipped`='1'";
+			$cod_type=" `a`.`id` not in (select `sell_id` from `".$cod_table."`) and `shipped`='1'";
 		}
 		else if($type=='non_cod_pending')
 		{
-			$cod_type=" `id` not in (select `sell_id` from `".$cod_table."`) and `shipped`='0'";
+			$cod_type=" `a`.`id` not in (select `sell_id` from `".$cod_table."`) and `shipped`='0'";
 		}
 		else if($type=='all_shipped')
 		{
-			$cod_type=" `shipped`='1'";
+			$cod_type=" `a`.`shipped`='1'";
 		}
 		else if($type=='all_pending')
 		{
-			$cod_type=" `shipped`='0'";
+			$cod_type=" `a`.`shipped`='0'";
 		}
 		if(strlen($cod_type)>1)
 		{
@@ -1226,7 +1229,32 @@ class Sellcontrol
 			$datebetween .=" and `id`=".$provided_sell_id;
 		} 
 
-		$countsql="select count(`id`) as totaloptins from `".$table."` where 1".$datebetween;
+		if($access=='admin')
+		{
+			$countsql="select count(`id`) as totaloptins from `".$table."` where 1 ".$datebetween;
+			$add_user = '';
+			$datebetween_user = $datebetween;
+		}
+		else
+		{
+			// join  $pref.all_products table to get product id and user_id add to  productid from $table 
+
+			$countsql="SELECT COUNT(`".$table."`.`id`) AS `totaloptins` 
+			FROM `".$table."` 
+			JOIN `".$pref."all_products` ON `".$pref."all_products`.`id` = `".$table."`.`productid` 
+			WHERE `".$pref."all_products`.`user_id` = '".$user_id."'
+			".$datebetween;
+			$add_user = " AND `".$pref."all_products`.`user_id` = '".$user_id."'";
+			if($datebetween!==''){
+				$datebetween_user = $datebetween." AND `c`.`user_id` = '".$user_id."' ";
+			}
+			else{
+				$datebetween_user = " WHERE `c`.`user_id` = '".$user_id."' ";
+			}
+			
+
+		}
+	//	echo $countsql;
 		$baseurl="";
 		$extrafields=0;
 		$total=0;
@@ -1241,21 +1269,40 @@ class Sellcontrol
 		}
 
 		if($pagecount==0)
-		{
-		$sql="select * from `".$table."` where `parent`='0'".$datebetween." order by id desc limit ".$limit."";
+		{	
+			$sql="select * from `".$table."` as `a`
+			JOIN `".$pref."all_products` as `b`ON `b`.`id` = `a`.`productid` 
+			where `a`.`parent`='0'".$datebetween." 
+			order by `a`.`id` desc limit ".$limit;
+	
+	//	$sql="select * from `".$table."` where `parent`='0'".$datebetween." order by id desc limit ".$limit."";
 		}
 		else
 		{
 		$pagecount=($pagecount*10)-10;
 
-		$sql="select * from `".$table."` where `parent`='0'".$datebetween." order by `id` desc limit ".$pagecount.", ".$limit."";
+		$sql="select * from `".$table."` as `a`
+		JOIN `".$pref."all_products` as `b`ON `b`.`id` = `a`.`productid` 
+		where `a`.`parent`='0'".$datebetween." 
+		order by `id` desc limit ".$pagecount.", ".$limit."";
 		}
-
-	//	echo $sql;
-
 		if(is_numeric($funnel_id))
 		{
-		$countsql="select count(`id`) as totaloptins from `".$table."` where productid='".$funnel_id."'".$datebetween;
+			if($access=='admin')
+			{
+				$countsql="select count(`id`) as totaloptins from `".$table."` as `a`
+				where `a`.productid='".$funnel_id."'".$datebetween;
+			}
+			else
+			{
+				$countsql="select count(`id`) as totaloptins from `".$table."` as `a`
+			JOIN `".$pref."user_funnel` as `b` ON `a`.`funnnelid` = `b`.`funnel_id`
+			JOIN `".$pref."administrator` as `c`ON `b`.`user_id` = `c`.`user_id`
+			where `a`.productid='".$funnel_id."'".$datebetween_user;
+		}
+			echo $countsql;
+			echo "<br>";
+		
 		 $total_qry=$mysqli->query($countsql);
 		if($total_qry)
 		{
@@ -1266,28 +1313,103 @@ class Sellcontrol
 		}
 		if($pagecount==0)
 		{
-		$sql="select * from `".$table."` where productid='".$funnel_id."'".$datebetween." order by `id` desc limit ".$limit."";
+			if($access=='admin'){
+				$sql="select * from `".$table."` as `a`
+				where `a`.`productid`='".$funnel_id."'".$datebetween." 
+				order by `id` desc limit ".$limit."";
+			}
+			else{
+				$sql="select * from `".$table."` as `a`
+				JOIN `".$pref."all_products` as `b`ON `b`.`id` = `a`.`productid` 
+				where `a`.`parent`='0'".$datebetween." 
+				order by `a`.`id` desc limit ".$limit;
+			}
+						
 		}
 		else
 		{
-		$pagecount=($pagecount*10)-10;
-		$sql="select * from `".$table."` where productid='".$funnel_id."'".$datebetween." order by `id` desc limit ".$pagecount.", ".$limit."";
+
+			$pagecount=($pagecount*10)-10;
+				if($access=='admin'){
+					$sql="select * from `".$table."` as  `a`
+					where `a`.`productid`='".$funnel_id."'".$datebetween."
+					order by `a`.`id` desc limit ".$pagecount.", ".$limit."";
+				}
+				else{
+					$sql="select * from `".$table."` as `a`
+					JOIN `".$pref."all_products` as `b`ON `b`.`id` = `a`.`productid` 
+					where `a`.`parent`='0'".$datebetween." 
+					order by `a`.`id` desc limit ".$pagecount.", ".$limit."";
+				}
 		}
-        }
+		}
+
 
 		if(strlen($search)>0)
 		{
 		$search=$mysqli->real_escape_string($search);
 		if(is_numeric($funnel_id))
 		{
-			$sql="select * from `".$table."` where productid='".$funnel_id."' and (paymentmethod like '%".$search."%' or payment_id like '%".$search."%' or shippingdetail like '%".$search."%' or purchase_name like '%".$search."%' or purchase_email like '%".$search."%')".$cod_type." order by id desc";
+			if($access == 'admin'){
+				$sql="select * from `".$table."` as `a`.
+				where `a`.`productid`='".$funnel_id."' 
+				and (
+					`a`.`paymentmethod` like '%".$search."%' 
+					or `a`.`payment_id` like '%".$search."%' 
+					or `a`.`shippingdetail` like '%".$search."%' 
+					or `a`.`purchase_name` like '%".$search."%' 
+					or `a`.`purchase_email` like '%".$search."%'
+					)".$cod_type." 
+				order by `a`.`id` desc";
+			}
+			else{
+				$sql="select * from `".$table."` as `a`
+				JOIN `".$pref."all_products` as `b`ON `b`.`id` = `a`.`productid` 
+				where 
+				`b`.`user_id` = '".$user_id."'
+				AND `a`.`parent`='0'".$datebetween." 
+				and (
+					`a`.`paymentmethod` like '%".$search."%' 
+					or `a`.`payment_id` like '%".$search."%' 
+					or `a`.`shippingdetail` like '%".$search."%' 
+					or `a`.`purchase_name` like '%".$search."%' 
+					or `a`.`purchase_email` like '%".$search."%'
+					)".$cod_type." 
+				order by `a`.`id` desc";
+			}
+				
 		}
 		else
 		{
-			$sql="select * from `".$table."` where (paymentmethod like '%".$search."%' or payment_id like '%".$search."%' or shippingdetail like '%".$search."%' or purchase_name like '%".$search."%' or purchase_email like '%".$search."%')".$cod_type." order by id desc";
+			if($access == 'admin'){
+				$sql="select * from `".$table."` as `a`
+				 where (
+					`a`.`paymentmethod` like '%".$search."%' 
+					or `a`.`payment_id` like '%".$search."%' 
+					or `a`.`shippingdetail` like '%".$search."%' 
+					or `a`.`purchase_name` like '%".$search."%' 
+					or `a`.`purchase_email` like '%".$search."%'
+					)".$cod_type." 
+					order by `a`.`id` desc";
+			}
+			else{
+				$sql="select * from `".$table."` as `a`
+				JOIN `".$pref."all_products` as `b`ON `b`.`id` = `a`.`productid` 
+				where
+				`b`.`user_id` = '".$user_id."'
+				AND (
+					`a`.`paymentmethod` like '%".$search."%' 
+					or `a`.`payment_id` like '%".$search."%' 
+					or `a`.`shippingdetail` like '%".$search."%' 
+					or `a`.`purchase_name` like '%".$search."%' 
+					or `a`.`purchase_email` like '%".$search."%'
+					)".$cod_type." 
+				order by `a`.`id` desc";
+			}
+			
 		}
-		}
-		
+	}
+		 echo $sql;
 		$qry=$mysqli->query($sql);
 
 		return array('sales'=>$qry,'total'=>$total,'extracols'=>$extrafields);
