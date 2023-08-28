@@ -15,10 +15,22 @@ class Smtpcontrol
 		$pref=$this->dbpref;
 		$table=$pref."quick_smtp_setting";
 		$id=$mysqli->real_escape_string($id);
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin')
+		{
+			$where_data = " where 1";
+			$add_user = " ";
+		}
+		else
+		{
+			$where_data = " where user_id = '".$user_id."'";
+			$add_user = " and user_id = '".$user_id."'";
+		}
 		
 		if($all==1)
 		{
-			$qry=$mysqli->query("select * from `".$table."` order by id desc");
+			$qry=$mysqli->query("select * from `".$table."` ".$where_data." order by id desc");
 			if($qry->num_rows>0)
 			{
 				return $qry;
@@ -30,7 +42,7 @@ class Smtpcontrol
 		}
 		else
 		{
-			$qry=$mysqli->query("select * from `".$table."` where `id`=".$id."");
+			$qry=$mysqli->query("select * from `".$table."` where `id`=".$id." ".$add_user." limit 1");
 			if($qry->num_rows>0)
 			{
 				return $qry->fetch_object(); 

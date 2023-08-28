@@ -18,7 +18,8 @@ class Smtp
                $mysqli=$this->mysqli;
                $pref=$this->dbpref;
                $date=time();
- $sql="INSERT INTO `".$pref."quick_smtp_setting`(title,hostname,port,encryption,fromname,fromemail,username,password,replyname,replyemail,created_at)VALUES('".$title."','".$hostname."','".$port."','".$encryption."','".$fromname."','".$fromemail."','".$username."','".$password."','".$replyname."','".$replyemail."','".$date."')";
+               $user_id = $_SESSION['user' . get_option('site_token')];
+               $sql="INSERT INTO `".$pref."quick_smtp_setting`(title,hostname,port,encryption,fromname,fromemail,username,password,replyname,replyemail,created_at,user_id)VALUES('".$title."','".$hostname."','".$port."','".$encryption."','".$fromname."','".$fromemail."','".$username."','".$password."','".$replyname."','".$replyemail."','".$date."','".$user_id."')";
 
            if ($mysqli->query($sql) === TRUE)
            {

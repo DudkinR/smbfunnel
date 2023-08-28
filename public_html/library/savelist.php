@@ -17,14 +17,21 @@ class CreateList
 	{
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;
-
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if ($access == 'admin') {
+			$where_data = " where 1";
+			$add_user = " ";
+		} else {
+			$where_data = " where user_id = '" . $user_id . "'";
+			$add_user = " and user_id = '" . $user_id . "'";
+		}
 		$ipaddress = $this->ip;
 
 		if ($_POST['createlist'] == 1) {
 			$listname = $_POST['listname'];
 			$date = time();
 			$listname = $mysqli->real_escape_string($listname);
-			$user_id=$_SESSION['user' . get_option('site_token')];
 			$insertlistname = "insert into `" . $pref . "quick_list_records` (`title`,`creationdate`,`user_id`) VALUES('" . $listname . "','" . $date . "','".$user_id."')";
 			$res = $mysqli->query($insertlistname);
 			//$idd = $fetcharray['id'];
@@ -50,7 +57,7 @@ class CreateList
 
 			// echo $updateuser;
 			if ($updateuser > 0) {
-				$checkexist = "select * from `" . $pref . "quick_email_lists` where listid='" . $listid . "' and email='" . $email . "' and `id` not in(" . $updateuser . ")";
+				$checkexist = "select * from `" . $pref . "quick_email_lists` where listid='" . $listid . "' and email='" . $email . "' and `id` not in(" . $updateuser . ") ".$add_user."";
 				$selres = $mysqli->query($checkexist);
 				$rows = $selres->num_rows;
 				// echo $rows;
@@ -62,7 +69,7 @@ class CreateList
 					return 0;
 				}
 			} else {
-				$checkexist = "select * from `" . $pref . "quick_email_lists` where listid='" . $listid . "' and email='" . $email . "'";
+				$checkexist = "select * from `" . $pref . "quick_email_lists` where listid='" . $listid . "' and email='" . $email . "' ".$add_user."";
 				$selres = $mysqli->query($checkexist);
 				$rows = $selres->num_rows;
 				// echo $rows;
@@ -87,7 +94,7 @@ class CreateList
 
 				$start_from = ($pagecount - 1) * $record_per_page;
 
-				$query = "SELECT * FROM `" . $pref . "quick_email_lists` where listid=" . $listid . " order by id DESC LIMIT " . $start_from . ", " . $record_per_page . "";
+				$query = "SELECT * FROM `" . $pref . "quick_email_lists` where listid=" . $listid . " ".$add_user." order by id DESC LIMIT " . $start_from . ", " . $record_per_page . "";
 				// echo $query;
 				$result = $mysqli->query($query);
 				if ($pagecount > 1) {
@@ -103,7 +110,7 @@ class CreateList
 			$listid = $_POST['listid'];
 
 
-			$query = "SELECT * FROM `" . $pref . "quick_email_lists` where listid=" . $listid . " and (name like '%" . $nameemail . "%' or email like '%" . $nameemail . "%')";
+			$query = "SELECT * FROM `" . $pref . "quick_email_lists` where listid=" . $listid . " ".$add_user." and (name like '%" . $nameemail . "%' or email like '%" . $nameemail . "%')";
 			// echo $query;
 			$result = $mysqli->query($query);
 			if ($result->num_rows >= 1) {
@@ -142,16 +149,24 @@ class CreateList
 		$pref = $this->dbpref;
 		$table = $pref . "quick_list_records";
 		$id = $mysqli->real_escape_string($id);
-
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if ($access == 'admin') {
+			$where_data = " where 1";
+			$add_user = " ";
+		} else {
+			$where_data = " where user_id = '" . $user_id . "'";
+			$add_user = " and user_id = '" . $user_id . "'";
+		}
 		if ($all == 1) {
-			$qry = $mysqli->query("select * from `" . $table . "` order by id desc");
+			$qry = $mysqli->query("select * from `" . $table . "` ".$where_data." order by id desc");
 			if ($qry->num_rows > 0) {
 				return $qry;
 			} else {
 				return 0;
 			}
 		} else {
-			$qry = $mysqli->query("select * from `" . $table . "` where `id`=" . $id . "");
+			$qry = $mysqli->query("select * from `" . $table . "` where  `id`=" . $id . " ".$add_user." limit 1");
 			if ($qry->num_rows > 0) {
 				return $qry->fetch_object();
 			} else {
@@ -164,6 +179,15 @@ class CreateList
 		//add to list
 		$total = $this->getTotalCount();
 		$site_token_for_dashboard = get_option('site_token');
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin'){
+			$where_add = " ";
+		}
+		else{
+			$where_add = " and user_id = '".$user_id."'";
+		}
+
 		if ($_SESSION['user_plan_type' . $site_token_for_dashboard] == 2 && $total >= 50) {
 			return 1;
 		}
@@ -186,9 +210,9 @@ class CreateList
 				$extraarr = $extra;
 			}
 
-			$qry = $mysqli->query("select `id` from `" . $table . "` where `listid`='" . $listid . "' and `email`='" . $email . "'");
+			$qry = $mysqli->query("select `id` from `" . $table . "` where `listid`='" . $listid . "' and `email`='" . $email . "' ".$where_add." ");
 			if ($qry->num_rows < 1) {
-				$in = "insert into `" . $table . "` (`listid`, `name`, `email`, `exf`, `ipaddr`, `date`) values('" . $listid . "','" . $name . "','" . $email . "','" . json_encode($extraarr) . "','" . $this->ip . "','" . time() . "')";
+				$in = "insert into `" . $table . "` (`listid`, `name`, `email`, `exf`, `ipaddr`, `date`,`user_id`) values('" . $listid . "','" . $name . "','" . $email . "','" . json_encode($extraarr) . "','" . $this->ip . "','" . time() . "','".$user_id."')";
 
 				$ins = $mysqli->query($in);
 				$ins_id = $mysqli->insert_id;
@@ -210,8 +234,16 @@ class CreateList
 	{
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin'){
+			$where_add = " ";
+		}
+		else{
+			$where_add = " where user_id = '".$user_id."'";
+		}
 		$table = $pref . "quick_email_lists";
-		$qry_str = $mysqli->query("SELECT COUNT(*) AS `total` FROM `$table`");
+		$qry_str = $mysqli->query("SELECT COUNT(*) AS `total` FROM `$table` ".$where_add."");
 		$run = $qry_str->fetch_object();
 		return $run->total;
 	}
@@ -219,8 +251,16 @@ class CreateList
 	{
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin'){
+			$where_add = " ";
+		}
+		else{
+			$where_add = " where user_id = '".$user_id."'";
+		}
 		$table = $pref . "quick_list_records";
-		$qry_str = $mysqli->query("SELECT COUNT(*) AS `total` FROM `$table`");
+		$qry_str = $mysqli->query("SELECT COUNT(*) AS `total` FROM `$table` " . $where_add . "");
 		$run = $qry_str->fetch_object();
 		return $run->total;
 	}
@@ -283,11 +323,19 @@ class CreateList
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;
 		$table = $pref . "quick_email_lists";
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin'){
+			$where_add = " ";
+		}
+		else{
+			$where_add = " and user_id = '".$user_id."'";
+		}
 		$id = $mysqli->real_escape_string($id);
 		if (!$email) {
-			$qry = $mysqli->query("select * from `" . $table . "` where `id`=" . $id . "");
+			$qry = $mysqli->query("select * from `" . $table . "` where `id`=" . $id . " ".$where_add." limit 1");
 		} else {
-			$qry = $mysqli->query("select * from `" . $table . "` where `listid`='" . $id . "' and `email`='" . $email . "'");
+			$qry = $mysqli->query("select * from `" . $table . "` where `listid`='" . $id . "' and `email`='" . $email . "' ".$where_add." ");
 		}
 		if ($qry->num_rows > 0) {
 			$r = $qry->fetch_assoc();
@@ -312,10 +360,18 @@ class CreateList
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;
 		$table = $pref . "quick_email_lists";
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin'){
+			$where_add = " ";
+		}
+		else{
+			$where_add = " and user_id = '".$user_id."'";
+		}
 
 		$id = $mysqli->real_escape_string($id);
 
-		$qry = $mysqli->query("select * from `" . $table . "` where `listid`='" . $id . "'");
+		$qry = $mysqli->query("select * from `" . $table . "` where `listid`='" . $id . "' ".$where_add)." ";
 
 		if ($qry->num_rows > 0) {
 			return $qry;
@@ -328,8 +384,16 @@ class CreateList
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;
 		$table = $pref . "quick_email_lists";
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin'){
+			$where_add = " ";
+		}
+		else{
+			$where_add = " and user_id = '".$user_id."'";
+		}
 		$id = $mysqli->real_escape_string($id);
-		$exf = $mysqli->query("select `exf` from `" . $table . "` where `id`='" . $id . "'");
+		$exf = $mysqli->query("select `exf` from `" . $table . "` where `id`='" . $id . "'" . $where_add . " ");
 
 		if ($exf->num_rows > 0) {
 			$r = $exf->fetch_object();
@@ -361,11 +425,19 @@ class CreateList
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;
 		$table = $pref . 'quick_email_lists';
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access == 'admin'){
+			$where_add = " ";
+		}
+		else{
+			$where_add = " and user_id = '".$user_id."'";
+		}
 		$listid = $mysqli->real_escape_string($listid);
 
 		// Build your query	
 
-		$select = "SELECT * FROM `" . $table . "` WHERE listid=" . $listid . "";
+		$select = "SELECT * FROM `" . $table . "` WHERE listid=" . $listid . " ".$where_add;
 
 		$MyQuery = $mysqli->query($select);
 

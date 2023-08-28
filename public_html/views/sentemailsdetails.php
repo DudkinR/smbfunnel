@@ -1,12 +1,22 @@
 <?php
 $mysqli = $info['mysqli'];
 $pref = $info['dbpref'];
-
+$user_id= $_SESSION['user'.get_option('site_token')];
+$access=$_SESSION['access'.get_option('site_token')];
+if($access=="admin")
+{
+ $json_access='';
+}
+else
+{
+ $json_access=' LEFT JOIN `'.$pref.'quick_users` as `b` ON `a`.`user_id`=`b`.`id`';
+}
 if(isset($_GET))
   {
     foreach($_GET as $getindex=>$getvalue)
     {
       $_GET[$getindex]=$mysqli->real_escape_string($getvalue);
+      //print_r($getvalue);
     }
   }
 
@@ -34,12 +44,9 @@ elseif (isset($_POST['deleteres'])) {
   $delete ="delete from `".$pref."quick_subscription_mail_schedule` where seqid='".$seqid."' and status not in('-1')";
   $mysqli->query($delete);
 }
-
 $page = '';
-
 $status="";
 $seqid = "";
-
 $headertitle="Mail Reports";
 
 if (isset($_GET['status']) || isset($_GET['seqid'])) {
@@ -91,11 +98,22 @@ if($getstatus=="links_visits")
 
   if($dokeywordsearch===0)
   {
-  $query="select * from `".$pref."quick_subscription_mail_schedule` where stoken in(select distinct(`email_token`) from `".$pref."email_links_visits` where `sequence_id`='".$seqid."'".$datebetween[1]." and `visited`='1')".$keyword_search." order by ".$order_by." limit ".$startpagecount.",".get_option('qfnl_max_records_per_page')."";
+    $query="select * from `".$pref."quick_subscription_mail_schedule` as `a` 
+    where `a`.`stoken` in(
+      select distinct(`email_token`) from `".$pref."email_links_visits` as `b`
+      where `b`.`sequence_id`='".$seqid."'".$datebetween[1]." 
+      and `b`.`visited`='1')
+      ".$keyword_search." order by `a`.`".$order_by."` 
+      limit ".$startpagecount.",".get_option('qfnl_max_records_per_page')."";
   }
   else
   {
-    $query="select * from `".$pref."quick_subscription_mail_schedule` where stoken in(select distinct(`email_token`) from `".$pref."email_links_visits` where `sequence_id`='".$seqid."' and `visited`='1') order by `id` desc limit ".$startpagecount.",".get_option('qfnl_max_records_per_page')."";
+    $query="select * from `".$pref."quick_subscription_mail_schedule` as `a`
+    where `a`.`stoken` in(select distinct(`email_token`) 
+    from `".$pref."email_links_visits`  as `b`
+    where `b`.`sequence_id`='".$seqid."' and `b`.`visited`='1') 
+    order by `a`.`id` 
+    desc limit ".$startpagecount.",".get_option('qfnl_max_records_per_page')."";
   }
 
   $totalqry=$mysqli->query("select count(`id`) as `countid` from `".$pref."quick_subscription_mail_schedule` where stoken in(select distinct(`email_token`) from `".$pref."email_links_visits` where `sequence_id`='".$seqid."' and `visited`='1')");
@@ -118,7 +136,9 @@ else
   $totalqry=$mysqli->query("SELECT count(`id`) as `countid` FROM `".$pref."quick_subscription_mail_schedule` where ".$status."".$datebetween[1]." and seqid=".$seqid." order by id desc");
 
 }
-
+echo $query;
+echo "<br>";
+echo "<br>";
 $result = $mysqli->query($query);
 }
 else
@@ -147,7 +167,7 @@ else
          "(select count(`id`) as `countid` from `".$pref."email_links_visits` where `sequence_id`=`a`.id and `visited`='1'".$linksdatebetween[1].") as `total_linksvisits`",
       );
       
-       $arrange_orderby="`time` desc"; $arrange_orderby_main="order by `time` desc";
+       $arrange_orderby="`time` desc"; $arrange_orderby_main="order by `schedule`.`time` desc";
 
        if(isset($_GET['arrange_records_order']))
        {
@@ -163,20 +183,51 @@ else
        }
 
        $keyword_search="";
+       if($access=="admin")
+       {
+        $json_access='';
+       }
+       else
+       {
+        $json_access="`schedule`.`user_id` = ".$user_id." and";
+       }  
        if(isset($_POST['onpage_search']) && strlen($_POST['onpage_search'])>0)
        {
         $_POST['onpage_search']=$mysqli->real_escape_string($_POST['onpage_search']);
         $keyword_search=" and `a`.title like '%".$_POST['onpage_search']."%' or `a`.sentdata like '%".$_POST['onpage_search']."%'";
 
-        $sql="select `a`.id,`a`.title,`a`.sequence,".implode(",",$subquery_array)." from `".$table."` as `a` where `id` in(select `seqid` from `".$pref."quick_subscription_mail_schedule` order by `time` desc)".$keyword_search."";
+        $sql="select `a`.id,`a`.title,`a`.sequence,".implode(",",$subquery_array)." 
+        from `".$table."` as `a` 
+        JOIN `".$pref."quick_subscription_mail_schedule` as `schedule` ON `a`.`id` = `schedule`.`seqid`
+        LEFT JOIN `smbf_users` as `b` ON `schedule`.`user_id` = `b`.`id`
+        WHERE $json_access 
+         `id` in(select `seqid` from `".$pref."quick_subscription_mail_schedule` order by `time` desc)".$keyword_search."
+         ";
        }
        else
        {
-        $sql="select `a`.id,`a`.title,`a`.sequence,".implode(",",$subquery_array)." from `".$table."` as `a` where `id` in(select `seqid` from `".$pref."quick_subscription_mail_schedule`".$datebetween[0]." order by ".$arrange_orderby.")".$arrange_orderby_main." limit ".$startpagecount.", ".get_option('qfnl_max_records_per_page')."";
+        $sql="select `a`.id,`a`.title,`a`.sequence,
+        ".implode(",",$subquery_array)." from `".$table."` as `a` 
+        JOIN `".$pref."quick_subscription_mail_schedule` AS `schedule`
+        ON
+            `a`.`id` = `schedule`.`seqid`
+        LEFT JOIN `".$pref."users` AS `b`
+        ON
+            `schedule`.`user_id` = `b`.`id`
+        WHERE
+         $json_access
+        `a`.`id` in
+        (select `seqid` from `".$pref."quick_subscription_mail_schedule`".$datebetween[0]." order by
+         ".$arrange_orderby.")".$arrange_orderby_main." 
+         limit ".$startpagecount.", ".get_option('qfnl_max_records_per_page')."
+         ";
        }
 
         $totalqry=$mysqli->query("select count(`id`) as `countid` from `".$table."` where `id` in(select `seqid` from `".$pref."quick_subscription_mail_schedule`".$datebetween[0]." order by `time` desc)");
        //echo $sql;
+       // echo "<br>";
+       // $sql=        "select `a`.id,`a`.title,`a`.sequence,(select count(id) from `smbf_quick_subscription_mail_schedule` where seqid=`a`.id and (status=1 or status=2 or status=3)) as `total_sent`,(select count(id) from `smbf_quick_subscription_mail_schedule` where seqid=`a`.id and status=2 ) as `total_open`,(select count(id) from `smbf_quick_subscription_mail_schedule` where seqid=`a`.id and status='1' ) as `total_unopen`,(select count(id) from `smbf_quick_subscription_mail_schedule` where seqid=`a`.id and status='0') as `unsents`,(select count(id) from `smbf_quick_subscription_mail_schedule` where seqid=`a`.id and status=3) as `unsubscribed`,(select max(`time`) as `lasttime` from `smbf_quick_subscription_mail_schedule` where `seqid`=`a`.id and time not in('0')) as `lastsenttime`,(select count(`id`) as `countid` from `smbf_email_links_visits` where `sequence_id`=`a`.id and `visited`='1') as `total_linksvisits` from `smbf_quick_sequence` as `a` where `id` in(select `seqid` from `smbf_quick_subscription_mail_schedule` order by `time` desc)order by `time` desc limit 0, 10";
+
         $resultseq = $mysqli->query($sql);
 }
 ?>

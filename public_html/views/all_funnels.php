@@ -52,7 +52,7 @@ if (isset($_POST['regeneratefunnelcode'])) {
 							<?php
 							$hashcount = 0;
 							$funnel = $data_arr['funnel'];
-
+							
 							if (isset($_POST['delfunnel'])) {
 								$funnel->deleteFunnel($_POST['delfunnel']);
 							}
@@ -75,6 +75,7 @@ if (isset($_POST['regeneratefunnelcode'])) {
 								}
 								$count = 0;
 								$lastid = 0;
+								
 
 								if ($datas['rows']) {
 									$lastid = $datas['rows']->num_rows;
@@ -145,6 +146,7 @@ if (isset($_POST['regeneratefunnelcode'])) {
 							<!-- /keyword search -->
 						</tbody>
 					</table>
+
 				</div>
 				<div class="col-md-12 row nopadding">
 					<div class="col-sm-6 mr-auto mt-2">
