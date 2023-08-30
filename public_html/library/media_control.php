@@ -8,6 +8,12 @@
         var $media_dir;
         var $media_dir_url;
         var $table;
+        var $user_id;
+        var $access;
+        var $where_data;
+        var $add_user;
+        var $add_vue;
+
         
         
         function __construct($arr)
@@ -18,6 +24,21 @@
             $this->load=$arr['load'];
 
             $this->table= $this->dbpref.'media';
+        $this->user_id = $_SESSION['user' . get_option('site_token')];
+		$this->access = $_SESSION['access' . get_option('site_token')];
+		if($this->access == 'admin')
+		{
+			$this->where_data = " where 1";
+			$this->add_user = " ";
+            $add_vue = " ";
+
+		}
+		else
+		{
+			$this->where_data = " where user_id = '".$this->user_id."'";
+			$this->add_user = " and user_id = '".$this->user_id."'";
+            $this->add_vue = " user_id = '".$this->user_id."' and ";
+		}
 
             if(isset($arr['base_dir']))
             {
@@ -107,6 +128,7 @@
             $tmp_file=$file['tmp_name'];
             $name=str_replace(' ','_', $title);
             $count=1;
+            $user_id = $_SESSION['user' . get_option('site_token')];
 
             $temp_main_name=$name;
             lbl:
@@ -127,7 +149,7 @@
             if($moved)
             {
                 $type=self::getFileType($destin);
-                $in=$this->mysqli->query("insert into `".$this->table."` (`title`, `file`, `type`,`file_type`, `size`, `description`, `added_on`, `updated_on`) values ('".$title."', '".$name."', '".$type."','".$main_type."', '".$size."', '', '".time()."', '".time()."')");
+                $in=$this->mysqli->query("insert into `".$this->table."` (`title`, `file`, `type`,`file_type`, `size`, `description`, `added_on`, `updated_on`,`user_id`) values ('".$title."', '".$name."', '".$type."','".$main_type."', '".$size."', '', '".time()."', '".time()."', '".$user_id."')");
                 if($in)
                 {return 1;}
             }
@@ -157,11 +179,11 @@
             if(isset($_POST['select_order']))
             {
                 $order=$mysqli->real_escape_string(trim($_POST['select_order']));
-                $limit_txt= " order by `id` ".$order.$limit_txt;
+                $limit_txt= "  order by `id` ".$order.$limit_txt;
             }
-
             $by=($by=='all')? 1: "`type` ='".$by."'";
-            $qry=$mysqli->query("select * from `".$this->table."` where ".$by.$search.$limit_txt);
+            $sql_text="select * from `".$this->table."` where  ".$this->add_vue." ".$by.$search.$limit_txt;
+            $qry=$mysqli->query($sql_text);
 
             $arr=array();
 
