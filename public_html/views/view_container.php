@@ -448,21 +448,27 @@ $dbpref = $info['dbpref'];
                                         </a>
                                         <!-- Submenu content -->
                                         <div id='submenu5' class="collapse sidebar-submenu <?= in_array($page, $page_array5) ? 'show' : ''; ?>">
+                                        <?php if($_SESSION['access' . get_option('site_token')]==='admin') {?>
                                             <?php if (in_array('settings', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                                                 <a href="index.php?page=settings" class="<?= ("settings" == $page) ? 'active' : ''; ?>">
                                                     <i class="fas fa-cog pr-2"></i> <span class="menu-collapsed hide-menu"><?php w('Settings'); ?></span>
                                                 </a>
-                                            <?php } ?>
+                                            <?php } 
+                                            }
+                                            ?>
                                             <?php if (in_array('multiuser_table', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                                                 <a href="index.php?page=multiuser_table" class="<?= ("multiuser_table" == $page ||  "createmultiuser" == $page) ? 'active' : ''; ?>">
                                                     <i class="fas fa-users-cog pr-2"></i> <span class="hide-menu menu-collapsed"><?php w('Users'); ?></span>
                                                 </a>
                                             <?php } ?>
+                                            <?php if($_SESSION['access' . get_option('site_token')]==='admin') {?>
                                             <?php if (in_array('gdpr', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                                                 <a href="index.php?page=gdpr" class="<?= ("gdpr" == $page) ? 'active' : ''; ?>">
                                                     <i class="fas fa-user-lock pr-2"></i> <span class="hide-menu menu-collapsed"><?php w('GDPR Settings'); ?></span>
                                                 </a>
-                                            <?php } ?>
+                                            <?php } 
+                                            }
+                                            ?>
                                         </div>
                                     </li>
                                 <?php } ?>

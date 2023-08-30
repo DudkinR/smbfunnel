@@ -30,14 +30,14 @@
 		{
 			$this->where_data = " where 1";
 			$this->add_user = " ";
-            $add_vue = " ";
+            $this->add_vue = " ";
 
 		}
 		else
 		{
-			$this->where_data = " where user_id = '".$this->user_id."'";
-			$this->add_user = " and user_id = '".$this->user_id."'";
-            $this->add_vue = " user_id = '".$this->user_id."' and ";
+			$this->where_data = " where `user_id` = '".$this->user_id."'";
+			$this->add_user = " and `user_id` = '".$this->user_id."'";
+            $this->add_vue = " `user_id` = '".$this->user_id."' and ";
 		}
 
             if(isset($arr['base_dir']))
@@ -60,7 +60,7 @@
             $main_file=$this->media_dir.'/'.$file;
             $exists= (is_file($main_file))? true: false;
             $exists_in_db=false;
-            $qry=$this->mysqli->query("select `id` from `".$this->table."` where `file`='".$file."' limit 1");
+            $qry=$this->mysqli->query("select `id` from `".$this->table."` where ".$this->add_vue." `file`='".$file."' limit 1");
             if($qry->num_rows>0)
             {
                 $exists_in_db= true;
@@ -73,7 +73,7 @@
             {
                 if($exists_in_db)
                 {
-                    $this->mysqli->query("delete from `".$this->table."` where `file`='".$file."'");
+                    $this->mysqli->query("delete from `".$this->table."` where ".$this->add_vue."  `file`='".$file."'");
                 }
                 else
                 {
@@ -203,7 +203,7 @@
             $mysqli=$this->mysqli;
             $file= $mysqli->real_escape_string($file);
             unlink($this->media_dir.'/'.$file);
-            $mysqli->query("delete from `".$this->table."` where `file`='".$file."'");
+            $mysqli->query("delete from `".$this->table."` where ".$this->add_vue."  `file`='".$file."'");
         }
         function updateFileBasicData($file, $title, $description)
         {
@@ -213,7 +213,7 @@
             $title= $mysqli->real_escape_string($title);
             $description= $mysqli->real_escape_string($description);
 
-            $up=$mysqli->query("update `".$table."` set `title`='".$title."', `description`= '".$description."' where `file`='".$file."'");
+            $up=$mysqli->query("update `".$table."` set `title`='".$title."', `description`= '".$description."' where  ".$this->add_vue." `file`='".$file."'");
             echo (($up)? 1:0);
         }
     }

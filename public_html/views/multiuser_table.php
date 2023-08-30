@@ -2,9 +2,20 @@
 // print_r($info);
 $mysqli = $info['mysqli'];
 $pref = $info['dbpref'];
+$user_id = $_SESSION['user' . get_option('site_token')];
+$access = $_SESSION['access' . get_option('site_token')];
+if($access == 'admin')
+{
+  $sql_text = "";
+  }
+else
+{
+  $sql_text = "`user_id` = '".$user_id."' and ";
+} 
+
 if (isset($_POST['userid'])) {
   $id = $_POST['userid'];
-  $delete = "delete from `" . $pref . "users` where id=" . $id;
+  $delete = "delete from `" . $pref . "users` where  id=" . $id;
   $mysqli->query($delete);
 }
 
@@ -28,7 +39,7 @@ if (isset($_POST['onpage_search']) && strlen($_POST['onpage_search']) > 0) {
   if (isset($_GET['arrange_records_order'])) {
     $order_by = base64_decode($_GET['arrange_records_order']);
   }
-  $query = "SELECT * FROM `" . $pref . "users` where " . $timelimit_condition . " order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
+  $query = "SELECT * FROM `" . $pref . "users` where ".$sql_text."   " . $timelimit_condition . " order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
 }
 
 $result = $mysqli->query($query);

@@ -145,8 +145,9 @@ else
          else{
           $verifycode=time();
           $verifycode .=substr(str_shuffle('sxdcfgvhj15238sdxcfvgbhj358awsedrft'),0,5);
-               $sql="INSERT INTO `".$pref."users` (`name`, `email`, `password`, `verified`, `verifycode`, `date_verifycodegen`, `ip_lastsignin`, `ip_created`, `date_created`, `date_signin`,`permission`,`profile_picture`) VALUES ('".$name."','".$email."','".$password."','','".$verifycode."','','','".$ip."','".$date."','','".$permission."','".$fileupload_insert."')";
-               $this->user_ob->isLoggedin(1);
+          
+          $sql="INSERT INTO `".$pref."users` (`name`, `email`, `password`, `verified`, `verifycode`, `date_verifycodegen`, `ip_lastsignin`, `ip_created`, `date_created`, `date_signin`,`permission`,`profile_picture`,`user_id`) VALUES ('".$name."','".$email."','".$password."','','".$verifycode."','','','".$ip."','".$date."','','".$permission."','".$fileupload_insert."','".$_SESSION['user' . get_option('site_token')]."')";
+              $this->user_ob->isLoggedin(1);
               if ($mysqli->query($sql) === TRUE)
                {
                 $insertedUserId = mysqli_insert_id($mysqli);

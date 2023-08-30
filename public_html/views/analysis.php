@@ -5,6 +5,20 @@ $dbpref = $info['dbpref'];
 $table = $dbpref . "quick_funnels";
 $page_table = $dbpref . "quick_pagefunnel";
 $tablename = $dbpref . "site_visit_record";
+$user_id = $_SESSION['user' . get_option('site_token')];
+$access = $_SESSION['access' . get_option('site_token')];
+if($access == 'admin')
+{
+  $sql_text = "select `id`,`name` from `" . $table . "`  order by `id` desc";
+  }
+else
+{
+  $sql_text = "select `a`.`id`,`a`.`name` from `" . $table . "` as `a`
+  left join `".$dbpref."user_funnel` as `b` on `a`.`id`=`b`.`funnel_id`
+   where `b`.`user_id` = '".$user_id."'
+   order by `a`.`id` desc";
+} 
+//echo $sql_text;
 ?>
 <div class="container-fluid">
   <div class="row">
@@ -21,7 +35,8 @@ $tablename = $dbpref . "site_visit_record";
             <select class="btn btn-primary " id="exampleFormControlSelect1" name="analysis_funnel" onchange="if(this.value>0){this.form.submit();}">
               <option value=0>-<?php w('Select Funnel'); ?>-</option>
               <?php
-              $datas = $mysqli->query("select `id`,`name` from `" . $table . "` order by `id` desc");
+              
+              $datas = $mysqli->query($sql_text);
               if ($datas->num_rows > 0) {
                 while ($r = $datas->fetch_object()) {
                   $selected = "";
