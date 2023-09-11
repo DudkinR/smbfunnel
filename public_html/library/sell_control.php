@@ -161,7 +161,7 @@ class Sellcontrol
 
 			
 		}
-		echo $text_sql_count="select count(`id`) as countid from `".$table."` ".$first_add_user." ";
+		 $text_sql_count="select count(`id`) as countid from `".$table."` ".$first_add_user." ";
 		$totalrecord=$mysqli->query($text_sql_count);
 		$totalrecord=$totalrecord->fetch_object();
 		$totalrecord=$totalrecord->countid;
@@ -1300,8 +1300,8 @@ class Sellcontrol
 			JOIN `".$pref."administrator` as `c`ON `b`.`user_id` = `c`.`user_id`
 			where `a`.productid='".$funnel_id."'".$datebetween_user;
 		}
-			echo $countsql;
-			echo "<br>";
+		//	echo $countsql;
+		//	echo "<br>";
 		
 		 $total_qry=$mysqli->query($countsql);
 		if($total_qry)

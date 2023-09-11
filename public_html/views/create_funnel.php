@@ -53,6 +53,7 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 											<option value="blank">{{t('Custom')}}</option>
 										</select>
 									</div>
+		
 									<div class="mb-3">
 										<label>{{t('Funnel URL')}}</label>
 										<?php
@@ -62,6 +63,7 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 										} else {
 											$trans_install_url = $_SERVER['HTTP_HOST'];
 										}
+										
 										?>
 										<div class="input-group">
 											<div class="input-group-prepend" data-bs-toggle="tooltip" title="<?php w('Base URL'); ?>">
@@ -70,7 +72,6 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 											<input type="text" class="form-control" data-bs-toggle="tooltip" v-bind:title="t('Path for the funnel')" v-bind:placeholder="t('Enter path')" v-model="funnel_url_slug" />
 										</div>
 									</div>
-
 									<?php if ($_SESSION['user_plan_type' . $site_token_for_dashboard] == 2 && $data_arr['total_funnels'] >= 1) { ?>
 										<button type="button" class="btn theme-button float-right mt-2" style="margin-top:8px;float:right" data-bs-toggle="modal" data-bs-target="#upgradeFromFreeModal">
 											<i class="fas fa-check"></i> {{t('Create Funnel')}}

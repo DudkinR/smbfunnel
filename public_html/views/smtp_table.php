@@ -1,6 +1,16 @@
 <?php
 $mysqli = $info['mysqli'];
 $pref = $info['dbpref'];
+$user_id = $_SESSION['user' . get_option('site_token')];
+$access = $_SESSION['access' . get_option('site_token')];
+if($access == 'admin')
+{
+  $sql_text = "";
+  }
+else
+{
+  $sql_text = "`user_id` = '".$user_id."' and ";
+} 
 if (isset($_POST['userid'])) {
   $id = $_POST['userid'];
   $delete = "delete from `" . $pref . "quick_smtp_setting` where id=" . $id;
@@ -29,12 +39,12 @@ if (isset($_POST['onpage_search']) && strlen($_POST['onpage_search']) > 0) {
     $order_by = base64_decode($_GET['arrange_records_order']);
   }
 
-  $query = "SELECT *," . $getcountofusing . " FROM `" . $pref . "quick_smtp_setting` where " . $timelimit_condition . " order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
+  $query = "SELECT *," . $getcountofusing . " FROM `" . $pref . "quick_smtp_setting` where ".$sql_text." " . $timelimit_condition . " order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
 }
 
 $result = $mysqli->query($query);
 
-$totalpage_query = $mysqli->query("select count(`id`) as `countid` from `" . $pref . "quick_smtp_setting` where " . $timelimit_condition . "");
+$totalpage_query = $mysqli->query("select count(`id`) as `countid` from `" . $pref . "quick_smtp_setting` where  ".$sql_text." " . $timelimit_condition . "");
 $total_ob = $totalpage_query->fetch_object();
 ?>
 <div class="container-fluid">

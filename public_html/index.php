@@ -2,7 +2,6 @@
 $current_base_dir = str_replace("\\", "/", __DIR__);
 require_once($current_base_dir . "/gcp/gcp.php");
 require_once($current_base_dir . '/library/lang.php');
-
 session_start();
 
 require_once("library/esc_html.php");
@@ -254,6 +253,7 @@ if (!isset($_GET['funnel_view']) || !(get_option('qfnl_router_mode') == '1') || 
 		$currenturl = getProtocol();
 		$currenturl .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "/index.php?page=login";
 		$currenturl = preg_replace("/(cf-login|cf-admin)+(\/)*/", "", $currenturl);
+		 $currenturl;
 		header("location: " . $currenturl . "");
 	}
 

@@ -205,8 +205,13 @@ class Funnel
 			$routed_path = $dir;
 		}
 		$url = rtrim($url, "/");
+		$basedomain = explode("@@",$url);
+		$domain=$name.".".$basedomain[1];
 		$token = substr(str_shuffle('1234567890188595652'), 0, 10);
-		$sql = "INSERT INTO `" . $pref . "quick_funnels` (`name`, `flodername`,`baseurl`, `pagecount`, `firstpage`, `type`,`labelhtml`,`validinputs`,`primarysmtp`,`date_created`,`token`) VALUES ('" . $name . "','" . $routed_path . "','" . $url . "','0','','" . $type . "','','firstname,lastname,name,email,password,reenterpassword,phone,remember_user,payment_method','phpmailer','" . $date . "','" . $token . "')";
+		$sql = "INSERT INTO `" . $pref . "quick_funnels` 
+		(`name`, `flodername`,`baseurl`, `pagecount`, `firstpage`, `type`,`labelhtml`,`validinputs`,`primarysmtp`,`date_created`,`token`)
+		 VALUES 
+		 ('" . $name . "','" . $routed_path . "','" . $url . "','0','','" . $type . "','','firstname,lastname,name,email,password,reenterpassword,phone,remember_user,payment_method','phpmailer','" . $date . "','" . $token . "' )";
 		$in = $mysqli->query($sql);
 		if ($in) {
         if (isset($_SESSION['user' . get_option('site_token')])) {

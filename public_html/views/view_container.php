@@ -456,6 +456,13 @@ $dbpref = $info['dbpref'];
                                             <?php } 
                                             }
                                             ?>
+                                           <?php if($_SESSION['access' . get_option('site_token')]==='admin') {?>
+                                                <a href="index.php?page=subdomains" class="<?= ("settings" == $page) ? 'active' : ''; ?>">
+                                                    <i class="fas fa-sitemap pr-2"></i> <span class="menu-collapsed hide-menu"><?php w('Subdomains'); ?></span>
+                                                </a>
+                                            <?php 
+                                            }
+                                            ?>    
                                             <?php if (in_array('multiuser_table', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                                                 <a href="index.php?page=multiuser_table" class="<?= ("multiuser_table" == $page ||  "createmultiuser" == $page) ? 'active' : ''; ?>">
                                                     <i class="fas fa-users-cog pr-2"></i> <span class="hide-menu menu-collapsed"><?php w('Users'); ?></span>

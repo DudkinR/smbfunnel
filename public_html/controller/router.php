@@ -925,7 +925,28 @@ elseif ($page == 'no_permission') {
 	} else {
 		echo "Version missing";
 	}
-} else {
+}// page== subdomians
+elseif($page=="subdomains")
+{
+	$header = $this->load->loadBootstrap();
+	$header .= $this->load->loadStyle('style');
+	$footer ="";
+	$page_description = "Create, edit and manage subdomains";
+	$createoredit = "Subdomains";
+	$tutorial_link = "";
+	$this->load->view($createoredit, $header, $page . ".php", $footer, array('page_description' => $page_description, 'tutorial_link' => $tutorial_link));
+}// page== new_subdomian
+elseif($page=="new_subdomain")
+{
+	$header = $this->load->loadBootstrap();
+	$header .= $this->load->loadStyle('style');
+	$footer ="";
+	$page_description = "Create, edit and manage subdomains";
+	$createoredit = "Subdomains";
+	$tutorial_link = "";
+	$this->load->view($createoredit, $header, $page . ".php", $footer, array('page_description' => $page_description, 'tutorial_link' => $tutorial_link));
+}// page== edit_subdomian
+else {
 	//manage plugins
 	$has_a_integrated_page = false;
 	if (isset($GLOBALS['plugin_loader'])) {

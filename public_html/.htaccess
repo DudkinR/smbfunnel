@@ -1,0 +1,25 @@
+RewriteEngine On
+
+#  RewriteCond %{REQUEST_URI} !^/index\.php$
+
+#  RewriteRule ^(.*)$ /index.php [L]
+
+# Перенаправление на index.php
+#RewriteCond %{REQUEST_URI} !^/index\.php$
+#RewriteRule ^ /index.php [L]
+
+
+#cf-qfnl-rewrite-start
+RewriteEngine On
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^(.*)$ index.php [L]
+#cf-qfnl-rewrite-end
+
+#cf-qfnl-rewrite-start
+RewriteEngine On
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^(.*)$ index.php [L]
+#cf-qfnl-rewrite-end
+

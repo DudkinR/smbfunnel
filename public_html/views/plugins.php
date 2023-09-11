@@ -2,6 +2,9 @@
 $ob=$data_arr['plugins_ob'];
 ?>
 <div class="container-fluid" id="app_plugins">
+    <?php
+      if($_SESSION['access' . get_option('site_token')]==='admin') {
+        ?>
 <loading_container v-bind:loading="ajax_loading" v-bind:err="err" v-bind:msg="msg"></loading_container>
 <display_update_popup v-if="show_update_detail_popup" v-bind:plugin="show_update_detail_popup"></display_update_popup>
 <container_plugin_installer v-if="show_plugin_installer_popup"></container_plugin_installer>
@@ -67,4 +70,12 @@ $ob=$data_arr['plugins_ob'];
            </div>
     </div>
 </div>
+<?php }
+else{
+    ?>
+    <h1>You don`t have access to enable and disable plugins!</h1>
+    
+    <?php
+}
+?>
 </div>
