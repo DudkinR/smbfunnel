@@ -407,6 +407,27 @@ $funnel=$load->loadFunnel();
 $create=$funnel->createFunnel($_POST['funnel_url'],$_POST['funnel_name'],$_POST['funnel_type'],$_POST['modify_index']);
 echo $create;
 }
+//------------create subdomain---------------------
+if(isset($_POST['createsubdomain']))
+{
+		// create new subdomain
+		$mysqli = $info['mysqli'];
+		$dbpref = $info['dbpref'];
+		$table = $dbpref . "subdomians";
+		//clear text
+		$name=$_POST['subdomain_name'];
+		$url=$_POST['subdomain_url'];
+		$type = $_POST['subdomain_type'];
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$sql_insert="
+		INSERT INTO `".$table."`(`id`, `name`, `url`, `type`, `user_id`) VALUES
+		(NULL,'$name','$url','$type','$user_id')";
+		$mysqli->query($sql_insert);
+		echo $sql_insert;
+
+
+}	
+
 //------------rename funnel---------------------
 if(isset($_POST['renamefunnels']))
 {
