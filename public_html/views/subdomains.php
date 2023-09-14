@@ -40,12 +40,56 @@ $dbpref = $info['dbpref'];
 </style>
 <div class="container-fluid">
     <?php
+    function check_gethostbyname($url) {
+        $mass_sub=explode(".",$url);
+        // delete https://
+        $name_sub=str_replace("https://","",$mass_sub[0]);
+        $ip = gethostbyname($url);
+        if ($ip == $url) {
+            return 0;
+        } else {
+            $ch = curl_init($url);
+             // Устанавливаем опции cURL
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); 
+            // Включаем следование по редиректам
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            // Выполняем запрос
+            $response = curl_exec($ch);
+           
 
+            // Закрываем cURL сеанс
+            list($headers, $body) = explode("\r\n\r\n", $response, 2);
+            // Закрываем cURL сеанс
+            curl_close($ch);
+            // Теперь $headers содержит заголовки ответа
+            $mass_headers=explode("\r\n",$headers);
+            $thead=explode(" ",$mass_headers[0]);
+             // Получаем HTTP-код состояния
+             $httpCode= $thead[1];
+            if ($httpCode == 301 || $httpCode == 302) {
+                // Если получен HTTP-код 301 или 302, это указывает на перенаправление
+                return 1;
+            } elseif ($httpCode == 200) {
+                // Если получен HTTP-код 200, то перенаправления нет
+                return 2;
+            } else {
+                // В случае другого HTTP-кода можно вернуть 0 или другое значение по вашему выбору
+                return 0;
+            }
+        }
+    }
 		$table = $dbpref . "subdomians";
         $query = "SELECT * FROM $table";
         $result = $mysqli->query($query);
+        
         $trans_install_url = $_SERVER['HTTP_HOST'];
     ?> 
+    <div class="row">
+        <div class="col-md-12">
+            <h2><?=gethostbyname($trans_install_url)?></h2>
+        </div>
+    </div>
     <div class="row">
 			<div class="col-sm-12 nopadding">
 				<div class="table-responsive">
@@ -54,7 +98,8 @@ $dbpref = $info['dbpref'];
 							<th>#</th>
 							<th><?php w("Name"); ?></th>
                             <th><?php w("URL"); ?></th>
-							<th><?php w("Type"); ?></th>
+      						<th><?php w("Type"); ?></th>
+                            <th><?php w("htaccess"); ?></th>
 							<th><?php w("User") ?></th>
 						</thead>
                         <tbody>
@@ -62,15 +107,42 @@ $dbpref = $info['dbpref'];
                                 $count = 0;
                                 while ($row = $result->fetch_assoc()) {
                                     $count++;
-                                    if($row['type']==0) $bg="bg-danger";
-                                    else if($row['type']==1) $bg="bg-success";
-                                    else if($row['type']==2) $bg="bg-warning";
-                                    else $bg="bg-info";
+                                    if(check_gethostbyname(str_replace("/","",$row['url']) )==0)
+                                    { $type=0;
+                                     $bg="bg-danger";
+                                     $text_htaccess= "You need to add CNAME on server";
+                                    }
+                                    else if(check_gethostbyname(str_replace("/","",$row['url']) )==1) {
+                                        $type=1;
+                                        $bg="bg-warning";
+                                         $text_htaccess= "You have CNAME on server and  htaccess";
+                                    }
+                                    else if(check_gethostbyname(str_replace("/","",$row['url']) )==2){
+                                        $type=2;
+                                        $bg="bg-success";
+                                        $text_htaccess= "You have CNAME on server , but  htaccess is not configured
+                                        <br>
+                                        RewriteEngine On
+                                        <br>
+                                        RewriteRule ^(.*)$ https://". $trans_install_url."/" . $row['name'] . "/$1 [R=301,L]
+
+                                        ";
+                                    }
+                                    else{
+                                        $type=0;
+                                        $bg="bg-info"; $text_htaccess="error";
+                                    }
+                                    $query = "UPDATE $table SET type='$type' WHERE id=".$row['id'];
+                                    $mysqli->query($query);
                                     echo "<tr class='".$bg."'>";
                                     echo "<td>" . $count . "</td>";
                                     echo "<td>" . $row['name'] . "</td>";
-                                    echo "<td>" . $row['url'] . "</td>";
-                                    echo "<td>" . $row['type'] . "</td>";
+                                    echo "<td> <a href='https://".$row['url']."' target='_blank' >
+                                    " . $row['url'] . "
+                                    </a>
+                                    </td>";
+                                    echo "<td>" . $type . "</td>";
+                                    echo "<td>" . $text_htaccess. "</td>";
                                     echo "<td>" . $row['user_id'] . "</td>";
                                     echo "</tr>";
                                 }

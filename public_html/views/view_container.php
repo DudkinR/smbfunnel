@@ -458,7 +458,7 @@ $dbpref = $info['dbpref'];
                                             ?>
                                            <?php if($_SESSION['access' . get_option('site_token')]==='admin') {?>
                                                 <a href="index.php?page=subdomains" class="<?= ("settings" == $page) ? 'active' : ''; ?>">
-                                                    <i class="fas fa-sitemap pr-2"></i> <span class="menu-collapsed hide-menu"><?php w('Subdomains'); ?></span>
+                                                    <i class="fas fa-sitemap pr-2"></i> <span class="menu-collapsed hide-menu"><?php w('Cname'); ?></span>
                                                 </a>
                                             <?php 
                                             }

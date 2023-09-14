@@ -31,7 +31,7 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 				<?php if (!$funnel_id) { ?>
 
 					<div class="row mt-5" id='step_1' v-if="(current_step=='step_1')? true : false">
-						<div class="col-sm-4 mw120 mx-auto">
+						<div class="col-sm-6 mw120 mx-auto">
 							<div class="card visual-pnl shadow">
 								<div class="card-header theme-text bg-white border-bottom-0">{{t('Create Project')}}</div>
 								<div class="card-body">
@@ -70,6 +70,29 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 												<span class="input-group-text">{{funnel_host}}/</span>
 											</div>
 											<input type="text" class="form-control" data-bs-toggle="tooltip" v-bind:title="t('Path for the funnel')" v-bind:placeholder="t('Enter path')" v-model="funnel_url_slug" />
+										</div>
+									</div>
+									<div class="mb-3">
+										<label>{{t('CNAME')}}</label>
+										<input type="checkbox"  v-model="cname" />
+										<?php
+										$trans_install_url = "";
+										if ((get_option('qfnl_router_mode') == '1')) {
+											$trans_install_url = get_option('install_url');
+										} else {
+											$trans_install_url = $_SERVER['HTTP_HOST'];
+										}
+										$trans_install_url_short = str_replace("https://", "", $trans_install_url);
+										?>
+										<div class="input-group">
+											<div class="input-group-prepend" data-bs-toggle="tooltip" title="<?php w('Base URL'); ?>">
+												<span class="input-group-text">https://</span>
+											</div>
+											<input type="text" class="form-control" data-bs-toggle="tooltip" v-bind:title="t('Path for the CNAME')" v-bind:placeholder="t('Enter path')" v-model="funnel_url_slug" />
+											<div class="input-group-prepend" data-bs-toggle="tooltip" title="<?php w('Base URL'); ?>">
+												<span class="input-group-text">.<?=$trans_install_url_short?></span>
+											</div>
+											
 										</div>
 									</div>
 									<?php if ($_SESSION['user_plan_type' . $site_token_for_dashboard] == 2 && $data_arr['total_funnels'] >= 1) { ?>
@@ -178,7 +201,7 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 											</div>
 											<div class="card-body">
 												<div class="mb-3">
-													<label for="">{{t('Page Name')}} 222</label>
+													<label for="">{{t('Page Name')}}</label>
 													<input type="text" class="form-control urltoclone" v-bind:placeholder="t('Enter Page Name')" v-model="new_label" />
 												</div>
 												<div class="mb-3">
@@ -219,7 +242,7 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 											<div class="card-body">
 												<div class="mb-3">
 													<label for="">{{t('Subdomain')}}</label>
-													<select class="form-select form-control mt-0" id="subdomain" v-model="new_subdomain">
+													<select class="form-select form-control mt-0" id="subdomain" v-model="new_CNAME">
 														<option value="">{{t('Select Subdomain')}}</option>
 														<?php
 														$mysqli = $info['mysqli'];

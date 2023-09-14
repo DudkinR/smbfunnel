@@ -932,8 +932,8 @@ elseif($page=="subdomains" || $page=="new_subdomain")
 	$header = $this->load->loadBootstrap();
 	$header .= $this->load->loadStyle('style');
 	$footer ="";
-	$page_description = "Create, edit and manage subdomains";
-	$createoredit = "Subdomains";
+	$page_description = "Create, edit and manage CNAME";
+	$createoredit = "CNAME";
 	$tutorial_link = "";
 	$this->load->view($createoredit, $header, $page . ".php", $footer, array('page_description' => $page_description, 'tutorial_link' => $tutorial_link));
 }

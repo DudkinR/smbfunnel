@@ -74,7 +74,7 @@ Vue.component('funnel_rename', {
 		},
 		doToggle: function () {
 			this.toggle();
-		},
+		}, 
 		renameFunnels: function () {
 
 			const url = new URL(window.location.href);

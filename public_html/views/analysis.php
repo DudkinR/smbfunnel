@@ -129,7 +129,7 @@ else
                           <i class="fas fa-filter"></i>
                         </div>
                         <div class="col-auto  mt-3">
-                          <h3 class="fs-12 mb-0"><?php w('Funnel Name') ?></h3>
+                          <h3 class="fs-12 mb-0"><?php w('Funnel Name') ?> </h3>
                           <p class="fs-18"><?php echo $funnel_title; ?> </p>
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-#RewriteEngine On
-#RewriteRule ^(.*)$ https://smbfunnels.com/sub2/$1 [R=301,L]
+RewriteEngine On
+RewriteRule ^(.*)$ https://smbfunnels.com/test3/$1 [R=301,L]
 
 
