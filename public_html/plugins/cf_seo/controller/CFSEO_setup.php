@@ -28,12 +28,10 @@ if(!class_exists('cfseo_setup'))
         $page=($page*$max_limit)-$max_limit;
         $limit =" limit ".$page.','.$max_limit;
       }
-    
-      /////////////////////////////
+          /////////////////////////////
       $search="";
       if(isset($_POST['onpage_search']))
       {
-
         $search=trim($mysqli->real_escape_string($_POST['onpage_search']));
         $search=str_replace('_','[_]',$search);
         $search=str_replace('%','[%]',$search);
@@ -45,11 +43,7 @@ if(!class_exists('cfseo_setup'))
       {
         $order_by=base64_decode($_GET['arrange_records_order']);
 	  }
-	  
-	  
-
       $date_between=dateBetween('added_on',null,true);
-
       if(strlen($date_between[0])>0)
       {
           $search .=$date_between[1];
