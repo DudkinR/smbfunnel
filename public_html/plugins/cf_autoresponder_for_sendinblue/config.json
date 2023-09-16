@@ -1,0 +1,12 @@
+{
+    "name": "Sendinblue Autoresponder ",
+    "version": "1.1",
+    "description": "This plugin will enable you to take Subsribers with Sendinblue",
+    "start": "index.php",
+    "author": "Teknikforce",
+    "author_url": "https://teknikforce.com",
+    "plugin_url": "https://teknikforce.com",
+    "logo": "assets/img/logo.png",
+    "required_version": "1.0.0",
+    "auto_update_callback_url": "https://marketplace.cloudfunnels.in/plugin/check_update/cf_autoresponder_for_sendinblue"
+}

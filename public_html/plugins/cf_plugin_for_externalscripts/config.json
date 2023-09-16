@@ -1,0 +1,12 @@
+{
+    "name": "External Scripts",
+    "version": "1.3",
+    "description": "This plugin will enable you to take all integration",
+    "start": "index.php",
+    "author": "Teknikforce",
+    "author_url": "https://teknikforce.com",
+    "plugin_url": "https://teknikforce.com",
+    "logo": "assets/img/logo.png",
+    "required_version": "4.2.5",
+    "auto_update_callback_url": "https://marketplace.cloudfunnels.in/plugin/check_update/cf_plugin_for_externalscripts"
+}

@@ -1,0 +1,19 @@
+.visual-loader-twospin {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid blue;
+  border-bottom: 8px solid blue;
+  -webkit-animation: two-spin 2s linear infinite;
+  animation: two-spin 2s linear infinite;
+  opacity:1;
+}
+
+@-webkit-keyframes two-spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes two-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

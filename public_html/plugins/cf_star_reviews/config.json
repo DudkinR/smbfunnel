@@ -1,0 +1,12 @@
+{
+    "name": "Star Reviews",
+    "version": "1.1.2",
+    "description": "Create and manage review",
+    "start": "index.php",
+    "author": "Teknikforce",
+    "author_url": "https://teknikforce.com",
+    "plugin_url": "https://teknikforce.com",
+    "logo": "assets/image/logo.jpg",
+    "required_version": "4.2.3",
+    "auto_update_callback_url": "https://marketplace.cloudfunnels.in/plugin/check_update/cf_star_reviews"
+}
