@@ -623,6 +623,8 @@ var funnel = new Vue({
 		page_position_changing: false,
 		pglvl_active: 0,
 		page_active_type: 'NA',
+		cname: 1, // Добавляем переменную cname в данные
+	
 	},
 
 	methods: {
@@ -736,7 +738,13 @@ var funnel = new Vue({
 			}
 			else {
 				var thisvue = this;
-				var fields = { "createfunnel": 1, "funnel_url": this.funnel_url.trim(), "funnel_name": this.funnel_name.trim(), "funnel_type": this.funnel_type, "modify_index": this.funnel_modify_pre_index };
+				var fields = { "createfunnel": 1, 
+				"funnel_url": this.funnel_url.trim(),
+				"funnel_name": this.funnel_name.trim(),
+				"funnel_type": this.funnel_type,
+				"modify_index": this.funnel_modify_pre_index,
+            	"cname": this.cname // Добавляем CNAME в запрос
+			};
 
 				request.postRequestCb('req.php', fields, function (data) {
 					data = data.trim();

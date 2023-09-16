@@ -1,0 +1,247 @@
+.form-control:focus, input[type="button"]:focus, input[type="submit"]:focus, button[type="button"]:focus, button[type="submit"]:focus 
+{
+  border-color: #66afe9 !important;
+  outline: 0 !important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6) !important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6) !important;
+}
+
+.global-top-border 
+{
+  border-top: 1px solid #6600FF !important;
+  border-left: 1px solid #6600FF !important;
+  border-right: 1px solid #6600FF !important;
+}
+
+.global-bottom-border 
+{
+  border-bottom: 1px solid #6600FF !important;
+  border-left: 1px solid #6600FF !important;
+  border-right: 1px solid #6600FF !important;
+}
+
+.cfglobal_styled_table 
+{
+  overflow: auto !important;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.cfglobal_bg_color 
+{
+  background: #4481b9 !important;
+}
+
+.cfglobal_border_color 
+{
+  background: white;
+  color: #6600FF;
+}
+
+.cfglobal_styled_table thead tr 
+{
+  color: #ffffff;
+  text-align: left;
+}
+  
+.cfglobal_styled_table th, 
+.cfglobal_styled_table td 
+{
+  padding: 12px 15px;
+}
+  
+.cfglobal_styled_table tbody tr 
+{
+  border-bottom: 1px solid #dddddd;
+}
+  
+.cfglobal_styled_table tbody tr:hover 
+{
+  font-weight: bold;
+  color: #4481b9;
+}
+
+.cfglobal_styled_table tbody tr:last-of-type 
+{
+  border-bottom: 2px solid #4481b9;
+}
+
+.swal2-header .swal2-icon, .swal2-icon-content 
+{
+  font-size: xx-large !important;
+}
+
+select
+{
+  padding: 10px !important;
+  border: none !important;
+  outline: none !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  font-size: 20px !important;
+  border-left: 1px solid #050505 !important;
+  border-right: 1px solid #050505 !important;
+}
+
+#cfglobal_input_container .updowncontainer .col-sm-12, #cfglobal_input_header_container .updowncontainer .col-sm-12{
+  margin-top:4px !important;
+  display:flex !important;
+  justify-content: flex-end !important;
+  /*align-content: flex-end;*/
+}
+
+#cfglobal_input_container .updowncontainer .cfext-switch, #cfglobal_input_header_container .updowncontainer .cfext-switch{
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75) !important;
+  min-width:30px !important;
+  max-width:30px !important;
+  border-radius:20px !important;
+}
+
+#cfglobal_input_container .updowncontainer .cfext-switch button, #cfglobal_input_header_container .updowncontainer .cfext-switch button {
+  display: block !important;
+  padding:2px !important;
+  margin:0px !important;
+  font-size: 8px !important;
+}
+
+#cfglobal_input_container, #cfglobal_input_header_container{
+  max-height: 500px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+#cfglobal_input_container .lvl-container, #cfglobal_input_header_container .lvl-container{
+  padding: 10px !important;
+  border-radius: 4px !important;
+  box-shadow: 2px 2px 6px -1px rgba(0,0,0,0.75) !important;
+}
+
+#cfglobal_input_container .lvl-container input, #cfglobal_input_container .lvl-container select, #cfglobal_input_header_container .lvl-container input, #cfglobal_input_header_container .lvl-container select{
+  max-height:30px !important;
+  font-size:12px !important;
+}
+
+#cfglobal_input_container .lvl-container:nth-child(even), #cfglobal_input_header_container .lvl-container:nth-child(even){
+  background:  linear-gradient(to top, #ddd6f3, #faaca8);
+}
+
+#cfglobal_input_container .lvl-container:nth-child(odd), #cfglobal_input_header_container .lvl-container:nth-child(odd){
+  background:  linear-gradient(to top, #faaca8, #ddd6f3);
+}
+
+#cfglobal_input_container .delinp, #cfglobal_input_header_container .delinp{
+  opacity: 0.6 !important;
+  margin-bottom: 4px !important;
+  cursor: pointer !important;
+}
+
+#cfglobal_input_container .selected_input, #cfglobal_input_header_container .selected_input {
+  margin-top:3px !important;
+  margin-bottom:3px !important;
+  background-color: #ffbd80 !important;
+}
+
+.cfglobal_theme_choose {
+  height: 541px !important;
+  width: 500px !important;
+}
+
+.pdl-0{
+  padding-left:0px !important;
+}
+
+.pdr-0{
+  padding-right:0px !important;
+}
+
+
+/* ====================== */
+/* Dropdown CSS */
+/* ====================== */
+.cfglobal_dropdown
+{
+    position: relative;
+    margin-top: 10px;
+    width: auto;
+    height: 50px;
+}
+
+.cfglobal_dropdown::before
+{
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 10000;
+    width: 8px;
+    height: 8px;
+    border: 2px solid #333;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(-45deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.cfglobal_dropdown.active::before
+{
+    top: 22px;
+    transform: rotate(-225deg);
+}
+
+.cfglobal_dropdown input
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: #fff;
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    padding: 12px 20px;
+    border-radius: 10px;
+}
+
+.cfglobal_dropdown .option
+{
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+    z-index: 100000 !important;
+}
+
+.cfglobal_dropdown.active .option
+{
+    display: block;
+}
+
+.cfglobal_dropdown .option div
+{
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.cfglobal_dropdown .option div:hover
+{
+    background: #62baea;
+    color: #fff;
+}
+
+iframe
+{
+  width: 100%;
+  height: auto;
+  border: none;
+  outline: none;
+}

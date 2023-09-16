@@ -403,8 +403,8 @@ elseif($addpass==2||$addpass==0){echo "Please Refresh The Page and Try Again.";}
 if(isset($_POST['createfunnel']))
 {
 if(!$userobforcheck->isLoggedin()){die ('@not-logged-in@');}
-$funnel=$load->loadFunnel();
-$create=$funnel->createFunnel($_POST['funnel_url'],$_POST['funnel_name'],$_POST['funnel_type'],$_POST['modify_index']);
+$funnel=$load->loadFunnel(); 
+$create=$funnel->createFunnel($_POST['funnel_url'],$_POST['funnel_name'],$_POST['funnel_type'],$_POST['modify_index'],$_POST['cname']);
 echo $create;
 }
 //------------create subdomain---------------------
@@ -427,6 +427,20 @@ if(isset($_POST['createsubdomain']))
 
 
 }	
+//------------delete subdomain---------------------
+if(isset($_POST['delete_cname']))
+{
+		// delete subdomain
+		$mysqli = $info['mysqli'];
+		$dbpref = $info['dbpref'];
+		$table = $dbpref . "subdomians";
+		$id=$_POST['delcname'];
+		$sql_delete="
+		DELETE FROM `".$table."` WHERE `id` = '$id'";
+		$mysqli->query($sql_delete);
+		echo $sql_delete;
+}
+
 
 //------------rename funnel---------------------
 if(isset($_POST['renamefunnels']))

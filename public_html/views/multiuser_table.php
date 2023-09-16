@@ -41,10 +41,8 @@ if (isset($_POST['onpage_search']) && strlen($_POST['onpage_search']) > 0) {
   }
   $query = "SELECT * FROM `" . $pref . "users` where ".$sql_text."   " . $timelimit_condition . " order by " . $order_by . " LIMIT " . $start_from . ", " . get_option('qfnl_max_records_per_page') . "";
 }
-
 $result = $mysqli->query($query);
-
-$countrows_query = $mysqli->query("select count(`id`) as `countid` from `" . $pref . "users` where " . $timelimit_condition . "");
+$countrows_query = $mysqli->query("select count(`id`) as `countid` from `" . $pref . "users` where ".$sql_text." " . $timelimit_condition . "");
 $countrows_ob = $countrows_query->fetch_object();
 $countrows = $countrows_ob->countid;
 ?>

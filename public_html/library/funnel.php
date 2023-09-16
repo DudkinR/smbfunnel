@@ -39,12 +39,18 @@ class Funnel
 		// $this->template_url = "http://cloudfunnels.in/resources/index.php";
 		// $this->template_url = "http://localhost/CloudFunnels_Templates/templates.php";
 	}
-	function createFunnel($url, $name, $type, $modify_index = 0)
+	function createFunnel($url, $name, $type, $modify_index = 0,$cname)
 	{
 		//create funnel
 		global $document_root;
 		$site_token_for_dashboard=get_option('site_token');
 		$total_funnels = $this->getTotalFunnel();
+		if($cname==1)
+		{			
+		$this->insertSubdomain($name);
+		}
+			
+		
 		if($_SESSION['user_plan_type' . $site_token_for_dashboard]==2 && $total_funnels>=1 ) {
 			return 0;
 		}
@@ -100,7 +106,8 @@ class Funnel
 							mkdir($path . '/q-fnl-assets/img');
 							mkdir($path . '/q-fnl-assets/css');
 						}
-						return self::insertFunnelBase($name, $actualurl, $path, $type, $routed_path);
+
+						return self::insertFunnelBase($name, $actualurl, $path, $type, $routed_path,$cname);
 					} else {
 						return "Unable to create Dir";
 					}
@@ -110,7 +117,7 @@ class Funnel
 						mkdir($path . '/q-fnl-assets/js');
 						mkdir($path . '/q-fnl-assets/img');
 						mkdir($path . '/q-fnl-assets/css');
-						return self::insertFunnelBase($name, $actualurl, $path, $type, $routed_path);
+						return self::insertFunnelBase($name, $actualurl, $path, $type, $routed_path,$cname);
 					} else {
 						return "Something is wrong, seems another funnel is already available on the same path";
 					}
@@ -191,9 +198,19 @@ class Funnel
 		}
 		return $return;
 	}
-
-	function insertFunnelBase($name, $url, $dir, $type, $routed_path = 0)
+	function insertSubdomain($name){
+		$mysqli = $this->mysqli;
+		$pref = $this->dbpref;	
+		$trans_install_url =str_replace(["https://","www"],"",$_SERVER['HTTP_HOST']);
+		$url=$name.".".$trans_install_url;
+		$type = 0;
+		$user_id = $_SESSION['user' . get_option('site_token')];
+		$sql_insert="INSERT INTO `".$pref."subdomians`(`name`, `url`, `type`, `user_id`) VALUES ('".$name."','".$url."','".$type."','".$user_id."')";
+		$mysqli->query($sql_insert); 
+	}
+	function insertFunnelBase($name, $url, $dir, $type, $routed_path = 0,$cname)
 	{
+		//echo $cname;
 		$plugin_loader = false;
 		if (isset($GLOBALS['plugin_loader'])) {
 			$plugin_loader = $GLOBALS['plugin_loader'];
@@ -230,6 +247,7 @@ class Funnel
                 $sqlf = "INSERT INTO `" . $pref . "user_funnel` (`user_id`, `funnel_id`) VALUES ('" . $user_id . "', '" . $funnel_id . "')";
               }
             $inf = $mysqli->query($sqlf);
+
         }
 
 			////
