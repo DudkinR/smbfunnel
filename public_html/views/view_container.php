@@ -216,7 +216,7 @@ $dbpref = $info['dbpref'];
                         $dashboard_permission_page_arr = array();
                         if (isset($_SESSION['permission_page_arr' . $site_token_for_dashboard]) && is_array($_SESSION['permission_page_arr' . $site_token_for_dashboard])) {
                             $dashboard_permission_page_arr = $_SESSION['permission_page_arr' . $site_token_for_dashboard];
-                        }
+                        } 
                         if (in_array('dashboard', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                             <li id="li-dashboard">
                                 <a class="waves-effect waves-dark sidebar-submenu-a" href="index.php?page=dashboard" aria-expanded="false"><i class='fas fa-tachometer-alt'></i> <span class="hide-menu"><?php w('Dashboard'); ?></span></a>

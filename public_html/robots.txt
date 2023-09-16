@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://smbfunnels.com/sitemap.xml

@@ -5,132 +5,167 @@
     http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
    <url>
-     <loc>https://smbfunnels.com/dudkin-project/page-1</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <loc>https://smbfunnels.com/subdomin/optin</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/subdomin/salespage</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/subdomin/order-form</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/subdomin/confirmation-page</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/subdomin/cancelation-page</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/sub2/optin</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/sub2/salespage</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/sub2/order-form</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/sub2/confirmation-page</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/sub2/cancelation-page</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/my_dev/optin</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
+   </url>
+
+   <url>
+     <loc>https://smbfunnels.com/my_dev/thankyou-page</loc>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/seminario/optin</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/seminario/thankyou-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/mi-funnel/registration-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/mi-funnel/login-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/mi-funnel/membership-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/mi-funnel/forgot-password-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
-   </url>
-
-   <url>
-     <loc>https://smbfunnels.com/test/registration-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
-   </url>
-
-   <url>
-     <loc>https://smbfunnels.com/test/login-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
-   </url>
-
-   <url>
-     <loc>https://smbfunnels.com/test/membership-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
-   </url>
-
-   <url>
-     <loc>https://smbfunnels.com/test/forgot-password-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/coldoutreachclub/optin</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/coldoutreachclub/salespage</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/coldoutreachclub/order-form</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/coldoutreachclub/confirmation-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/coldoutreachclub/cancelation-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/try</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/salespage</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/order-form</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/confirmation-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/cancelation-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/smbfunnels/optin</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/smbfunnels/salespage</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/smbfunnels/order-form</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/smbfunnels/confirmation-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 
    <url>
      <loc>https://smbfunnels.com/smbfunnels/cancelation-page</loc>
-     <lastmod>2023-08-18T04:34:27+00:00</lastmod>
+     <lastmod>2023-09-16T06:11:56+00:00</lastmod>
    </url>
 </urlset>

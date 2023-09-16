@@ -229,39 +229,7 @@ $funnel_url = str_replace("@@qfnl_install_dir@@", get_option('install_url'), $da
 										</div>
 									</div>
 								</div>
-								<!-- row where is the select with available subdomains -->
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="card pnl">
-											<div class="card-header">
-												<div class="row">
-													<div class="col">{{t("Select Subdomain")}}</div>
-													<div class="col text-right"><i class="fas fa-times " v-on:click="closeNewModel()" style="cursor:pointer;"></i></div>
-												</div>
-											</div>
-											<div class="card-body">
-												<div class="mb-3">
-													<label for="">{{t('Subdomain')}}</label>
-													<select class="form-select form-control mt-0" id="subdomain" v-model="new_CNAME">
-														<option value="">{{t('Select Subdomain')}}</option>
-														<?php
-														$mysqli = $info['mysqli'];
-														$dbpref = $info['dbpref'];
-														$table = $dbpref . "subdomians";
-												        $query = "SELECT * FROM $table";
-														$funnel_subdomains = $mysqli->query($query);
-														foreach ($funnel_subdomains as $subdomain) {
-															echo "<option value='" . $subdomain->id . "'>" . $subdomain->name . "</option>";
-														}
-														?>
-													</select>
-												</div>
-												<button v-on:click="addNewLabel" class="btn theme-button btn-block mt-2 doclone">{{t("Add")}}</button>
-											</div>
-										</div>
-									</div>
 
-								</div>
 							</div>
 							<!-- ends funnel -->
 						</div>

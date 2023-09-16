@@ -101,6 +101,7 @@ $dbpref = $info['dbpref'];
       						<th><?php w("Type"); ?></th>
                             <th><?php w("htaccess"); ?></th>
 							<th><?php w("User") ?></th>
+                            <th><?php w("Action") ?></th>
 						</thead>
                         <tbody>
                             <?php
@@ -110,26 +111,43 @@ $dbpref = $info['dbpref'];
                                     if(check_gethostbyname(str_replace("/","",$row['url']) )==0)
                                     { $type=0;
                                      $bg="bg-danger";
+                                     $btn_bg="text-warning";
                                      $text_htaccess= "You need to add CNAME on server";
                                     }
                                     else if(check_gethostbyname(str_replace("/","",$row['url']) )==1) {
                                         $type=1;
                                         $bg="bg-warning";
+                                        $btn_bg="text-danger";
                                          $text_htaccess= "You have CNAME on server and  htaccess";
                                     }
                                     else if(check_gethostbyname(str_replace("/","",$row['url']) )==2){
                                         $type=2;
                                         $bg="bg-success";
-                                        $text_htaccess= "You have CNAME on server , but  htaccess is not configured
+                                        $btn_bg="text-danger";
+                                        $text_htaccess= "
+                                        <h6>You have CNAME on server , but  htaccess is not configured </h6>
                                         <br>
+                                        <p class=\"bg-light\">
                                         RewriteEngine On
                                         <br>
                                         RewriteRule ^(.*)$ https://". $trans_install_url."/" . $row['name'] . "/$1 [R=301,L]
-
+                                        </p>
+                                         <h6>Or add index.php with code: </h6>
+                                        <br>
+                                        <p class=\"bg-light\">
+                                        &lt;?php
+                                        <br>
+                                        header(\"Location: https://". $trans_install_url."/" . $row['name'] . "/\");
+                                        <br>
+                                        exit;
+                                        <br>
+                                        ?&gt;
+                                        </p>
                                         ";
                                     }
                                     else{
                                         $type=0;
+                                        $btn_bg="text-warning";
                                         $bg="bg-info"; $text_htaccess="error";
                                     }
                                     $query = "UPDATE $table SET type='$type' WHERE id=".$row['id'];
@@ -144,6 +162,15 @@ $dbpref = $info['dbpref'];
                                     echo "<td>" . $type . "</td>";
                                     echo "<td>" . $text_htaccess. "</td>";
                                     echo "<td>" . $row['user_id'] . "</td>";
+                                    echo "<td>
+                                    <form action=\"?page=delete_subdomain\" method=\"post\" >
+                                    <input type=\"hidden\" name=\"delcname\" value=\"".$row['id']."\">
+                                    <input type=\"hidden\" name=\"delete_cname\" value=\"".$row['name']."\">
+                                    <button type=\"submit\" class=\"btn unstyled-button\" data-bs-toggle=\"tooltip\" title=\"\" data-bs-original-title=\"Delete CNAME\" aria-label=\"Delete CNAME\">
+                                    <i class=\"fas fa-trash ".$btn_bg."\"></i>
+                                    </button>
+                                    </form>
+                                    </td>";
                                     echo "</tr>";
                                 }
                             ?>

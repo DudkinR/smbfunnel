@@ -926,7 +926,7 @@ elseif ($page == 'no_permission') {
 		echo "Version missing";
 	}
 }// page== subdomians
-elseif($page=="subdomains" || $page=="new_subdomain")
+elseif($page=="subdomains" || $page=="new_subdomain" || $page=="delete_subdomain")
 {
 
 	$header = $this->load->loadBootstrap();
@@ -935,6 +935,7 @@ elseif($page=="subdomains" || $page=="new_subdomain")
 	$page_description = "Create, edit and manage CNAME";
 	$createoredit = "CNAME";
 	$tutorial_link = "";
+//	$page="subdomains" ;
 	$this->load->view($createoredit, $header, $page . ".php", $footer, array('page_description' => $page_description, 'tutorial_link' => $tutorial_link));
 }
 else {
@@ -955,7 +956,7 @@ else {
 				$createoredit = $plugin_data[0]['page_title'] . " ";
 			}
 			$this->load->view($createoredit, $header, "plugin_view.php", "", array('page_description' => $page_description, 'tutorial_link' => $tutorial_link), $plugin_data);
-		}
+		} 
 	}
 
 	if (!$has_a_integrated_page) {

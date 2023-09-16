@@ -125,51 +125,74 @@ if (isset($_GET['id'])) {
                 <div id="permissiondiv" class="dropdown-menu btn-block" style="max-height: 350px;overflow-y: auto;">
 
                   <div style="padding: 0px 10px 0px 10px;width: 500px;">
+                  <?php 
+                   if (in_array('admin', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="admin" <?php if (in_array('admin', $permission)) {echo "checked";} ?>><?php w("All Pages"); ?></label>
-
+                  <?php } 
+                  if (in_array('dashboard', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="dashboard" <?php if (in_array('dashboard', $permission)) {echo "checked";} ?>><?php w("Dashboard"); ?></label>
+                  <?php }
+                  if (in_array('all_funnels', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
 
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="all_funnels,create_funnel,optins,page_builder" <?php if (in_array('all_funnels', $permission)) {echo "checked";} ?>><?php w("Funnels & Optins"); ?></label>
+                  <?php }
+                  if (in_array('membership_funnels', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
 
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="membership_funnels,members" <?php if (in_array('membership_funnels', $permission)) {echo "checked";} ?>><?php w("Members"); ?></label>
+                  <?php }
+                  if (in_array('analysis', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="analysis" <?php if (in_array('analysis', $permission)) {echo "checked";} ?>><?php w("Analysis"); ?></label>  
-                    
+                  <?php }
+                  if (in_array('media', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>                    
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="media" <?php if (in_array('media', $permission)) {echo "checked";} ?>><?php w("Media"); ?></label>
-
+                  <?php }
+                  if (in_array('products', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="products" <?php if (in_array('products', $permission)) {echo "checked";} ?>><?php w("Products"); ?></label>
-
+                  <?php }
+                  if (in_array('sales', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="sales" <?php if (in_array('sales', $permission)) {echo "checked";} ?>><?php w("Sales"); ?></label>
-
+                  <?php }
+                  if (in_array('plugins', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="plugins" <?php if (in_array('plugins', $permission)) {echo "checked";} ?>><?php w("Plugins"); ?></label>
-
-                    <?php
-                    if(isset($GLOBALS['user_screen_plugin_pages']) && is_array($GLOBALS['user_screen_plugin_pages']))
+                  <?php }
+                  if(isset($GLOBALS['user_screen_plugin_pages']) && is_array($GLOBALS['user_screen_plugin_pages']))
                     {
                       foreach($GLOBALS['user_screen_plugin_pages'] as $user_screen_plugin_pages_index=>$user_screen_plugin_pages_val){
-                    ?>
-                    <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="<?php echo $user_screen_plugin_pages_index; ?>" <?php if (in_array($user_screen_plugin_pages_index, $permission)) {echo "checked";
-                    } ?>><?php w($user_screen_plugin_pages_val);echo"&nbsp;";echo"("; w('Plugin'); echo ")"; ?></label>
-                      
-                    <?php }} ?>
-
-                    <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="listrecords,createlist" <?php if (in_array('listrecords', $permission)) {echo "checked";} ?>><?php w("Lists"); ?></label>
-                                                                                                                                         <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="compose_mail" <?php if (in_array('compose_mail', $permission)) {echo "checked";} ?>><?php w("Compose Mail"); ?></label>
-
-                    <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="sequence_records,sequence" <?php if (in_array('sequence_records', $permission)) {echo "checked";} ?>><?php w("Sequences"); ?></label>
-
+                        if (in_array($user_screen_plugin_pages_index, $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) {
+                          ?>
+                          <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="<?php echo $user_screen_plugin_pages_index; ?>" <?php if (in_array($user_screen_plugin_pages_index, $permission)) {echo "checked";
+                          } ?>><?php w($user_screen_plugin_pages_val);echo"&nbsp;";echo"("; w('Plugin'); echo ")"; ?></label>
+                          <?php }
+                        }
+                    }
+                    if (in_array('listrecords', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
+                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="listrecords,createlist" <?php if (in_array('listrecords', $permission)) {echo "checked";} ?>><?php w("Lists"); ?></label>
+                    <?php }
+                    if (in_array('compose_mail', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
+                      <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="compose_mail" <?php if (in_array('compose_mail', $permission)) {echo "checked";} ?>><?php w("Compose Mail"); ?></label>
+                    <?php }
+                    if (in_array('sequence_records', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
+                      <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="sequence_records,sequence" <?php if (in_array('sequence_records', $permission)) {echo "checked";} ?>><?php w("Sequences"); ?></label>
+                    <?php }
+                     if (in_array('sentemailsdetails', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="sentemailsdetails" <?php if (in_array('sentemailsdetails', $permission)) {echo "checked";
                     } ?>><?php w("Mailing History"); ?></label>
-
-                    <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="smtp_table,smtp_create" <?php if (in_array('smtp_table', $permission)) {echo "checked";} ?>><?php w("SMTPs"); ?></label>
-
-                    <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="multiuser_table,createmultiuser" <?php if (in_array('multiuser_table', $permission)) {echo "checked";} ?>><?php w("Users"); ?></label>
-
+                    <?php }
+                    if (in_array('smtp_table', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
+                      <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="smtp_table,smtp_create" <?php if (in_array('smtp_table', $permission)) {echo "checked";} ?>><?php w("SMTPs"); ?></label>
+                    <?php }
+                    if (in_array('multiuser_table', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
+                      <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="multiuser_table,createmultiuser" <?php if (in_array('multiuser_table', $permission)) {echo "checked";} ?>><?php w("Users"); ?></label>
+                    <?php }
+                    if (in_array('gdpr', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="gdpr" <?php if (in_array('gdpr', $permission)) {echo "checked";} ?>><?php w("GDPR Configuration"); ?></label>
-
+                    <?php }
+                    if (in_array('settings', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
                     <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="settings" <?php if (in_array('settings', $permission)) {echo "checked";} ?>><?php w("Settings"); ?></label>
-
-                    <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="settings" <?php if (in_array('app_guide', $permission)) {echo "checked";} ?>><?php w("Guidence"); ?></label>
-
+                    <?php }
+                    if (in_array('app_guide', $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) { ?>
+                    <label>&nbsp;<input type="checkbox" name="permission[]" class="checkstyle" value="app_guide" <?php if (in_array('app_guide', $permission)) {echo "checked";} ?>><?php w("Guidence"); ?></label>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
