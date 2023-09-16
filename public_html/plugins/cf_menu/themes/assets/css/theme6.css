@@ -1,0 +1,385 @@
+.cfmenu_theme6 {
+    width: 100%;
+    z-index: 9999;
+}
+
+.cfmenu_theme6-main-wrapper img {
+    width: 100%;
+    display: block;
+}
+
+.cfmenu_theme6-main-wrapper a {
+    color: #000;
+    text-decoration: none;
+}
+
+.cfmenu_theme6-main-wrapper ul li {
+    list-style-type: none;
+}
+
+.cfmenu_theme6-navbar {
+    background: #fafafa;
+    padding: 0 1rem;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.cfmenu_theme6-main-wrapper .brand-and-icon {
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cfmenu_theme6-main-wrapper .cfmenu_theme6-navbar-brand {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.cfmenu_theme6-navbar-toggler {
+    display: block;
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: 0;
+    padding: 0.2rem 0.5rem;
+    transition: all 0.4s ease;
+}
+
+.cfmenu_theme6 button:hover,
+.cfmenu_theme6 button:active,
+.cfmenu_theme6 button:focus,
+.cfmenu_theme6 input:active,
+.cfmenu_theme6 input:focus,
+.cfmenu_theme6 input:hover {
+    outline: none;
+    border: none;
+}
+
+.cfmenu_theme6-navbar-toggler:hover {
+    opacity: 0.7;
+}
+
+.cfmenu_theme6-navbar-collapse {
+    overflow-y: scroll;
+    display: none;
+}
+
+.cfmenu_theme6-navbar-nav>li>a {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: block;
+    padding: 0.6rem 0;
+    margin: 0.2rem 0;
+    border-bottom: 1px solid #ddd;
+    border-radius: 1px;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.cfmenu_theme6-main-wrapper .drop-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.cfmenu_theme6-navbar-nav>li>a:hover {
+    opacity: 0.7;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu h4 {
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 0;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu ul li {
+    text-transform: capitalize;
+    padding: 0.2rem 0;
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu ul li a {
+    opacity: 0.8;
+    transition: all 0.5s ease;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu ul li a:hover {
+    padding-left: 14px;
+    opacity: 0.9;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu {
+    display: none;
+    padding-top: 10px;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item {
+    padding-left: 1.2rem;
+    padding-top: 10px;
+    padding-right: 10px;
+    width: 100%;
+    margin: 10px;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(4) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    width: 100%;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(4) h2 {
+    text-transform: capitalize;
+    margin: 1.5rem 0;
+    width: 100%;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(4) .btn {
+    border: 1px solid #000;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    transition: all 0.5s ease;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(4) .btn:hover {
+    background: transparent;
+    color: #000;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(2) {
+    margin: 0 auto;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item img {
+    transition: 0.4s;
+}
+
+.cfmenu_theme6-main-wrapper .sub-menu-item img:hover {
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Media Queries */
+
+@media screen and (min-width: 992px) {
+    .cfmenu_theme6-navbar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding: 0 5rem;
+        position: relative;
+    }
+    .cfmenu_theme6-main-wrapper .sub-menu-item {
+        width: 28%;
+    }
+    .cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(2) {
+        width: 20%;
+    }
+    .cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(4) {
+        width: 20%;
+    }
+    .cfmenu_theme6-navbar-toggler {
+        display: none;
+    }
+    .cfmenu_theme6-main-wrapper .brand-and-icon {
+        flex: 0 0 100px;
+        border-bottom: none;
+        padding: 0;
+    }
+    .cfmenu_theme6-navbar-collapse {
+        display: block!important;
+        overflow-y: hidden;
+        flex: 1 0 auto;
+    }
+    .cfmenu_theme6-navbar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cfmenu_theme6-navbar-nav>li>a {
+        border-bottom: none;
+        margin: 0 0.4rem;
+        padding: 1.7rem 1.8rem 1.7rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    .cfmenu_theme6-main-wrapper .sub-menu {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        top: 100%;
+        background: #f8f8f8;
+    }
+    .cfmenu_theme6-navbar-nav>li:hover .sub-menu {
+        display: flex !important;
+        /* grid-template-columns: repeat(4, 1fr); */
+        padding: 0 5rem;
+    }
+    .cfmenu_theme6-navbar-nav>li {
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.4s ease;
+    }
+    .cfmenu_theme6-navbar-nav>li:hover {
+        border-bottom-color: #000;
+    }
+    .cfmenu_theme6-main-wrapper .sub-menu-item {
+        padding-left: 0;
+        padding-top: 2px;
+    }
+    .cfmenu_theme6-main-wrapper .sub-menu-item:nth-child(3) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+.cfmenu_theme6 .cfmenu_theme6-icon-img {
+    width: 25px;
+}
+
+.cfmenu_theme6 ul {
+    margin-bottom: 0 !important;
+    padding: 0;
+    margin: 0;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-nabvar-icons ul li a {
+    padding: 10px 3px;
+    cursor: pointer;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-nabvar-icons ul li a {
+    padding: 10px 3px;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-navbar-collapse .cfmenu_theme6-close-menu {
+    background-color: transparent;
+    border: 0;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-mobile-header {
+    border-bottom: 1px solid #cccccc;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search .input-group {
+    border: 1px solid;
+    background-color: white;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search {
+    display: none;
+    position: relative;
+    z-index: 99;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search input {
+    width: 89%;
+    padding: 10px;
+    border: 0;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search.cfmenu_theme6-search-active {
+    display: block;
+    animation: cfmenu_theme6-search 0.1s ease-out;
+    background-color: #ffffff;
+    padding: 30px 0px;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search button {
+    padding: 9px 12px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-open-menu {
+    border: none;
+    background-color: transparent;
+}
+
+.cfmenu_theme6 button:focus,
+.cfmenu_theme6 button:active {
+    outline: none;
+    border: none;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-search-btn {
+    display: none;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search form {
+    background-color: white;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-search-btn {
+    display: none;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-search-cancel {
+    display: block;
+    transition: all 0.2s;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-close-menu {
+    display: block;
+    transition: all 0.2s;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-search-cancel:hover,
+.cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-close-menu:hover {
+    color: #ccc;
+    transform: scale(1.2);
+}
+
+.cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-search-cancel img {
+    width: 20px;
+}
+
+.cfmenu_theme6 .cfmenu_theme6-nabvar-icons {
+    display: none !important
+}
+
+@media screen and ( min-width: 1024px) {
+    .cfmenu_theme6-navbar-brand {
+        font-size: 1.8rem;
+    }
+    .cfmenu_theme6-navbar-toggler {
+        font-size: 1.8rem;
+    }
+    .cfmenu_theme6 .cfmenu_theme6-icon-img-a {
+        display: none !important;
+    }
+    .cfmenu_theme6 .cfmenu_theme6-mobile-header {
+        display: none !important;
+    }
+    .cfmenu_theme6 .brand-and-icon .cfmenu_theme6-mobile-icons {
+        display: none !important
+    }
+    .cfmenu_theme6 .cfmenu_theme6-nabvar-icons {
+        display: flex !important
+    }
+    .cfmenu_theme6 .cfmenu_theme6-search .cfmenu_theme6-search-btn {
+        display: block
+    }
+}

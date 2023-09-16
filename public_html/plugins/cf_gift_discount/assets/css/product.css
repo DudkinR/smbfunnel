@@ -1,0 +1,283 @@
+/* For product */
+
+.cp 
+{
+  cursor: pointer;
+}
+.mt-2
+{
+  margin-top: 2px;
+}
+.mb-4
+{
+  margin-bottom: 4px;
+}
+.text-gray
+{
+  color:rgba(105, 102, 102, 0.589);
+}
+.p5
+{
+  padding: 5px;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-center-column
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.product-media-selector {
+  min-height: 250px;
+  overflow: auto;
+}
+
+.product-media-selector .item-selection
+{
+  display: flex;
+  border: 2px solid rgba(175, 174, 174, 0.986);
+  border-style: dashed;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: rgba(247, 240, 240, 0.781);
+}
+.product-media-selector .item-selection .uploader
+{
+  padding: 8px 20px;
+  color: rgba(184, 179, 179, 0.781);
+  font-size: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0px;
+}
+.h-220
+{
+  min-height: 220px !important;
+}
+.h-180
+{
+  min-height: 180px !important;
+}
+.mr-2
+{
+  margin-right: 2px;
+}
+.inline-overflow
+{
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  flex-wrap: nowrap;
+}
+.responsive-embed-video
+{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.responsive-embed-video iframe
+{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+.p-4
+{
+  padding: 4px !important;
+}
+.w-200-pc
+{
+  width: 200%;
+}
+.f-20
+{
+  font-size: 20px !important;
+}
+.f-19
+{
+  font-size: 19px !important;
+}
+.f-12
+{
+  font-size: 12px !important;
+}
+.f-14
+{
+  font-size: 14px !important;
+}
+.op-6
+{
+  opacity: 0.6;
+}
+.position-relative
+{
+  position: relative;
+}
+.position-absolute
+{
+  position: absolute;
+}
+.input-suggester
+{
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+  padding: 5px;
+  background-color: whitesmoke;
+  max-height: 180px;
+  overflow: auto;
+  z-index: 999999;
+}
+.input-suggester .each
+{
+  cursor: pointer;
+  padding: 8px 2px;
+  background-color: transparent;
+  color: rgb(100 109 109);
+}
+.input-suggester .each:hover
+{
+  background-color: rgb(218, 214, 214);
+  color: rgb(94, 93, 92);
+}
+.disappeared-input
+{
+  width: 100%;
+  padding: 4px 0px;
+  border: 0px;
+}
+.mask-input 
+{
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 4px;
+}
+.suggestion-tablet-container
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.suggestion-tablet
+{
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  padding: 4px;
+  margin: 2px;
+  padding: 5px;
+  margin: 4px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 0px 6px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 0px 6px -1px rgba(0,0,0,0.75);
+  box-shadow: 2px 0px 6px -1px rgba(0,0,0,0.75);
+}
+.suggestion-tablet .content
+{
+  font-size: 15px !important;
+}
+.suggestion-tablet .close
+{
+  font-size: 12px !important;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+html
+{
+  scroll-behavior: smooth;
+}
+.media_view_media
+{
+  border: 2px solid rgba(175, 174, 174, 0.986);
+  border-style: dashed;
+  border-radius: 10px;
+  padding: 5px;
+}
+.media_view_media img, .media_view_media video
+{
+  border-radius: 6px;
+}
+.f-16
+{
+  font-size: 16 px;
+}
+.status-element
+{
+  color: whitesmoke;
+  opacity: 0.8;
+  padding: 6px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+.variant_all_path a
+{
+  width: 100%;
+  display: block;
+  text-decoration: none;
+}
+.variant_all_path .media_view_media
+{
+  max-width: 60px;
+}
+.variant_all_path tr.active
+{
+  background-color: rgba(0,0,0,.05);
+}
+.pd-l-50
+{
+  padding-left: 50px;
+}
+.sticky-right
+{
+  right: 0;
+  position: -webkit-sticky;
+  position: sticky;
+}
+.sticky-action-col
+{
+  right: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  padding-left: 5px;
+  background-color: white;
+  border: 0px !important;
+}
+.sticky-table-header 
+{
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  background-color: white;
+  z-index: 9;
+}
+.var-cont-comb .table-responsive
+{
+  max-height: 400px;
+}
+.better-scroll::-webkit-scrollbar
+{
+  height: 8px;
+  width: 8px;
+}
+.better-scroll::-webkit-scrollbar-thumb
+{
+  background-color: rgb(155, 152, 152);
+  border-radius: 5px;
+}
+.var-cont-comb input[type="text"], .var-cont-comb input[type="number"]
+{
+  min-width: 100px;
+}
+/* For product */

@@ -1,0 +1,32 @@
+.easy-editor-container > .row {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.easy-editor-container .disclaimer-title {
+  margin-bottom: 10px;
+  color: #1d56bb;
+  position: relative;
+}
+.easy-editor-container .disclaimer-title:after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 5px;
+  border-radius: 10px 0px 0px 10px;
+  margin-top: 2px;
+  margin-bottom: 6px;
+  background: rgb(51, 5, 92);
+  background: linear-gradient(
+    90deg,
+    rgba(51, 5, 92, 1) 0%,
+    rgba(247, 250, 251, 1) 49%
+  );
+}
+.easy-editor-container .card {
+  border-color: transparent;
+  -webkit-box-shadow: 2px 3px 13px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 3px 13px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 3px 13px -2px rgba(0, 0, 0, 0.75);
+}

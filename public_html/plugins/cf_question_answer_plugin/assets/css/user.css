@@ -1,0 +1,46 @@
+#mcdiv{
+    margin-top: -14px;
+    margin-left: 1px;
+    margin-bottom: 22px;
+}
+.mcname{
+    
+   
+    text-transform: capitalize;
+    font-size:14px;
+    color: rgb(128, 123, 123);;
+}
+.mcdate{
+    
+    font-size:14px;
+    color: rgb(128, 123, 123);;
+}
+.cfquestion_main{
+    font-family: Cambria, Georgia, serif;
+}
+
+.cfquestion_main_heading{
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+}
+.cfquestion_question_q,
+.cfquestion_question_a{
+    width: 10%;
+
+}
+.cfquestion_question_qd,
+.cfquestion_question_ans{
+    width: 90%;
+}
+#cfquestion_qandadiv{
+    border-bottom: 1px solid #cccccc;
+    padding: 8px 0;
+}
+#morebtn{
+    margin-left:0px;
+}
+#cfqandanswer #cfq_loadBtn{
+    border: 1px solid #ccc;
+    padding: 3px 6px;
+}
+

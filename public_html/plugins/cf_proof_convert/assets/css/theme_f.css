@@ -1,0 +1,53 @@
+.cfproof_convert_chips {
+  position: fixed;
+  width: 350px;
+  padding: 5px 5px 5px 15px;
+  box-shadow: 4px 4px 14px 1px rgba(0,0,0,0.4);
+  background-color: #ffffff;
+  cursor: pointer;
+  z-index:999999999;
+  line-height:1.4;
+}
+.cfproof_convert_temp_img{
+  position: relative;
+  height: 100%;
+}
+.cfproof_convert_temp_img img {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+.cfproof_convert_chips:after{
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-top: 15px solid #5d7aa7;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  margin: 0 auto;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+}
+.cfproof_convert_closebtn {
+  position: absolute;
+  color: #888;
+  font-weight: bold;
+  top: -7px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cfproof_convert_closebtn:hover {
+  color: #000;
+}
+.cfproof_convert_text{
+  font-size: 12px;
+}

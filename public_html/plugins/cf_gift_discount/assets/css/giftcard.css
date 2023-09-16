@@ -1,0 +1,263 @@
+.cfdisp_cursor{
+    cursor: pointer;
+}
+/* Font Weight Style */
+.fw4{
+    font-weight: 400;
+}
+.fw5{
+    font-weight: 500;
+}
+.fw6{
+    font-weight: 600;
+}
+.fw7{
+    font-weight: 700;
+}
+.fw8{
+    font-weight: 800;
+}
+.fw9{
+    font-weight: 900;
+}
+/* Font Weight Style End */
+.fs5px{
+    font-size: 5px !important
+}
+.fs6px{
+    font-size: 6px !important
+}
+.fs7px{
+    font-size: 7px !important
+}
+.fs8px{
+    font-size: 8px !important
+}.fs9px{
+    font-size: 9px !important
+}
+.fs10px{
+    font-size: 10px !important
+}
+.fs11px{
+    font-size: 11px !important
+}
+.fs12px{
+    font-size: 12px !important
+}
+.fs13px{
+    font-size: 13px !important
+}
+.fs14px{
+    font-size: 14px !important
+}
+.fs15px{
+    font-size: 15px !important
+}
+.fs16px{
+    font-size: 16px !important
+}
+.fs17px{
+    font-size: 17px !important
+}
+.fs18px{
+    font-size: 18px !important
+}.fs19px{
+    font-size: 19px !important
+}
+.fs20px{
+    font-size: 20px !important
+}
+.fs21px{
+    font-size: 21px !important
+}
+.fs22px{
+    font-size: 22px !important
+}
+.fs23px{
+    font-size: 23px !important
+}
+.fs24px{
+    font-size: 24px !important
+}
+.fs25px{
+    font-size: 25px !important
+}
+.fs26px{
+    font-size: 26px !important
+}
+.fs27px{
+    font-size: 27px !important
+}
+.fs28px{
+    font-size: 28px !important
+}
+.fs29px{
+    font-size: 29px !important
+}
+.fs30px{
+    font-size: 30px !important
+}
+/* Font Size Style in pixel End */
+
+.cfdisp-required{
+    color: red;
+}
+
+#cfdisp-success-class,
+#cfdisp-error-class{
+    display: none;
+}
+#cfdisp-sfsnackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff !important;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+  }
+  
+  #cfdisp-sfsnackbar.show {
+    visibility: visible;
+    -webkit-animation: cfdispsnakfadein 0.5s, cfdispsfsnakfadeout 0.5s 2.5s;
+    animation: cfdispsnakfadein 0.5s, cfdispsfsnakfadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes cfdispsnakfadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes cfdispsnakfadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes cfdispsfsnakfadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes cfdispsfsnakfadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  .cfdisp-set_expiration_date{
+    display: none;
+  }
+  #cfdisp-delete-produc-images{
+    display: none;
+  }
+  #cfdisp-collectionformdiv .card .card-header{
+    color: #333;
+  }
+  #cfdisp-collectionformdiv ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  #cfdisp-collectionformdiv ul li .form-group{
+    background-color: #edf1f5;
+    padding: 11px;
+  }
+
+  #cfdisp-collectionformdiv ul li .form-group *{
+    font-size: 13px !important;
+  }
+
+  .cfdisp-issue-gift-card .img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .cfdisp-issue-gift-card .img img{
+    border-radius: 50%;
+  }
+  .cfdisp-resend-code{
+    border: none;
+    background: none;
+    color: blue;
+  }
+  #cfdis_add_percentage{
+      display: none;
+  }
+  .cfdis-sf-error{
+      color: red;
+  }
+  .sf-error{
+    color: red;
+  }
+
+  .cfgift_tabs-nav li {
+    float: left;
+    width: 50%;
+  }
+  .cfgift_tabs-nav li:first-child a {
+    border-right: 0;
+    border-top-left-radius: 6px;
+  }
+  .cfgift_tabs-nav li:last-child a {
+    border-top-right-radius: 6px;
+  }
+  .cfgift_tabs a {
+    background: #eaeaed;
+    border: 1px solid #cecfd5;
+    color: #0087cc;
+    display: block;
+    font-weight: 600;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+  }
+  .cfgift_tabs a:hover {
+    color: #ff7b29;
+  }
+  .cfgift_tabs  .cfgift_tab-active a {
+    background: #1f57ca;
+    border-bottom-color: transparent;
+    color: #ffffff;
+    cursor: default;
+  }
+  .cfgift_tabs .cfgift_tabs-stage {
+    border: 1px solid #cecfd5;
+    border-radius: 0 0 6px 6px;
+    border-top: 0;
+    clear: both;
+    padding: 24px 30px;
+    position: relative;
+    background-color: #ffffff;
+    top: -1px;
+  }
+  .cfgmail-custom{
+    display: none;
+  }
+  .cfgift-selection-container .cfgift-list ul{
+   padding: 0;
+   margin: 0;
+  }
+  .cfgift-selection-container .cfgift-list ul li {
+    padding: 5px 2px;
+    color: #ffffffcf;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 8px 0;
+    transition: all 0.4s linear;
+    position: relative;
+    background-color: #f7f7f7;
+  }
+  .cfgift-selection-container .cfgift-list ul li a {
+  padding: 0 6px;
+  display: inline-block;
+  position: relative;
+  transform: left .3s linear;
+  width: 100%;
+  }

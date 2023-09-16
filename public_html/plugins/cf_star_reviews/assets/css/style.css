@@ -1,0 +1,682 @@
+.cs-card{
+	max-width: 100%;
+}
+#cfpro-rev_input_container
+{
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#cfpro-rev_input_container .lvl-container
+{
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px -1px rgba(0,0,0,0.75);
+}
+#cfpro-rev_input_container .lvl-container input, #cfpro-rev_input_container .lvl-container select
+{
+  max-height:30px !important;
+  font-size:12px;
+}
+#cfpro-rev_input_container .lvl-container:nth-child(even)
+{
+  background-color: #ffe6cc;
+}
+ .cfpro-rev-file-ocon{
+  height: 500px;
+}
+
+.cfpro-rev-file-ocon img{
+  max-height: 100% !important;
+  max-width: 100% !important;
+}
+#cfpro-rev_input_container .lvl-container:nth-child(odd)
+{
+  background-color:  #fff2e6;
+}
+#cfpro-rev_input_container .delinp
+{
+  opacity: 0.6;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+#cfpro-rev_input_container .selected_input 
+{
+  margin-top:3px !important;
+  margin-bottom:3px !important;
+  background-color: #ffbd80 !important;
+}
+.pdl-0
+{
+  padding-left:0px !important;
+}
+.pdr-0
+{
+  padding-right:0px !important;
+}
+
+.cfpro-rev_images{
+  transition: 0.3s;
+}
+.cfpro-rev_images:hover{
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+.cfpro-rev_images img{
+  cursor: pointer;
+}
+.cfpro-rev_page_url{
+  resize: none;
+}
+.cfpro-rev_notes{
+  font-size: 0.7em;
+  color: #888181;
+}
+
+.cfpro-rev_overlay{
+  position: fixed;
+  z-index: 99999;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: #c3d7ff59;
+}
+.cfpro-rev_close{
+  color:white;
+  right:20px;
+  top:20px;
+  position:absolute;
+  cursor:pointer
+}
+.cfpro-rev_body{
+     margin: auto;
+    border-radius: 5px;
+    max-width: 81%;
+    top: 54vh;
+    left: 56vw;
+    z-index: 99999;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    position: absolute;
+    max-height: 70%;
+    overflow-y: auto;
+}
+.cfpro-rev_fake_container{
+  padding: 10px;
+}
+.cfpro-rev_chips{
+    line-height:1.4;
+}
+
+.cfpro-rev #cfpro-rev-open-filter{
+  width: 300px;
+  z-index: 99;
+  background-color: #323a40;
+  padding: 14px;
+  position: absolute;
+}
+
+.cfpro-rev #cfpro-rev-filter-btn{background:#1f57ca;background:linear-gradient(25deg,rgba(31,87,202,1) 0,#1f57ca 100%)!important;color:#fff;border-radius:5px!important;font-size:14px;box-shadow:0 6px 0 0 rgba(0,0,0,.01),0 15px 32px 0 rgba(0,0,0,.06)}
+/* Admin side rating */
+.cfpro-rev-my-rating input.cfpro-rev-star { display: none; }
+
+.cfpro-rev-my-rating label.cfpro-rev-star {
+  float: right;
+  padding: 0px 2px;
+  font-size: 19px;
+  color: #444;
+  transition: all .2s;
+}
+
+.cfpro-rev-my-rating input.cfpro-rev-star:checked ~ label.cfpro-rev-star:before {
+  content: '\f005';
+  color: #f5af0e;
+  transition: all .25s;
+}
+
+.cfpro-rev-my-rating input.cfpro-rev-star-5:checked ~ label.cfpro-rev-star:before {
+  color: #f5af0e;
+}
+
+.cfpro-rev-my-rating input.cfpro-rev-star-1:checked ~ label.cfpro-rev-star:before {color: #f5af0e;}
+
+
+
+.cfpro-rev-my-rating label.cfpro-rev-star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+  color: #f5af0e;
+}
+.cfpro-rev-my-rating label.cfpro-rev-star-not:before {
+  content: '\f005' !important;
+  font-family: FontAwesome;
+  color: #cccccc;
+}
+.cfpro-rev-bulk-show{
+  opacity: 0;
+}
+.cfpro-rev-custom-check input {
+  display:none
+}
+
+.cfpro-rev-custom-check label {
+  position:relative;
+  padding-left:30px;
+  margin-bottom:20px;
+  display: inline-block;
+}
+
+.cfpro-rev-custom-check label:before,
+.cfpro-rev-custom-check label:after {
+  content:'';
+  position:absolute;
+}
+
+.cfpro-rev-custom-check label:before {
+  width:20px;
+  height: 20px;
+  border:2px solid #3642ff;
+  top:0;
+  left:0;
+  border-radius:4px;
+}
+
+.cfpro-rev-custom-check label:after {
+  width:0px;
+  height:0px;
+  transition:width 0.2s;
+  top: 6px;
+  left: 4px;
+  transform:rotate(-45deg);
+}
+
+.cfpro-rev-custom-check input:checked + label:after {
+    border:1px solid #0047ff;
+    border-width: 0 0 3px 3px;
+    height:6px;
+    width:12px
+}
+.cfpro-rev-custom-check-ques label{
+  margin-bottom: 15px;
+}
+/* The cfpro_rev_drip_model (background) */
+.cfpro_rev_drip_model {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999999; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+/* cfpro_rev_drip_model Content */
+.cfpro_rev_drip_model-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  border-radius: 5px;
+  width: 98%;
+  z-index: 999999; /* Sit on top */
+}
+/* cfpro_rev_drip_model Content */
+#cfpro_rev_one-assing_model .cfpro_rev_drip_model-content {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: cfcourse-animatescale;
+  animation-duration: 0.4s;
+  width: 98%;
+  z-index: 999999; /* Sit on top */
+  border: none;
+}
+/* cfpro_rev_drip_model Content */
+#cfpro_rev_drip_delete_assign .cfpro_rev_model_w_anim {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  width: 40%;
+  z-index: 999999; /* Sit on top */
+  border: none;
+}
+.cfpro_rev_model_w_anim .alert{
+
+border-radius: 0px;
+}
+.cfpro_rev_model_w_anim .alert-light{
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+  border-bottom: 1px solid #f5f1f1;
+  border-radius: 0;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:x; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+/* Add Animation */
+@-webkit-keyframes cfcourse-animatescale {
+  from {transform: scale(0); opacity:0} 
+  to {transform: scale(1); opacity:1}
+}
+
+@keyframes cfcourse-animatescale {
+  from {transform: scale(0); opacity:0} 
+  to {transform: scale(1); opacity:1}
+}
+/* Snack bar start */
+#cfpro-rev-snackbar-admin {
+  visibility: hidden;
+  min-width: 190px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 7px;
+  position: fixed;
+  z-index: 999;
+  right: 50px;
+  bottom: 50px;
+  font-size: 17px;
+}
+
+
+#cfpro-rev-snackbar-admin.cfpro-rev-snackbar-show {
+  visibility: visible;
+  -webkit-animation: cfpro-rev-fadein-admin 0.5s, cfpro-rev-fadeout-admin 0.5s 2.5s;
+  animation: cfpro-rev-fadein-admin 0.5s, cfpro-rev-fadeout-admin 0.5s 2.5s;
+}
+
+@-webkit-keyframes cfpro-rev-fadein-admin {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 50px; opacity: 1;}
+}
+
+@keyframes cfpro-rev-fadein-admin {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 50px; opacity: 1;}
+}
+
+@-webkit-keyframes cfpro-rev-fadeout-admin {
+  from {bottom: 50px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes cfpro-rev-fadeout-admin {
+  from {bottom: 50px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+/* Snack bar end */
+/* The Close Button */
+.cfpro-rev-close-drip {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+
+.cfpro-rev-close-drip:hover,
+.cfpro-rev-close-drip:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cfpro_rev_drip_model-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.cfpro_rev_drip_model-body {padding: 2px 16px;}
+
+.cfpro_rev_drip_model-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+.cfpro_rev_drip_model-footer::after{
+  content: "";
+  display: table;
+  clear: both;
+}
+.cfpro-rev-actions{
+  opacity: 0;
+  transition: 0.2s;
+  font-size: 0.75em;
+}
+.cfpro-rev-hover-review:hover .cfpro-rev-actions{
+  opacity: 1;
+}
+.cfpro-rev-comment-second-text{
+  display: none;
+}
+.cfpro-rev_tabs ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cfpro-rev_tabs-nav li {
+  float: left;
+  width: 33.33%;
+}
+.cfpro-rev_tabs-nav li:first-child a {
+  border-right: 0;
+  border-top-left-radius: 6px;
+}
+.cfpro-rev_tabs-nav li:last-child a {
+  border-top-right-radius: 6px;
+}
+.cfpro-rev_tabs a {
+  background: #eaeaed;
+  border: 1px solid #cecfd5;
+  color: #0087cc;
+  display: block;
+  font-weight: 600;
+  padding: 10px 0;
+  text-align: center;
+  text-decoration: none;
+}
+.cfpro-rev_tabs a:hover {
+  color: #ff7b29;
+}
+.cfpro-rev_tabs  .cfpro-rev_tab-active a {
+  background: #1f57ca;
+  border-bottom-color: transparent;
+  color: #ffffff;
+  cursor: default;
+}
+.cfpro-rev_tabs .cfpro-rev_tabs-stage {
+  border: 1px solid #cecfd5;
+  border-radius: 0 0 6px 6px;
+  border-top: 0;
+  clear: both;
+  padding: 24px 30px;
+  position: relative;
+  background-color: #ffffff;
+  top: -1px;
+}
+.cfpro-rev_tabs_navvar{
+  display: none;
+}
+#cfpro-rev_tab-1{
+  display: block;
+}
+
+/* The container */
+.cf-pro-rev-like-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.cf-pro-rev-like-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.cf-pro-rev-like-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 23px;
+  width: 22px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.cf-pro-rev-like-container:hover input ~ .cf-pro-rev-like-checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.cf-pro-rev-like-container input:checked ~ .cf-pro-rev-like-checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.cf-pro-rev-like-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.table-striped tbody tr.cfpro-rev-approved{
+  background-color: rgb(224 118 43 / 26%);
+}
+
+/* Show the checkmark when checked */
+.cf-pro-rev-like-container input:checked ~ .cf-pro-rev-like-checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.cf-pro-rev-like-container .cf-pro-rev-like-checkmark:after {
+  left: 8px;
+  top: 3px;
+  width: 8px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.cfpro-rev-border{
+  border-right: 1px solid #007bff;
+}
+.cfpro-reviews-media .row img:hover,
+.cfpro-reviews-media .row video:hover,
+.cfpro-reviews-media .row audio:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.cfpro-reviews-media .row .col-md-4{
+  cursor: pointer;
+}
+/* Custom radion button */
+/* The container */
+.cf-pro-rev-like-containerr {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.cf-pro-rev-like-containerr input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.cf-pro-radio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.cf-pro-rev-like-containerr:hover input ~ .cf-pro-radio {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.cf-pro-rev-like-containerr input:checked ~ .cf-pro-radio {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.cf-pro-radio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.cf-pro-rev-like-containerr input:checked ~ .cf-pro-radio:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.cf-pro-rev-like-containerr .cf-pro-radio:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+/* Custom radion button End */
+.cfpro-reviews-media .d-flex div{
+  height: 120px;
+  width: 120px;
+  text-align: center;
+  background-color: #e1e1f74f;
+}
+.cfpro-reviews-media .d-flex div img{
+  max-height: 100%;
+  max-width: 100%;
+  cursor: pointer;
+}
+.cfpro-reviews-media .d-flex div{
+  margin: 4px;
+}
+.mySlides {display: none;
+  height: 350px;
+  text-align: center;
+}
+img {vertical-align: middle; height: 100% !important;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.cfpro-rev-prev, .cfpro-rev-next {
+  cursor: pointer;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.cfpro-rev-next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.cfpro-rev-prev:hover, .cfpro-rev-next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #fff;
+    font-size: 14px;
+    padding: 7px 16px;
+    position: absolute;
+    background-color: black;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.cfade {
+  animation-name: cfade;
+  animation-duration: 1.5s;
+}
+
+@keyframes cfade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .cfpro-rev-prev, .cfpro-rev-next,.text {font-size: 11px}
+}

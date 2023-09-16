@@ -1,0 +1,104 @@
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+#show_questions
+{
+margin-left: 0px;
+margin-right: : 0px;
+background-color: rgb(246, 247, 251);
+}
+
+#question
+{
+font-size: 31px;
+color:black;
+padding-bottom: 20px;
+padding-top: 20px;
+border-radius: 10px;
+}
+.quiz_label
+{
+	font-weight: bold;
+    text-decoration: underline;
+    font-size: 28px;
+	color:rgb(201, 0, 0);
+}
+
+#options
+{
+margin-left: 0px;
+margin-right: 0px;
+color:black;
+font-size: 20px;
+padding-top: 6px;
+padding-bottom: 6px;
+border-radius: 5px;	
+}
+
+
+
+#options:hover
+{
+	background-color: #0e8dc7;
+	color:white;
+	font-size: 22px;
+	cursor:pointer;
+}
+#options div 
+{
+/*width:100%;*/
+display:inline;
+}
+
+#progress
+{
+	height:10px;
+	margin-left: 1px;
+	margin-right: 1px;
+	background-color:#DDD;
+}
+#progbr
+{
+	width:0%;
+	background-color:#0e8dc7;
+}
+#form_design{
+background-color: #0e8dc7;
+margin-left: 1px;
+margin-right: 1px;
+border-radius: 10px;
+padding:20px;
+}
+
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+@media screen and (min-width: 880px) {
+#options
+{
+margin-left: 180px;
+margin-right: 180px;
+color:black;
+font-size: 20px;
+padding-top: 6px;
+padding-bottom: 6px;
+border-radius: 5px;	
+}
+#form_design{
+background-color: #0e8dc7;
+margin-left: 180px;
+margin-right: 180px;
+border-radius: 10px;
+padding:20px;
+}
+#progress
+{
+	height:10px;
+	margin-left: 180px;
+	margin-right: 180px;
+	background-color:#DDD;
+}
+}

@@ -1,0 +1,221 @@
+/* The cfquizo-modal (background) */
+.cfquizo-quiz
+{
+  border-radius: 15px;
+}
+
+.cfquizo-modal label.error{
+  color: red;
+}
+.cfquizo-modal {
+  display: none;   /* Hidden by default  */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 0px; /* Location of the box */
+  left: 0;
+  top: 0; 
+  z-index: 9999;
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.cfquizo-modal img, .cfquizo-modal video, .cfquizo-modal iframe
+{
+  max-width:100%;
+}
+
+/* cfquizo-modal Content */
+.cfquizo-modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 100%;
+  -webkit-animation-name: cfquizo_animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: cfquizo_animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes cfquizo_animatetop {
+  from {top:-50px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes cfquizo_animatetop {
+  from {top:-50px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.cfquizo-modal-close {
+    color: #000;
+    opacity: 0.5;
+    float: right;
+    font-size: 28px;
+    margin: 0px;
+    margin-top: 0px;
+    font-weight: bold;
+}
+
+.cfquizo-modal-close:hover,
+.cfquizo-modal-close:focus {
+  color: #000;
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cfquizo-modal .cfquizo-form {
+    border-radius: 5px;
+    background: #ff44ff;
+    border:0px solid #ff44ff;
+}
+.cfquizo-modal-header {
+  /*font-size: 28px;*/
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
+
+
+.cfquizo-modal-body {
+  padding: 0px 0px;
+  max-height:420px;
+  overflow-y:auto;
+  width:100%;
+}
+
+.cfquizo-modal-footer {
+  padding: 0px 8px;
+  padding-bottom: 1px;
+  color: #ff44ff;
+}
+
+.cfquizo-modal .cfquizo-modal-Success {
+    text-align: center;
+    padding: 0px;
+    background-color: red;
+    color: #ff44ff;
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: none;
+}
+
+
+.tab {
+  display: none;
+}
+
+#show_questions
+{
+margin-left: 4px;
+margin-right: 4px;
+background-color: rgb(246, 247, 251);
+border:1px dotted blue;
+}
+
+#question
+{
+font-size: 28px;
+/*font-family: "Brush Script MT";*/
+font-family: "Futura Medium";
+background-color: #fff;
+color:#000;
+padding-bottom: 5px;
+padding-top: 5px;
+border-radius: 10px;
+}
+
+#question:hover {
+
+}
+
+#options
+{
+/*float:left;*/
+font-weight: bold;
+font-family: "Futura Medium";
+background-color: #fff;
+color:#000;
+font-size: 23px;
+padding-top: 3px;
+padding-bottom: 3px;
+border-radius: 5px; 
+box-shadow:0 0 15px pink;
+}
+
+#options:hover
+{
+  color: red;
+  font-size: 24px;
+  border:4px solid #F64850;
+  transition: .3s ease;
+  cursor:pointer;
+}
+
+#options div 
+{
+/*width:100%;*/
+display:inline;
+}
+
+#progress
+{
+  height:10px;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color:#B5C2DA;
+  margin-bottom: 4px;
+}
+#progbr
+{
+  width:0%;
+  background-color:blue;
+}
+
+#form_design{
+background-color: #0e8dc7;
+margin-left: 4px;
+margin-right: 4px;
+border-radius: 10px;
+padding:4px;
+}
+#form_design h3{
+color:#fff;
+}
+#form_design input{
+box-shadow:0 0 25px blue;
+}
+
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+
+@media screen and ( min-width: 880px ){
+  .cfquizo-modal-content {
+    width: 80%;
+  }
+  .cfquizo-modal{
+    padding: 25px;
+  }
+  #show_questions
+{
+margin-left: 40px;
+margin-right: 40px;
+background-color: rgb(246, 247, 251);
+border:1px dotted blue;
+}
+#form_design{
+background-color: #0e8dc7;
+margin-left: 140px;
+margin-right: 140px;
+border-radius: 10px;
+padding:4px;
+}
+}
+

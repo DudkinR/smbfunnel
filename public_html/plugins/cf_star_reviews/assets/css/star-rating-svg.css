@@ -1,0 +1,57 @@
+.cfpro-rev-all-rating-con .jq-stars {
+  display: inline-block;
+}
+
+.cfpro-rev-all-rating-con  .jq-rating-label {
+  font-size: 22px;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  font-family: helvetica, arial, verdana;
+}
+
+.cfpro-rev-all-rating-con  .jq-star {
+  width: 30px !important;
+  height: 30px !important;
+  display: inline-block;
+  cursor: pointer;
+}
+.cfpro-rev-all-rating-con .cfpro-rev-ave-rating .jq-star {
+  width: 20px !important;
+  height: 20px !important;
+}
+.cfpro-rev-all-rating-con .cfpro-rev-r-summery  .jq-star{
+  width: 15px !important;
+  height: 15px !important;
+}
+.cfpro-rev-all-rating-con  .jq-star-svg {
+  padding-left: 3px;
+  width: 100%;
+  height: 100% ;
+}
+
+.cfpro-rev-all-rating-con  .jq-star-svg path {
+  /* stroke: #000; */
+  stroke-linejoin: round;
+}
+
+/* un-used */
+.cfpro-rev-all-rating-con .jq-shadow {
+  -webkit-filter: drop-shadow( -2px -2px 2px #888 );
+  filter: drop-shadow( -2px -2px 2px #888 );
+}
+[class^="svg-hovered-"], [class*="svg-hovered-"] {
+  fill: #ffc107 !important;
+}
+
+[class^="svg-rated-"], [class*="svg-rated-"] {
+  fill: #ffc107 !important;
+}
+@media screen and (min-width:500px)
+{
+  .cfpro-rev-ave-rating .jq-star {
+    width: 20px !important;
+    height: 20px !important;
+
+  }
+}

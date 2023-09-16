@@ -1,0 +1,45 @@
+.cfrespo_theme-3 {
+    font-family: 'Varela Round', sans-serif;
+}
+
+.cfrespo_preview_modal, .cf-respo-modal {
+    background-color: rgba(0,0,0,0.5) !important;
+    z-index: 999999999 !important;
+    overflow: hidden !important;
+}
+
+.cfrespo_theme-3 .modal-content{
+    -webkit-border-radius: 30px !important; /* Safari & Chrome */
+       -moz-border-radius: 30px !important; /* Firefox */
+        -ms-border-radius: 30px !important; /* IE */
+         -o-border-radius: 30px !important; /* Opera */
+            border-radius: 30px !important;
+
+    background: white !important;
+}
+
+.cfrespo_theme-3 .form-control {
+    height: 46px !important;
+}
+
+.cfrespo_theme-3 .close span{
+    font-size: medium !important;
+}
+
+.cfrespo_theme-3 input {
+    font-size: medium !important;
+}
+
+.cfrespo_theme-3 .btn1 {
+    border: none;
+    font-size: medium !important;
+    outline: none;
+    width: 100%;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.cfrespo_theme-3 img, .cfrespo_theme-3 video, .cfrespo_theme-3 iframe {
+    max-width: 100% !important;
+}

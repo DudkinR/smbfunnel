@@ -1,0 +1,121 @@
+/*.input {
+  border-radius: 10px;
+  border: 0.5px solid red;
+  padding: 5px;
+  text-align: center;
+}*/
+
+.styled-table {
+  overflow: visible;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #4481b9;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th, 
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:hover {
+  font-weight: bold;
+  color: #4481b9;
+}
+
+/*
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}*/
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #4481b9;
+}
+
+.cfrespo_message {
+  position: absolute !important;
+  right: 20px !important;
+}
+
+#cfrespo_input_container .updowncontainer .col-sm-12{
+  margin-top:4px !important;
+  display:flex !important;
+  justify-content: flex-end !important;
+  /*align-content: flex-end;*/
+}
+
+#cfrespo_input_container .updowncontainer .cfext-switch{
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75) !important;
+  min-width:30px !important;
+  max-width:30px !important;
+  border-radius:20px !important;
+}
+
+#cfrespo_input_container .updowncontainer .cfext-switch button {
+  display: block !important;
+  padding:2px !important;
+  margin:0px !important;
+  font-size: 8px !important;
+}
+
+#cfrespo_input_container{
+  max-height: 500px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+#cfrespo_input_container .lvl-container{
+  padding: 10px !important;
+  border-radius: 4px !important;
+  box-shadow: 2px 2px 6px -1px rgba(0,0,0,0.75) !important;
+}
+
+#cfrespo_input_container .lvl-container input, #cfrespo_input_container .lvl-container select{
+  max-height:30px !important;
+  font-size:12px !important;
+}
+
+#cfrespo_input_container .lvl-container:nth-child(even){
+  background-color: #ffe6cc !important;
+}
+
+#cfrespo_input_container .lvl-container:nth-child(odd){
+  background-color:  #fff2e6 !important;
+}
+
+#cfrespo_input_container .delinp{
+  opacity: 0.6 !important;
+  margin-bottom: 4px !important;
+  cursor: pointer !important;
+}
+
+#cfrespo_input_container .selected_input {
+  margin-top:3px !important;
+  margin-bottom:3px !important;
+  background-color: #ffbd80 !important;
+}
+
+.cfrespo_theme_choose {
+  height: 541px !important;
+  width: 500px !important;
+}
+
+.pdl-0{
+  padding-left:0px !important;
+}
+
+.pdr-0{
+  padding-right:0px !important;
+}

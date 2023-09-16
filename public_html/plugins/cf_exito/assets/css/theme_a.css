@@ -1,0 +1,185 @@
+/* The cfexito-modal (background) */
+.cfexito-modal label.error{
+  color: red;
+}
+.cfexito-modal {
+   display: none;   /* Hidden by default  */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 5px; /* Location of the box */
+  left: 0;
+  top: 0; 
+   z-index: 9999;
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.cfexito-modal img, .cfexito-modal video, .cfexito-modal iframe
+{
+  max-width:100%;
+}
+
+/* cfexito-modal Content */
+.cfexito-modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 100%;
+  -webkit-animation-name: cfexito_animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: cfexito_animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes cfexito_animatetop {
+  from {top:-50px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes cfexito_animatetop {
+  from {top:-50px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.cfexito-modal-close {
+    color: #000;
+    opacity: 0.5;
+    float: right;
+    font-size: 28px;
+    margin: 8px;
+    margin-top: 1px;
+    font-weight: bold;
+}
+
+.cfexito-modal-close:hover,
+.cfexito-modal-close:focus {
+  color: #000;
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cfexito-modal .cfexito-form {
+     border-radius: 5px;
+    background: #ffffff;
+    border:2px solid #ffffff;
+}
+.cfexito-modal-header {
+    padding: 1px 18px;
+    padding-top: 11px;
+    margin-bottom: 13px;
+}
+
+.cfexito-modal-body {padding: 2px 16px;}
+
+.cfexito-modal-footer {
+  padding: 0px 16px;
+  padding-bottom: 1px;
+  color: #ffffff;
+}
+
+/* Style the input elements and the submit button */
+.cfexito-modal input[type=text], 
+.cfexito-modal button[type=submit], 
+.cfexito-modal input[type=email], 
+.cfexito-modal input[type=number], 
+.cfexito-modal input[type=password], 
+.cfexito-modal input[type=color], 
+.cfexito-modal button[type=submit],
+.cfexito-modal input[type=url], 
+.cfexito-modal textarea {
+    width: 100%;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+    display: block;
+   margin-top: 10px;
+    border:none;
+    background-color: transparent;
+    border-bottom:1px solid #000000;
+    box-sizing: border-box;
+    resize: none;
+    transition: 0.4s;
+    cursor: auto
+}
+.cfexito-modal button
+{
+  cursor: pointer !important;
+}
+.cfexito-modal .lbl-radio, .cfexito-modal .lbl-checkbox
+{
+  display: block;
+}
+/* Style the input elements and the submit button */
+.cfexito-modal input[type=text]:focus, 
+.cfexito-modal button[type=submit]:focus,
+.cfexito-modal input[type=email]:focus,
+.cfexito-modal input[type=number]:focus,
+.cfexito-modal input[type=password]:focus,
+.cfexito-modal input[type=color]:focus,
+.cfexito-modal button[type=submit]:focus,
+.cfexito-modal input[type=url], 
+.cfexito-modal textarea:focus {
+
+  outline: none;
+}
+
+/* Add margins to the checkbox */
+.cfexito-modal input[type=checkbox] {
+  margin-top: 16px;
+}
+.cfexito-modal button[type=submit]:hover {
+  opacity: 0.8;
+}
+.cfexito-modal .cfexito-modal-Success {
+    text-align: center;
+    padding: 4px;
+    background-color: red;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: none;
+}
+.cfexito-modal ::placeholder {
+
+  opacity: 1; /* Firefox */
+}
+
+.cfexito-modal :-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+}
+
+.cfexito-modal ::-ms-input-placeholder { /* Microsoft Edge */
+ 
+}
+.cfexito-modal label{
+  color:#000000;
+}
+@media screen and ( min-width: 400px ){
+  .cfexito-modal-content {
+    width: 100%;
+  }
+  .cfexito-modal-<?php ?>{
+    padding: 5px;
+  }
+}
+
+@media screen and ( min-width: 500px ){
+  .cfexito-modal-content {
+    width: 70%;
+  }
+  .cfexito-modal-<?php ?>{
+    padding: 5px;
+  }
+}
+@media screen and ( min-width: 1000px ){
+  .cfexito-modal-content {
+    width: 45%;
+  }
+  .cfexito-modal{
+    padding: 50px;
+  }
+}

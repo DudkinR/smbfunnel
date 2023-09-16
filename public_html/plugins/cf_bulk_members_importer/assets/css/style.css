@@ -1,0 +1,149 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+.cfs_drag-area{
+
+}
+.cfs_drag-area .cfs_before_draging
+{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed #1e1d1d;
+  border-radius: 5px;
+  padding: 26px 2px;
+}
+#cfs_custom_header{
+  display: none;
+}
+#cf-studnet-errr{
+  display: none;
+}
+
+.cfs_drag-area .cfs_dragged_filed
+{
+  border-top: 1px solid #cecece;
+  border-bottom: 1px solid #cecece;
+  display: none;
+
+}
+.cfs_drag-area .cfs_dragged_filed .cfs_replace_button
+{
+  border: 1px solid;
+  width: 100px;
+} 
+.cfs_drag-area .cfs_dragged_filed 
+{
+  font-size: 12px;
+} 
+
+.cfs_drag-area.cfs_active{
+  border: 2px solid #fff;
+}
+.cfs_drag-area .cfs_icon{
+  font-size: 36px;
+  color: #505054;
+}
+.cfs_drag-area span{
+  font-size: 12px;
+  font-weight: 500;
+  /* color: #fff; */
+  margin: 2px 0 4px 0;
+}
+.cfs_drag-area header{
+  font-size: 13px;
+    color: #837e7e;
+}
+.cfs_drag-area button{
+  padding: 4px 9px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  color: #5256ad;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cfs_drag-area img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.cfs_progress {
+  background: #4b7e1c;
+  display: block;
+  height: 20px;
+  text-align: center;
+  transition: width .3s;
+  width: 0;
+}
+
+.cfs_progress.cfs_hide {
+  opacity: 0;
+  transition: opacity 1.3s;
+}
+.cfs-student-container .cfs-student-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cfs-student-container hr {
+  background-color: blue;
+  height: 5px;
+  width: 200px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.cfs-student-container h3 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.cfs-student-container .cfs-student-list ul li{
+  padding: 5px 2px;
+  color: #ffffffcf;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 8px 0;
+  transition: all 0.4s linear;
+  position: relative;
+  background-color: #f7f7f7;
+}
+
+.cfs_before_draging button{
+ transition: 0.4s;
+}
+.cfs_before_draging button:hover{
+  transform: scale(1.2);
+}
+.cfs-student-container .cfs-student-list ul li a {
+  padding: 0 6px;
+  display: inline-block;
+  position: relative;
+  transform: left .3s linear;
+  width: 100%;
+}
+.cfs-student-container .cfs-student-list ul li  .total-customer{
+  font-size: 14px;
+  color: #1783e1 !important;
+}
+.cfs-student-container .cfs-student-list ul li:hover{box-shadow: 0px 3px 15px -2px #ccc;background-color: #e5e3e324;}
+[cfs-studnet-store-avatar] {
+  padding: 20px;
+  font-size: 12px;
+  height: 10px;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: 600;
+}
+.select2-selection__choice__display {
+  color: #212529;
+}
+.select2-container {
+  width: 100% !important;
+}

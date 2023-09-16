@@ -1,0 +1,259 @@
+.cfmenu_theme1 ul:before,
+.cfmenu_theme1 ul:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+}
+
+.cfmenu_theme1.navbar {
+    position: absolute;
+    top: auto;
+    overflow: visible;
+}
+
+.cfmenu_theme1 .container-fluid {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.cfmenu_theme1 ul:after {
+    clear: both;
+}
+
+.cfmenu_theme1 ul ul ul {
+    left: 100%;
+    top: 0;
+}
+
+.cfmenu_theme1 li:hover>ul {
+    z-index: 9999 !important;
+    display: block;
+    position: absolute;
+}
+
+.cfmenu_theme1 .fa-caret-down {
+    padding-left: 10px;
+}
+
+.cfmenu_theme1 li:hover>ul .fa-caret-down:before {
+    content: '\f0da';
+}
+
+.cfmenu_theme1 li:hover li {
+    transition: 2s !important;
+    float: none;
+}
+
+.cfmenu_theme1 .main-navigation li ul li {
+    border-top: 0;
+}
+
+.cfmenu_theme1 li ul {
+    display: none;
+    /* border: 1px solid rgba(0, 0, 0, .15); */
+}
+
+.cfmenu_theme1 ul li a {
+    margin-right: 0 !important;
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cfmenu_theme1 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cfmenu_theme1 ul li {
+    display: block;
+    position: relative;
+    float: left;
+}
+
+.cfmenu_theme1 .cfmenu_collapse.show li:hover>ul .fa-caret-down:before {
+    content: '\f0d7';
+}
+
+.cfmenu_theme1 .cfmenu_collapse.show .fa-caret-down {
+    float: right;
+}
+
+.cfmenu_theme1 .cfmenu_collapse.show .main-navigation {
+    display: flex;
+    flex-direction: column;
+}
+
+.cfmenu_theme1 .cfmenu_collapse.show li:hover>ul {
+    position: relative;
+    left: 0;
+}
+
+.cfmenu_theme1 .cfmenu_extra_buttons {
+    position: relative !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* .cfmenu_theme1 .showRelative {
+    position: relative !important;
+    left: -97%;
+    top: 0px;
+} */
+
+.cfmenu_extra_buttons button {
+    background: none !important;
+}
+
+.cfmenu_theme1 .cfmenu_collapse.show .cfmenu_navbar_brand {
+    margin-left: 1.5rem !important;
+}
+
+#cfmenu_showSearchBox.container {
+    width: auto !important;
+    padding: 10px;
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+.cfmenu_theme1 .btn:focus {
+    outline: none !important;
+    border: 0.5px solid red;
+    box-shadow: inset 0 -1px 0 rgb(165, 73, 73) !important;
+}
+
+#cfmenu_showSearchBox .form-control:focus {
+    outline: none !important;
+    border-bottom: 1px solid #000 !important;
+    box-shadow: none !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+#cfmenu_showSearchBox .input-group:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+#cfmenu_showSearchBox .input-group-append {
+    position: absolute;
+    right: -10px !important;
+    top: -5px !important;
+    z-index: 9999;
+}
+
+#cfmenu_showSearchBox .input-group-text {
+    background: none !important;
+    border: none !important;
+}
+
+#cfmenu_showSearchBox .form-control {
+    width: 100% !important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(31, 29, 29) !important;
+}
+
+#cfmenu_showSearchBox .btn:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+#cfmenu_showSearchBox .close {
+    cursor: pointer;
+    position: relative;
+    font-weight: 900;
+    top: 50%;
+    right: 0%;
+    padding: 12px 16px;
+    transform: translate(0%, -50%);
+}
+
+@media screen and (max-width:991px) {
+    .cfmenu_theme1 .navbar-header {
+        margin-left: 1.5rem !important;
+    }
+    .cfmenu_theme1 .cfmenu_extra_buttons {
+        position: absolute !important;
+        top: 5px;
+        right: 5px;
+    }
+}
+
+.cfmenu_theme1-search button {
+    padding: 9px 12px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.cfmenu_theme1-search .input-group {
+    padding: 9px 12px;
+}
+
+.cfmenu_theme1-search .input-group {
+    border: 1px solid black;
+}
+
+.cfmenu_theme1-search .cfmenu_theme1-icon-img {
+    width: 25px;
+}
+
+.cfmenu_theme1-search {
+    display: none;
+    position: fixed;
+    top: 22px;
+    z-index: 999999;
+}
+
+.cfmenu_theme1-search .form-group {
+    margin-top: 1rem !important;
+}
+
+#cfmenu_theme1-mobile #cfmenu_theme1-close-menu {
+    display: block;
+    transition: all 0.2s;
+}
+
+.cfmenu_theme1-search .cfmenu_theme1-search-cancel {
+    display: block;
+    transition: all 0.2s;
+}
+
+.cfmenu_theme1-search .cfmenu_theme1-search-cancel:hover,
+#cfmenu_theme1-mobile #cfmenu_theme1-close-menu:hover {
+    color: #ccc;
+    transform: scale(1.2);
+}
+
+.cfmenu_theme1-search .col-md-7 {
+    background-color: aliceblue;
+}
+
+.cfmenu_theme1-search input {
+    width: 89%;
+    padding: 10px;
+    border: 0;
+}
+
+.cfmenu_theme1-search.cfmenu_theme1-search-active {
+    display: block;
+    animation: myfirst 0.1s ease-out;
+}
+
+@keyframes myfirst {
+    0% {
+        top: 0
+    }
+    100% {
+        top: 22px
+    }
+}

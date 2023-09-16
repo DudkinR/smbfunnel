@@ -1,0 +1,80 @@
+.cs-card{
+	max-width: 100%;
+}
+#cfquizo_input_container .updowncontainer .col-sm-12
+{
+  margin-top:4px;
+  display:flex;
+  justify-content: flex-end;
+  /*align-content: flex-end;*/
+}
+#cfquizo_input_container .updowncontainer .cfext-switch
+{
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+  min-width:30px;
+  max-width:30px;
+  border-radius:20px;
+}
+#cfquizo_input_container .updowncontainer .cfext-switch button 
+{
+  display: block;
+  padding:2px;
+  margin:0px;
+  font-size: 8px;
+}
+#cfquizo_input_container
+{
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#cfquizo_input_container .lvl-container
+{
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px -1px rgba(0,0,0,0.75);
+}
+#cfquizo_input_container .lvl-container input, #cfquizo_input_container .lvl-container select
+{
+  max-height:30px !important;
+  font-size:12px;
+}
+#cfquizo_input_container .lvl-container:nth-child(even)
+{
+  background-color: #ffe6cc;
+}
+#cfquizo_input_container .lvl-container:nth-child(odd)
+{
+  background-color:  #fff2e6;
+}
+#cfquizo_input_container .delinp
+{
+  opacity: 0.6;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+#cfquizo_input_container .selected_input 
+{
+  margin-top:3px !important;
+  margin-bottom:3px !important;
+  background-color: #ffbd80 !important;
+}
+.pdl-0
+{
+  padding-left:0px !important;
+}
+.pdr-0
+{
+  padding-right:0px !important;
+}
+
+.cfquizo_images{
+  transition: 0.3s;
+}
+.cfquizo_images:hover{
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+.cfquizo_images img{
+  cursor: pointer;
+}

@@ -1,0 +1,99 @@
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+#show_questions
+{
+margin-left: 0px;
+margin-right: 0px;
+background-color: rgb(246, 247, 251);
+border:1px dotted blue;
+}
+
+#question
+{
+font-size: 28px;
+font-family: "Futura Medium";
+background-color: #fff;
+color:#000;
+padding-bottom: 20px;
+padding-top: 20px;
+border-radius: 10px;
+}
+#options
+{
+font-family: "Futura Medium";
+background-color: #fff;
+color:#000;
+font-size: 23px;
+padding-top: 3px;
+padding-bottom: 3px;
+border-radius: 5px;	
+box-shadow:0 0 15px pink;
+}
+#options:hover
+{
+color: red;
+font-size: 24px;
+border:4px solid #F64850;
+transition: .3s ease;
+cursor:pointer;
+}
+#options div 
+{
+/*width:100%;*/
+display:inline;
+}
+
+#progress
+{
+height:10px;
+margin-left: 0px;
+margin-right: 0px;
+background-color:#B5C2DA;
+}
+#progbr
+{
+width:0%;
+background-color:blue;
+}
+#form_design{
+background-color: #0e8dc7;
+margin-left: 0px;
+margin-right: 0px;
+border-radius: 10px;
+box-shadow:0 0 25px blue;
+padding:20px;
+}
+#form_design input{
+box-shadow:0 0 25px blue;
+}
+
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+
+@media screen and (min-width: 880px) {
+  #show_questions {
+margin-left: 200px;
+margin-right: 200px;
+background-color: rgb(246, 247, 251);
+border:1px dotted blue;}
+#progress
+{
+height:10px;
+margin-left: 180px;
+margin-right: 180px;
+background-color:#B5C2DA;
+}
+#form_design{
+background-color: #0e8dc7;
+margin-left: 180px;
+margin-right: 180px;
+border-radius: 10px;
+box-shadow:0 0 25px blue;
+padding:20px;
+}
+}

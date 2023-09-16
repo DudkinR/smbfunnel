@@ -1,0 +1,106 @@
+.cfrespo_theme-2 {
+    font-family: 'Poppins', sans-serif;
+    color: #999;
+    font-size: 15px;
+}
+
+.cfrespo_preview_modal, .cf-respo-modal {
+    background-color: rgba(0,0,0,0.5) !important;
+    z-index: 999999999 !important;
+}
+
+.cfrespo_theme-2 .modal-content{
+    padding: 40px;
+    border-radius: 0;
+    border: none;
+    -webkit-animation-name: cfrespo_animatetop;
+    animation-name: cfrespo_animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+}
+
+.cfrespo_theme-2 input {
+    font-size: medium !important;
+    padding: 10px;
+}
+
+.cfrespo_theme-2 .modal-header{
+    border-bottom: none;
+    position: relative;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.cfrespo_theme-2 .close {
+    background: #d9534f;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    color: #fff;
+    text-shadow: none;
+    opacity: 0.5;
+    width: 22px;
+    height: 22px;
+    border-radius: 20px;
+    font-size: medium !important;
+}
+
+.cfrespo_theme-2 .close span {
+    position: relative !important;
+    font-size: medium !important;
+    top: -7px;
+    left: -3px;
+}
+
+.cfrespo_theme-2 .close:hover {
+    opacity: 0.5 !important;
+}
+
+.cfrespo_theme-2 .form-control, .cfrespo_theme-2 .btn {
+    min-height: 46px;
+    border-radius: 3px;
+}
+
+.cfrespo_theme-2 .form-control {
+    box-shadow: none;
+    border-color: #dbdbdb;
+}
+
+.cfrespo_theme-2 .form-control:focus {
+    border-color: #19bc9c;
+    box-shadow: 0 0 8px rgba(114, 101, 234, 0.51);
+}
+
+.cfrespo_theme-2 .btn1 {
+    color: #fff;
+    font-size: medium !important;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    padding: 6px 20px;
+    min-width: 150px;
+    border: none;
+}
+
+.cfrespo_theme-2 .btn1:hover, .cfrespo_theme-2 .btn1:focus {
+    transition: 0.5s;
+    outline: none;
+}
+
+.cfrespo_theme-2 .cfrespo-header {
+    color: black !important;
+}
+
+.cfrespo_theme-2 .form-group {
+    margin: 30px 0 15px;
+}
+
+.cfrespo_theme-2 .modal-footer {
+    text-align: center !important;
+    border: none;
+}
+
+.cfrespo_theme-2 img, .cfrespo_theme-2 video, .cfrespo_theme-2 iframe {
+    max-width: 100% !important;
+}

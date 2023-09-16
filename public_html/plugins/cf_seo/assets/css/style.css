@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+/* Tabbed Styles */
+.cfseo-tabbed {
+  width: 100%;
+  margin: 0 auto;
+  border-bottom: 4px solid #3379e1;
+  overflow: hidden;
+  transition: border 250ms ease;
+}
+.cfseo-tabbed .cfseo-tabbed-container {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  float: left;
+  padding-left: 48px;
+  list-style-type: none;
+}
+.cfseo-tabbed .cfseo-tabbed-container * {
+  margin: 0px;
+  padding: 0px;
+}
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links {
+  display: block;
+  float: right;
+  padding: 10px 22px 8px;
+  background-color: #fff;
+  margin-right: 46px;
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+  color: #777;
+
+  text-transform: uppercase;
+  font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif;
+
+  transition: all 250ms ease;
+  font-size: 0.75em;
+}
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links:before,
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links:after {
+  display: block;
+  content: " ";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 44px;
+  background-color: #fff;
+  transition: all 250ms ease;
+}
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links:before {
+  right: -24px;
+  transform: skew(30deg, 0deg);
+  box-shadow: rgba(0, 0, 0, 0.1) 3px 2px 5px,
+    inset rgba(255, 255, 255, 0.09) -1px 0;
+}
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links:after {
+  left: -24px;
+  transform: skew(-30deg, 0deg);
+  box-shadow: rgba(0, 0, 0, 0.1) -3px 2px 5px,
+    inset rgba(255, 255, 255, 0.09) 1px 0;
+}
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links:hover,
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links:hover:before,
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links:hover:after {
+  background-color: #f4f7f9;
+  color: #444;
+}
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links.cfseo-active {
+  z-index: 3;
+}
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links.cfseo-active,
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links.cfseo-active:before,
+.cfseo-tabbed .cfseo-tabbed-container .cfseo-tabbed-tab-links.cfseo-active:after {
+  background-color: #3379e1;
+  color: #fff;
+}
+.cfseo-tabcontent{
+  display: none;
+}
+.cfseo-show{
+  display: block;
+}
+.cfseo-tabcontent-container{
+  border: 4px solid #3379e1;
+  border-top: none;
+  padding: 10px;
+}
+.cfseo-seperator{
+  display: none;
+}
+.cfseo-seperators{
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    padding: 3px;
+    border: 1px solid #1c61df;
+    cursor: pointer;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+.cfseo-seperators-active{
+  border: 4px solid #3379e1;
+}
+.cfseo-label{
+  color: #be0720;
+}
+
+.cfseo-select-hidden {
+  display: none;
+  visibility: hidden;
+  padding-right: 10px;
+}
+
+.cfseo-select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+}
+
+.cfseo-select-styled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #1f66e7;
+  padding: 10px 11px;
+  font-size: 0.9em !important;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.cfseo-select-styled:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-color: #fff transparent transparent transparent;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+.cfseo-select-styled:hover {
+  background-color: #242dc6;
+}
+.cfseo-select-styled:active, .cfseo-select-styled.cfseo-active {
+  background-color: #2267ce;
+}
+.cfseo-select-styled:active:after, .cfseo-select-styled.cfseo-active:after {
+  top: 9px;
+  border-color: transparent transparent #fff transparent;
+}
+
+.cfseo-webmaster-p{
+  font-size: 0.7em !important;
+  color: #a49999;
+}
+.cfseo-webmaster-label{
+  color: #66668d;
+}
+.cfseo-xml-sitemap:hover{
+  text-decoration: underline !important;
+}
+.cfseo-select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #1f66e7;
+  overflow: auto;
+  max-height: 250px;
+}
+.cfseo-select-options li {
+  margin: 0;
+  padding: 8px 0;
+  text-indent: 15px;
+  font-size: 0.9em !important;
+  border-top: 1px solid #a59f9f;
+  -moz-transition: all 0.15s ease-in;
+  -o-transition: all 0.15s ease-in;
+  -webkit-transition: all 0.15s ease-in;
+  transition: all 0.15s ease-in;
+}
+.cfseo-help{
+  cursor: pointer;
+  color: #be0720a3;
+  transition: 0.5ms;
+}
+.cfseo-help:focus{
+  border: 1px solid #be0720a3;
+  border-radius: 50%;
+}
+.cfseo-collapse{
+  font-size: 0.9em;
+  font-family: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif';
+  color: #444444;
+}
+.cfseo-select-options li:hover {
+  color: #fffafa;
+  background: #1954c2;
+}
+.cfseo-select-options li[rel="hide"] {
+  display: none;
+}
+.cfseo-toggle {
+  position: relative;
+}
+.cfseo-toggle *, .cfseo-toggle *:before, .cfseo-toggle *:after {
+  box-sizing: border-box;
+}
+.cfseo-toggle input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.cfseo-toggle input[type="checkbox"][disabled] ~ label {
+  pointer-events: none;
+}
+.cfseo-toggle input[type="checkbox"][disabled] ~ label .cfseo-toggle-switch {
+  opacity: 0.4;
+}
+.cfseo-toggle input[type="checkbox"]:checked ~ label .cfseo-toggle-switch:before {
+  content: attr(data-unchecked);
+  left: 0;
+}
+.cfseo-toggle input[type="checkbox"]:checked ~ label .cfseo-toggle-switch:after {
+  content: attr(data-checked);
+}
+.cfseo-toggle label {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+.cfseo-toggle label .cfseo-toggle__label-text {
+  -webkit-box-flex: 1;
+          flex: 1;
+  padding-left: 32px;
+}
+.cfseo-toggle label .cfseo-toggle-switch {
+  position: relative;
+}
+.cfseo-toggle label .cfseo-toggle-switch:before {
+  content: attr(data-checked);
+  position: absolute;
+  top: 0;
+  padding:5px;
+  /* text-transform: uppercase; */
+  text-align: center;
+}
+.cfseo-toggle label .cfseo-toggle-switch:after {
+  content: attr(data-unchecked);
+  position: absolute;
+  z-index: 5;
+  /* text-transform: uppercase; */
+  text-align: center;
+  background: rgb(9, 33, 248);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.cfseo-toggle input[type="checkbox"][disabled] ~ label {
+  columns: #000000;;
+}
+.cfseo-toggle input[type="checkbox"]:focus ~ label .cfseo-toggle-switch, .cfseo-toggle input[type="checkbox"]:hover ~ label .cfseo-toggle-switch {
+  background-color: rgb(0, 0, 0);
+}
+.cfseo-toggle input[type="checkbox"]:focus ~ label .cfseo-toggle-switch:after, .cfseo-toggle input[type="checkbox"]:hover ~ label .cfseo-toggle-switch:after {
+  color:#ffffff;
+}
+.cfseo-toggle input[type="checkbox"]:hover ~ label {
+  color: #ffffff;
+}
+.cfseo-toggle input[type="checkbox"]:checked ~ label:hover {
+  color: #fafafa;
+}
+.cfseo-toggle input[type="checkbox"]:checked ~ label .cfseo-toggle-switch {
+  background-color: #010101;
+}
+.cfseo-toggle input[type="checkbox"]:checked ~ label .cfseo-toggle-switch:after {
+  color: #ffffff
+}
+.cfseo-toggle input[type="checkbox"]:checked:focus ~ label .cfseo-toggle-switch, .cfseo-toggle input[type="checkbox"]:checked:hover ~ label .cfseo-toggle-switch {
+  background-color: #424243;
+}
+.cfseo-toggle input[type="checkbox"]:checked:focus ~ label .cfseo-toggle-switch:after, .cfseo-toggle input[type="checkbox"]:checked:hover ~ label .cfseo-toggle-switch:after {
+  color: #ffffff;
+}
+.cfseo-toggle label .cfseo-toggle__label-text {
+  -webkit-box-flex: 1;
+          flex: 1;
+}
+.cfseo-toggle label .cfseo-toggle-switch {
+  -webkit-transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
+  background: #000000;
+}
+.cfseo-toggle label .cfseo-toggle-switch:before {
+  color: #ffffff;
+}
+.cfseo-toggle label .cfseo-toggle-switch:after {
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: -webkit-transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1), -webkit-transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  color: #777;
+}
+.cfseo-toggle input[type="checkbox"]:focus ~ label .cfseo-toggle-switch:after, .cfseo-toggle input[type="checkbox"]:hover ~ label .cfseo-toggle-switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.cfseo-toggle input[type="checkbox"]:checked ~ label .cfseo-toggle-switch:after {
+  -webkit-transform: translate3d(65px, 0, 0);
+          transform: translate3d(65px, 0, 0);
+}
+.cfseo-toggle input[type="checkbox"]:checked:focus ~ label .cfseo-toggle-switch:after, .cfseo-toggle input[type="checkbox"]:checked:hover ~ label .cfseo-toggle-switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.cfseo-toggle label {
+  font-size: 8px;
+}
+.cfseo-toggle label .cfseo-toggle-switch {
+  height: 25px;
+  -webkit-box-flex: 0;
+  flex: 0 0 132px;
+  border-radius: 4px;
+}
+.cfseo-toggle label .cfseo-toggle-switch:before {
+  left: 67px;
+  font-size: 10px;
+  line-height: 24px;
+  width: 65px;
+  padding: 0px 12px;
+}
+.cfseo-toggle label .cfseo-toggle-switch:after {
+  top: 2px;
+  left: 2px;
+  border-radius: 2px;
+  width: 63px;
+  color: #ffffff;
+  line-height: 21px;
+  font-size: 10px;
+}
+.cfseo-toggle label .cfseo-toggle-switch:hover:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow:none;
+  outline:  none;
+}
+.cfdisp_cursor{
+  cursor: pointer;
+}

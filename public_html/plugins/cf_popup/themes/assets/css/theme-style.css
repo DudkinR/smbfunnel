@@ -1,0 +1,96 @@
+.theme-2 {
+    font-family: 'Varela Round', sans-serif;
+    color: #999;
+    font-size: 15px;
+}
+
+.theme-2 .modal-content{
+    padding: 40px;
+    border-radius: 0;
+    border: none;
+}
+
+.theme-2 .modal-header{
+    border-bottom: none;
+    position: relative;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.theme-2 h4 {
+    color: #000;
+    text-align: center;
+    font-size: 30px;
+    margin: 0 0 25px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.theme-2 .close {
+    background: #d9534f;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    color: #fff;
+    text-shadow: none;
+    opacity: 0.5;
+    width: 22px;
+    height: 22px;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.theme-2 .close span {
+    position: relative !important;
+    top: -6px !important;
+    left: -3px !important;
+}
+
+.theme-2 .close:hover {
+    opacity: 0.5;
+}
+
+.theme-2 .form-control, .theme-2 .btn {
+    min-height: 46px;
+    border-radius: 3px;
+}
+
+.theme-2 .form-control {
+    box-shadow: none;
+    border-color: #dbdbdb;
+}
+
+.theme-2 .form-control:focus {
+    border-color: #19bc9c;
+    box-shadow: 0 0 8px rgba(114, 101, 234, 0.51);
+}
+
+.theme-2 .btn {
+    color: #fff;
+    border-radius: 4px;
+    background: #19bc9c;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    padding: 6px 20px;
+    min-width: 150px;
+    border: none;
+}
+
+.theme-2 .btn:hover, .theme-2 .btn:focus {
+    background: #4e3de4;
+    outline: none;
+}
+
+.theme-2 .cfrespo-header {
+    color: black !important;
+}
+
+.theme-2 .form-group {
+    margin: 30px 0 15px;
+}
+
+.theme-2 .modal-footer {
+    text-align: center !important;
+    border: none;
+}
