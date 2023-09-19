@@ -1,8 +1,12 @@
 <?php
+// 'Access-Control-Allow-Origin' header is present on the requested resource" связана с политикой Same-Origin веб-безопасности, которая предотвращает запросы к ресурсам с других доменов, если сервер не предоставляет соответствующие заголовки CORS 
+header("Access-Control-Allow-Origin: *");
 $current_base_dir = str_replace("\\", "/", __DIR__);
 require_once($current_base_dir . "/gcp/gcp.php");
 require_once($current_base_dir . '/library/lang.php');
 session_start();
+
+
 
 require_once("library/esc_html.php");
 if (isset($_GET["cfhttp"])) {

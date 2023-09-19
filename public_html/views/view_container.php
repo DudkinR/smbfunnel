@@ -190,7 +190,7 @@ $dbpref = $info['dbpref'];
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                     <?php 
-                    $user_id=$_SESSION['user' . get_option('site_token')];
+                    $user_id=$_SESSION['user' . get_option('site_token')]; 
                     $sql_text="SELECT * FROM `" . $dbpref . "administrator` WHERE `user_id` = " . $user_id;
                     $access_query = $mysqli->query($sql_text);
                     $access_data = $access_query->fetch_assoc();

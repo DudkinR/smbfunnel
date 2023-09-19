@@ -169,10 +169,11 @@ $forms_ob = $this->load('form_controller');
                                     <div class="cfmenuShowFunnelsData">
                                     <?php
                                     $get_all_funnels = get_funnels();
+                                    //print_r($get_all_funnels);
                                     foreach ($get_all_funnels as $key => $value) { ?>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="get_funnel_id_<?= $value['id'] ?>">
-                                                <input type="radio" id="get_funnel_id_<?= $value['id'] ?>" class="form-check-input" onclick="funnelpostData(this.id)" name="get_funnel_option" value="<?= $value['name'] ?>">
+                                            <label class="form-check-label" for="get_funnel_id_<?= $value['funnel_id'] ?>">
+                                                <input type="radio" id="get_funnel_id_<?= $value['funnel_id'] ?>" class="form-check-input" onclick="funnelpostData(this.id)" name="get_funnel_option" value="<?= $value['name'] ?>">
                                                 <?= $value['name'] ?>
                                             </label>
                                         </div>

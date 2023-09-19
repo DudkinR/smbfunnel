@@ -289,16 +289,38 @@ class Funnel
 		$table = $pref . "quick_funnels";
 		$id = $mysqli->real_escape_string($id);
 		$type = $mysqli->real_escape_string($type);
-		$r = 0;
-		if ($id === "-1") {
-			$chk_type = "";
-			if (strlen($type) > 0) {
-				$chk_type = " where `type`='" . $type . "'";
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
+		$access=$_SESSION['access' . get_option('site_token')];
+		if($access=='admin')
+		{
+			if ($id === "-1") {
+				$chk_type = "";
+				if (strlen($type) > 0) {
+					$chk_type = " where `type`='" . $type . "'";
+				}
+				$qry = $mysqli->query("select " . $select . " from `" . $table . "`" . $chk_type);
+			} else {
+				$qry = $mysqli->query("select " . $select . " from `" . $table . "` where `id`=" . $id . "");
 			}
-			$qry = $mysqli->query("select " . $select . " from `" . $table . "`" . $chk_type);
-		} else {
-			$qry = $mysqli->query("select " . $select . " from `" . $table . "` where `id`=" . $id . "");
 		}
+		else
+		{
+			if ($id === "-1") {
+				$chk_type = "";
+				if (strlen($type) > 0) {
+					$chk_type = " and `type`='" . $type . "'";
+				}
+				 $text_sql="select " . $select . " from `" . $table . "` as `a` 
+				INNER JOIN `".$pref."user_funnel` as `b` on `a`.`id`=`b`.`funnel_id` 
+				where `b`.`user_id`=".$user_id."
+				" . $chk_type;
+				$qry = $mysqli->query($text_sql);
+			} else {
+				$qry = $mysqli->query("select " . $select . " from `" . $table . "` where `id`=" . $id . "");
+			}
+		}
+		$r = 0;
+
 		if ($qry) {
 			if ($id === "-1") {
 				return $qry;

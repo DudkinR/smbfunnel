@@ -4,6 +4,33 @@ global $dbpref;
 global $app_variant;
 $setup_ob=$this->load('setup');
 $cfseo_install_url=get_option("install_url");
+$pref="smbf_";
+	  	$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access !== 'admin' ){
+			$select_funnels=" SELECT * FROM `".$pref."quick_funnels` as `funnels` 
+		INNER JOIN `".$pref."user_funnel` as `uf` 
+		ON `funnels`.`id` = `uf`.`funnel_id` 
+		WHERE `uf`.`user_id`= ".$user_id;
+		}
+		else{
+		$select_funnels=" SELECT * FROM `".$pref."quick_funnels` WHERE 1";
+		}
+		//echo $select_funnels;
+		$funnels_query=$mysqli->query($select_funnels);
+    $funnel_names=[];
+    while($funnel=$funnels_query->fetch_assoc()){
+      $funnel_names[]=$funnel['name'];
+    }
+    function a_funnels($funnel_names,$funnels){
+      $result=[];
+      foreach ($funnels as $funnel) {
+        if(in_array($funnel['name'],$funnel_names)){
+          $result[]=$funnel;
+        }
+      }
+      return $result;
+    }
 
 if(isset($_GET['cfseo_id']))
 {
@@ -250,7 +277,7 @@ else
               <label class="cfseo-webmaster-label">Select Page</label>
               <select name="cfseo[page_id]"  class="cfseo-select-container form-control cfseo-select">
               <?php 
-                $fnls = get_funnels();
+                $fnls = a_funnels($funnel_names,get_funnels());
                 foreach ( $fnls as $f ) 
                 {
                   $pages=get_funnel_pages($f['id']);
@@ -260,7 +287,7 @@ else
                     }
                   }
                 } 
-                $fnls = get_funnels();
+                $fnls = a_funnels($funnel_names,get_funnels());
                 foreach ( $fnls as $f ) 
                 {
                   $pages=get_funnel_pages($f['id']);

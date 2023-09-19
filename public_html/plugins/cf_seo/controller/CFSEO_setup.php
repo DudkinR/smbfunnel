@@ -16,6 +16,33 @@ if(!class_exists('cfseo_setup'))
       global $mysqli;
       global $dbpref;
       $table= $dbpref.$this->pref."setup";
+	  $pref="smbf_";
+	  	$user_id = $_SESSION['user' . get_option('site_token')];
+		$access = $_SESSION['access' . get_option('site_token')];
+		if($access !== 'admin' ){
+			$select_funnels=" SELECT * FROM `".$pref."quick_funnels` as `funnels` 
+		INNER JOIN `".$pref."user_funnel` as `uf` 
+		ON `funnels`.`id` = `uf`.`funnel_id` 
+		WHERE `uf`.`user_id`= ".$user_id;
+		}
+		else{
+		$select_funnels=" SELECT * FROM `".$pref."quick_funnels` WHERE 1";
+		}
+		//echo $select_funnels;
+		$funnels_query=$mysqli->query($select_funnels);
+		$funnels="AND (";
+		if($funnels_query->num_rows>0){
+			while($funnel = $funnels_query->fetch_assoc()){
+				if($funnels=="AND (")
+				{
+					$funnels .=" `page_url` LIKE '%/".$funnel[name]."/%' ";
+				}
+				else{
+					$funnels .=" OR `page_url` LIKE '%/".$funnel[name]."/%' ";
+				}
+			}
+		}
+		$funnels .=")";
       $page=$mysqli->real_escape_string($page);
       if(!$max_limit)
       {$max_limit=$mysqli->real_escape_string($max_limit);}
@@ -49,7 +76,8 @@ if(!class_exists('cfseo_setup'))
           $search .=$date_between[1];
       }
       //////////////////////////////
-	  $qry=$mysqli->query("SELECT * FROM `".$table."` WHERE 1".$search." ORDER BY ".$order_by.$limit);
+	  $sqlQ="SELECT * FROM `".$table."` WHERE 1".$search." ".$funnels." ORDER BY ".$order_by.$limit;
+	  $qry=$mysqli->query($sqlQ);
 
       $arr=[];
       if($qry->num_rows>0)

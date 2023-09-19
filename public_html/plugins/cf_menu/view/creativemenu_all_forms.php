@@ -3,8 +3,13 @@ global $mysqli;
 global $dbpref;
 global $app_variant;
 $table = $dbpref.'cfmenu';
-
-$sql = $mysqli->query("SELECT * FROM `".$table."` ORDER BY `id` DESC");
+$user_id=$_SESSION['user' . get_option('site_token')]; 
+$access= $_SESSION['access' . get_option('site_token')];
+if($access=='admin'){
+    $sql = $mysqli->query("SELECT * FROM `".$table."` ORDER BY `id` DESC");
+}else{
+$sql = $mysqli->query("SELECT * FROM `".$table."` WHERE `user_id`= ".$user_id." ORDER BY `id` DESC");
+}
 $num_rows = mysqli_num_rows($sql);
 ?>
 

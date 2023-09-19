@@ -82,7 +82,25 @@ if (!class_exists('CFMenu_form_controller')) {
             $choose_theme = $post_data['cfmenu_choose_theme'];
 
             if ($cfmenu_update_insert == 'create') {
-                $sql_status = ($mysqli->query("INSERT INTO `" . $table . "` (`form_name`, `form_desc`, `custom_url`, `dropndown`, `logo_details`, `manage_styles`, `extra_buttons`, `choose_theme`, `created_at`, `updated_at`) VALUES ('" . $form_name . "','" . $form_desc . "','" . $custom_url . "', '" . $stringifyData . "','" . $logo_details . "','" . $manage_styles . "', '" . $extra_buttons . "', '" . $choose_theme . "', now(), now())")) ? 1 : 0;
+                $user_id=$_SESSION['user' . get_option('site_token')];
+                $sql_text="INSERT INTO `" . $table . "` 
+                (`form_name`,
+                 `form_desc`,
+                  `custom_url`, 
+                  `dropndown`, 
+                  `logo_details`, 
+                  `manage_styles`, 
+                  `extra_buttons`, 
+                  `choose_theme`, 
+                  `created_at`, 
+                  `updated_at`,
+                  `user_id`
+                  ) VALUES (
+                  '" . $form_name . "','" . $form_desc . "','" . $custom_url . "', '" . $stringifyData . "','" . $logo_details . "','" . $manage_styles . "', '" . $extra_buttons . "', '" . $choose_theme . "', now(), 
+                  now(),
+                  '".$user_id."'
+                  )";
+                $sql_status = ($mysqli->query($sql_text)) ? 1 : 0;
                 $insert_id = $mysqli->insert_id;
             } else {
                 $sql_status = ($mysqli->query("UPDATE `" . $table . "` set `form_name`='" . $form_name . "',`form_desc`='" . $form_desc . "', `custom_url`='" . $custom_url . "', `dropndown`='" . $stringifyData . "', `logo_details`='" . $logo_details . "', `manage_styles`='" . $manage_styles . "', `extra_buttons`='" . $extra_buttons . "', `choose_theme`='" . $choose_theme . "', `updated_at`=now() where `id`='" . $id . "'")) ? 1 : 0;
@@ -237,10 +255,10 @@ if (!class_exists('CFMenu_form_controller')) {
 
             if ($select_value[0] == 'funnel' || $select_value[0] == "store") {
                 $get_all_funnels = get_funnels();
-                foreach ($get_all_funnels as $key => $value) { ?>
+                  foreach ($get_all_funnels as $key => $value) { ?>
                     <div class="form-check">
-                        <label class="form-check-label" for="get_funnel_id_<?= $value['id'] ?>">
-                            <input type="radio" id="get_funnel_id_<?= $value['id'] ?>" class="form-check-input" onclick="funnelpostData(this.id)" name="get_funnel_option" value="<?= $value['name'] ?>">
+                        <label class="form-check-label" for="get_funnel_id_<?= $value['funnel_id'] ?>">
+                            <input type="radio" id="get_funnel_id_<?= $value['funnel_id'] ?>" class="form-check-input" onclick="funnelpostData(this.id)" name="get_funnel_option" value="<?= $value['name'] ?>">
                             <?= $value['name'] ?>
                         </label>
                     </div>

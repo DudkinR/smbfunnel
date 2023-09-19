@@ -7,4 +7,4 @@
 				$dir=__DIR__;
 				$funnel=$ob->loadFunnel();
                 $funnel->userIndexContent(68,$dir,'xahyl1694837397');
-				?>
+				?> 

@@ -61,6 +61,7 @@ function submitSettingsForm() {
 }
 
 function funnelpostData(radioId) {
+    console.log(radioId);
     document.querySelector('.showPagesOfFunnel').innerHTML = `<i class="fa fa-spinner fa-spin" ></i>`;
     var form = "action=cfmenufunnelsajaxsettings&radioId=" + radioId;
     $.post($("#cfmenu_ajax").val(), form, function(success) {

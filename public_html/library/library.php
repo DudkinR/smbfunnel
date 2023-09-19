@@ -188,7 +188,7 @@ class Library
 		//load funnel control library
 		require_once("funnel.php");
 		self::setInfo('load', $this);
-		$ob = new Funnel(self::getInfo());
+		$ob = new Funnel(self::getInfo()); 
 		return $ob;
 	}
 	function loadFunnelCloner()

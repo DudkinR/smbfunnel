@@ -425,6 +425,7 @@ function get_funnels($type="",$select="*")
     $funnel_ob=$loader->loadFunnel();
     $all_funnels=$funnel_ob->getFunnel(-1,$select,$type);
     $funnels=array();
+
     if($all_funnels && $all_funnels->num_rows)
     {
         while($r=$all_funnels->fetch_assoc())
