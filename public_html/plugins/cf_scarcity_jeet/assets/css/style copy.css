@@ -1,0 +1,72 @@
+#cf_scarcity_jeet_legend {
+    display: content;
+    width: 60%;
+    padding-left: 15px;
+    color: white;
+    font-size: 20px;
+    background-color: #1f57ca;
+    border-radius: 25px;
+}
+
+#cf_scarcity_jeet_form{    
+    width: 100%;
+}
+#cf_scarcity_jeet_fieldset {
+    background-color: white;
+    margin-right: 20px;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+#cf_scarcity_jeet_pragraph{
+    font-family: poppins,san-serif!important;
+    padding-top: 10px;
+    padding-left: 35px;
+}
+.cf_scarcity_jeet_row {
+    display: flex;
+    flex-wrap: wrap;
+    
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#cf_scarcity_jeet_heading {
+    margin-top: 15px;
+    margin-bottom: .5rem;
+}
+#cf_scarcity_jeet_fieldset.toggles1 {
+    background-color: whitesmoke;
+}
+#cf_scarcity_jeet_fieldset.toggles2 {
+    background-color: whitesmoke;
+}
+#cf_scarcity_jeet_fieldset.toggles3 {
+    background-color: whitesmoke;
+}
+#cf_scarcity_jeet_fieldset.toggles4 {
+    background-color: white;
+}
+
+#cf_scarcity_jeet_span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: #fff;
+}
+#cf_scarcity_jeet_btn-primary.btn-primary {
+    overflow: visible;
+    border-radius: 6px;
+}
+#cf_scarcity_jeet_button,input {
+    overflow: visible;
+    border-radius: 6px;
+}
+#cf_scarcity_jeet_button,select {
+    text-transform: none;
+    border-radius: 8px;
+}
+

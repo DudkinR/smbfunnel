@@ -1,0 +1,354 @@
+#popup {
+    display: inline-block;
+    opacity: 0;
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    padding: 1em;
+    transform: translateX(-50%);
+    background-color: aliceblue;
+    border: 1px solid #888;
+    box-shadow: 1px 1px .5em 0 rgba(0, 0, 0, .5);
+    transition: opacity .3s ease-in-out;
+    width:1100px;
+    z-index: 1;
+    color:#352640;
+  }
+  .closepopup{
+    size: 100px;
+      color: red;
+      float: right!important;
+      margin-top: -40px !important;
+      margin-right: -30px !important;
+      cursor: pointer;
+      font-size: 50px;
+  }
+  #popup.hidden {
+    display: none;
+  }
+  #popup.fade-in {
+    opacity: 1;
+  }
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+  .maincfheader{
+    margin: 20px!important;
+    font-size: 30px  !important;
+    text-align: center!important;
+    color:#352640 !important;
+  }
+  .subheadercfspinner{
+    font-size: 20px!important;
+    color:#352640 !important;
+    margin: 20px!important;
+    text-align: center!important;
+
+  }
+  .rulesdiv{
+  
+      text-align: left;
+      margin-top: 40px;
+      font-size: 15px!important;
+  
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }#cfspinner_input_container .updowncontainer .col-sm-12
+  {
+    margin-top:4px;
+    display:flex;
+    justify-content: flex-end;
+    /*align-content: flex-end;*/
+  }
+  #cfspinner_input_container .updowncontainer .cfext-switch
+  {
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    min-width:30px;
+    max-width:30px;
+    border-radius:20px;
+  }
+  #cfspinner_input_container .updowncontainer .cfext-switch button 
+  {
+    display: block;
+    padding:2px;
+    margin:0px;
+    font-size: 8px;
+  }
+  #cfspinner_input_container
+  {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  #cfspinner_input_container .lvl-container
+  {
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 6px -1px rgba(0,0,0,0.75);
+  }
+  #cfspinner_input_container .lvl-container input, #cfspinner_input_container .lvl-container select
+  {
+    max-height:30px !important;
+    font-size:12px;
+  }
+  #cfspinner_input_container .lvl-container:nth-child(even)
+  {
+    background-color: #ffe6cc;
+  }
+  #cfspinner_input_container .lvl-container:nth-child(odd)
+  {
+    background-color:  #fff2e6;
+  }
+  #cfspinner_input_container .delinp
+  {
+    opacity: 0.6;
+    margin-bottom: 4px;
+    cursor: pointer;
+  }
+  #cfspinner_input_container .selected_input 
+  {
+    margin-top:3px !important;
+    margin-bottom:3px !important;
+    background-color: #ffbd80 !important;
+  }
+  .pdl-0
+  {
+    padding-left:0px !important;
+  }
+  .pdr-0
+  {
+    padding-right:0px !important;
+  }
+  /* The cfspinner_model (background) */
+.cfspinner_model label.error{
+  color: red;
+}
+.cfspinner_model {
+
+  padding-top: 5px; /* Location of the box */
+  left: 0;
+  top: 0; 
+  height: 100%; /* Full height */
+
+}
+
+.cfspinner_model img, .cfspinner_model video, .cfspinner_model iframe
+{
+  max-width:100%;
+}
+/* @media screen and (max-width: 500px) {
+  
+  .column,
+  .column{
+      width: 70%;
+  }
+} */
+/* cfspinner_model Content */
+.cfspinner_model-content {
+  position: relative;
+  background-color: #fefefe;
+ 
+  padding: 0;
+  width: 100%;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes cfexito_animatetop {
+  from {top:-50px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes cfexito_animatetop {
+  from {top:-50px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.cfspinner_model-close {
+    color: #000;
+    opacity: 0.5;
+    float: right;
+    font-size: 28px;
+    margin: 8px;
+    margin-top: 1px;
+    font-weight: bold;
+}
+
+.cfspinner_model-close:hover,
+.cfspinner_model-close:focus {
+  color: #000;
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cfspinner_model .cfexito-form {
+     border-radius: 5px;
+    background: #ffffff;
+    border:2px solid #ffffff;
+}
+.cfspinner_model-header {
+    padding: 1px 18px;
+    padding-top: 11px;
+    margin-bottom: 13px;
+}
+
+.cfspinner_model-body {padding: 2px 16px;
+/* padding-right: 40px; */
+}
+
+.cfspinner_model-footer {
+  padding: 0px 16px;
+  padding-bottom: 1px;
+  color: #352640;
+  text-align: initial;
+
+}
+
+/* Style the input elements and the submit button */
+.cfspinner_model input[type=text], 
+.cfspinner_model input[type=email], 
+.cfspinner_model input[type=number], 
+.cfspinner_model input[type=password], 
+.cfspinner_model input[type=color], 
+.cfspinner_model input[type=url], 
+.cfspinner_model textarea {
+    width: 100%;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+    display: block;
+   margin-top: 10px;
+    border:none;
+    background-color: transparent;
+    border-bottom:1px solid #000000;
+    box-sizing: border-box;
+    resize: none;
+    transition: 0.4s;
+    cursor: auto
+}
+.cfspinner_model button
+{
+  cursor: pointer !important;
+}
+.cfspinner_model .lbl-radio, .cfspinner_model .lbl-checkbox
+{
+  display: block;
+}
+/* Style the input elements and the submit button */
+.cfspinner_model input[type=text]:focus, 
+.cfspinner_model button[type=submit]:focus,
+.cfspinner_model input[type=email]:focus,
+.cfspinner_model input[type=number]:focus,
+.cfspinner_model input[type=password]:focus,
+.cfspinner_model input[type=color]:focus,
+.cfspinner_model input[type=url], 
+.cfspinner_model textarea:focus {
+
+  outline: none;
+}
+
+/* Add margins to the checkbox */
+.cfspinner_model input[type=checkbox] {
+  margin-top: 16px;
+}
+
+.cfspinner_model .cfspinner_model-Success {
+    text-align: center;
+    padding: 4px;
+    background-color: red;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+.cfspinner_model ::placeholder {
+
+  opacity: 1; /* Firefox */
+}
+
+.cfspinner_model label{
+  color:#000000;
+}
+
+
+@media screen and ( min-width: 500px ){
+ #popup{
+    width: 80%;
+  }
+  
+  .cfspinner_model{
+    padding: 5px;
+  }
+}
+
+
+/* } */

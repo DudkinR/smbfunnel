@@ -1,0 +1,491 @@
+#cfpabbly_inputs .updowncontainer .cfext-switch {
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75) !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    border-radius: 20px !important;
+}
+
+#cfpabbly_inputs .updowncontainer .cfext-switch button {
+    display: block !important;
+    padding: 2px !important;
+    margin: 0px !important;
+    font-size: 8px !important;
+}
+
+#cfpabbly_inputs {
+    max-height: 500px !important;
+    max-width: 650px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+#cfpabbly_inputs .lvl-container {
+    padding: 10px !important;
+    border-radius: 4px !important;
+    box-shadow: 2px 2px 6px -1px rgba(0, 0, 0, 0.75) !important;
+}
+
+#cfpabbly_inputs .lvl-container input,
+#cfpabbly_inputs .lvl-container select {
+    max-height: 30px !important;
+    font-size: 12px !important;
+}
+
+#cfpabbly_inputs .lvl-container {
+    background: #68ceec;
+}
+
+#cfpabbly_inputs .delinp {
+    opacity: 0.6 !important;
+    margin-bottom: 4px !important;
+    cursor: pointer !important;
+}
+
+#cfpabbly_inputs .selected_input {
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+    background-color: #68ceec !important;
+}
+
+.pdl-0 {
+    padding-left: 0px !important;
+}
+
+.pdr-0 {
+    padding-right: 0px !important;
+}
+
+.inpstatus.btn-toggle {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.inpstatus.btn-toggle {
+    margin: 0 4rem;
+    padding: 0;
+    position: relative;
+    border: none;
+    height: 1.5rem;
+    width: 3rem;
+    border-radius: 1.5rem;
+    color: #6b7381;
+    background: #bdc1c8;
+}
+.inpstatus.btn-toggle:focus, .btn-toggle:focus.active, .btn-toggle.focus, .btn-toggle.focus.active {
+    outline: none;
+}
+.inpstatus.btn-toggle:before, .btn-toggle:after {
+    line-height: 1.5rem;
+    width: 4rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+}
+.inpstatus.btn-toggle:before {
+    content: 'Off';
+    left: -4rem;
+}
+.inpstatus.btn-toggle:after {
+    content: 'On';
+    right: -4rem;
+    opacity: .5;
+}
+.inpstatus.btn-toggle > .handle {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 1.125rem;
+    background: #fff;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.active {
+    transition: background-color .25s;
+}
+.inpstatus.btn-toggle.active > .handle {
+    left: 1.6875rem;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.active:before {
+    opacity: .5;
+}
+.inpstatus.btn-toggle.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-sm:before, .btn-toggle.btn-sm:after {
+    line-height: -0.5rem;
+    color: #fff;
+    letter-spacing: .75px;
+    left: 0.4125rem;
+    width: 2.325rem;
+}
+.inpstatus.btn-toggle.btn-sm:before {
+    text-align: right;
+}
+.inpstatus.btn-toggle.btn-sm:after {
+    text-align: left;
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-sm.active:before {
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-sm.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-xs:before, .btn-toggle.btn-xs:after {
+    display: none;
+}
+.inpstatus.btn-toggle:before, .btn-toggle:after {
+    color: #6b7381;
+}
+.inpstatus.btn-toggle.active {
+    background-color: #29b5a8;
+}
+.inpstatus.btn-toggle.btn-lg {
+    margin: 0 5rem;
+    padding: 0;
+    position: relative;
+    border: none;
+    height: 2.5rem;
+    width: 5rem;
+    border-radius: 2.5rem;
+}
+.inpstatus.btn-toggle.btn-lg:focus, .btn-toggle.btn-lg:focus.active, .btn-toggle.btn-lg.focus, .btn-toggle.btn-lg.focus.active {
+    outline: none;
+}
+.inpstatus.btn-toggle.btn-lg:before, .btn-toggle.btn-lg:after {
+    line-height: 2.5rem;
+    width: 5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+}
+.inpstatus.btn-toggle.btn-lg:before {
+    content: 'Off';
+    left: -5rem;
+}
+.inpstatus.btn-toggle.btn-lg:after {
+    content: 'On';
+    right: -5rem;
+    opacity: .5;
+}
+.inpstatus.btn-toggle.btn-lg > .handle {
+    position: absolute;
+    top: 0.3125rem;
+    left: 0.3125rem;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 1.875rem;
+    background: #fff;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.btn-lg.active {
+    transition: background-color .25s;
+}
+.inpstatus.btn-toggle.btn-lg.active > .handle {
+    left: 2.8125rem;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.btn-lg.active:before {
+    opacity: .5;
+}
+.inpstatus.btn-toggle.btn-lg.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-lg.btn-sm:before, .btn-toggle.btn-lg.btn-sm:after {
+    line-height: 0.5rem;
+    color: #fff;
+    letter-spacing: .75px;
+    left: 0.6875rem;
+    width: 3.875rem;
+}
+.inpstatus.btn-toggle.btn-lg.btn-sm:before {
+    text-align: right;
+}
+.inpstatus.btn-toggle.btn-lg.btn-sm:after {
+    text-align: left;
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-lg.btn-sm.active:before {
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-lg.btn-sm.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-lg.btn-xs:before, .btn-toggle.btn-lg.btn-xs:after {
+    display: none;
+}
+.inpstatus.btn-toggle.btn-sm {
+    margin: 0 .5rem;
+    padding: 0;
+    position: relative;
+    border: none;
+    height: 1.5rem;
+    width: 3rem;
+    border-radius: 1.5rem;
+}
+.inpstatus.btn-toggle.btn-sm:focus, .btn-toggle.btn-sm:focus.active, .btn-toggle.btn-sm.focus, .btn-toggle.btn-sm.focus.active {
+    outline: none;
+}
+.inpstatus.btn-toggle.btn-sm:before, .btn-toggle.btn-sm:after {
+    line-height: 1.5rem;
+    width: .5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: .55rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+}
+.inpstatus.btn-toggle.btn-sm:before {
+    content: 'Off';
+    left: -0.5rem;
+}
+.inpstatus.btn-toggle.btn-sm:after {
+    content: 'On';
+    right: -0.5rem;
+    opacity: .5;
+}
+.inpstatus.btn-toggle.btn-sm > .handle {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 1.125rem;
+    background: #fff;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.btn-sm.active {
+    transition: background-color .25s;
+}
+.inpstatus.btn-toggle.btn-sm.active > .handle {
+    left: 1.6875rem;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.btn-sm.active:before {
+    opacity: .5;
+}
+.inpstatus.btn-toggle.btn-sm.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-sm.btn-sm:before, .btn-toggle.btn-sm.btn-sm:after {
+    line-height: -0.5rem;
+    color: #fff;
+    letter-spacing: .75px;
+    left: 0.4125rem;
+    width: 2.325rem;
+}
+.inpstatus.btn-toggle.btn-sm.btn-sm:before {
+    text-align: right;
+}
+.inpstatus.btn-toggle.btn-sm.btn-sm:after {
+    text-align: left;
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-sm.btn-sm.active:before {
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-sm.btn-sm.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-sm.btn-xs:before, .btn-toggle.btn-sm.btn-xs:after {
+    display: none;
+}
+.inpstatus.btn-toggle.btn-xs {
+    margin: 0 0;
+    padding: 0;
+    position: relative;
+    border: none;
+    height: 1rem;
+    width: 2rem;
+    border-radius: 1rem;
+}
+.inpstatus.btn-toggle.btn-xs:focus, .btn-toggle.btn-xs:focus.active, .btn-toggle.btn-xs.focus, .btn-toggle.btn-xs.focus.active {
+    outline: none;
+}
+.inpstatus.btn-toggle.btn-xs:before, .btn-toggle.btn-xs:after {
+    line-height: 1rem;
+    width: 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+}
+.inpstatus.btn-toggle.btn-xs:before {
+    content: 'Off';
+    left: 0;
+}
+.inpstatus.btn-toggle.btn-xs:after {
+    content: 'On';
+    right: 0;
+    opacity: .5;
+}
+.inpstatus.btn-toggle.btn-xs > .handle {
+    position: absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 0.75rem;
+    background: #fff;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.btn-xs.active {
+    transition: background-color .25s;
+}
+.inpstatus.btn-toggle.btn-xs.active > .handle {
+    left: 1.125rem;
+    transition: left .25s;
+}
+.inpstatus.btn-toggle.btn-xs.active:before {
+    opacity: .5;
+}
+.inpstatus.btn-toggle.btn-xs.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-xs.btn-sm:before, .btn-toggle.btn-xs.btn-sm:after {
+    line-height: -1rem;
+    color: #fff;
+    letter-spacing: .75px;
+    left: 0.275rem;
+    width: 1.55rem;
+}
+.inpstatus.btn-toggle.btn-xs.btn-sm:before {
+    text-align: right;
+}
+.inpstatus.btn-toggle.btn-xs.btn-sm:after {
+    text-align: left;
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-xs.btn-sm.active:before {
+    opacity: 0;
+}
+.inpstatus.btn-toggle.btn-xs.btn-sm.active:after {
+    opacity: 1;
+}
+.inpstatus.btn-toggle.btn-xs.btn-xs:before, .btn-toggle.btn-xs.btn-xs:after {
+    display: none;
+}
+.inpstatus.btn-toggle.btn-secondary {
+    color: #6b7381;
+    background: #bdc1c8;
+}
+.inpstatus.btn-toggle.btn-secondary:before, .btn-toggle.btn-secondary:after {
+    color: #6b7381;
+}
+.inpstatus.btn-toggle.btn-secondary.active {
+    background-color: #ff8300;
+}
+
+#cfpabbly_toast_success, #cfpabbly_toast_success #img {
+    background-color: #28a745 !important;
+}
+#cfpabbly_toast_error, #cfpabbly_toast_error #img {
+    background-color: #dc3545 !important;
+}
+#cfpabbly_toast_success, #cfpabbly_toast_error {
+    visibility: hidden;
+    max-width: 50px;
+    height: 50px;
+    /*margin-left: -125px;*/
+    margin: auto;
+    /* background-color: #333; */
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;right:0;
+    bottom: 30px;
+    font-size: 17px;
+    white-space: nowrap;
+}
+#cfpabbly_toast_success #img, #cfpabbly_toast_error #img{
+	width: 50px;
+	height: 50px;
+    float: left;
+    padding-top: 16px;
+    border-right: 1px solid white;
+    padding-bottom: 16px;
+    box-sizing: border-box;    
+    /* background-color: #111; */
+    color: #fff;
+}
+#cfpabbly_toast_success #desc, #cfpabbly_toast_error #desc{
+    color: #fff;
+    padding: 16px;
+    overflow: hidden;
+	white-space: nowrap;
+}
+
+#cfpabbly_toast_success.show, #cfpabbly_toast_error.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes expand {
+    from {min-width: 50px} 
+    to {min-width: 350px}
+}
+
+@keyframes expand {
+    from {min-width: 50px}
+    to {min-width: 350px}
+}
+@-webkit-keyframes stay {
+    from {min-width: 350px} 
+    to {min-width: 350px}
+}
+
+@keyframes stay {
+    from {min-width: 350px}
+    to {min-width: 350px}
+}
+@-webkit-keyframes shrink {
+    from {min-width: 350px;} 
+    to {min-width: 50px;}
+}
+
+@keyframes shrink {
+    from {min-width: 350px;} 
+    to {min-width: 50px;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 60px; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 60px; opacity: 0;}
+}

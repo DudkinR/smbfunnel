@@ -5,9 +5,6 @@ $current_base_dir = str_replace("\\", "/", __DIR__);
 require_once($current_base_dir . "/gcp/gcp.php");
 require_once($current_base_dir . '/library/lang.php');
 session_start();
-
-
-
 require_once("library/esc_html.php");
 if (isset($_GET["cfhttp"])) {
 	foreach ($_GET as $cfhttp_data_index => $cfhttp_data_val) {
@@ -30,6 +27,7 @@ if (!is_file($GLOBALS["config_file"])) {
 	}
 }
 
+
 //print_r($_SESSION);
 class FunnelIndex
 {
@@ -40,12 +38,13 @@ class FunnelIndex
 	var $base_dir;
 	function __construct()
 	{
-
+		
 		date_default_timezone_set('UTC');
 		$dir = str_replace("\\", '/', __DIR__);
 		$this->base_dir = rtrim($dir, '/');
-
+		
 		require_once($this->base_dir . "/library/library.php");
+
 		$this->load = new Library();
 
 		$this->view_dir = $dir . "/views";
@@ -90,12 +89,15 @@ class FunnelIndex
 				//exit;
 			}
 		}
-
+		
 		if (function_exists('get_option')) {
 			//this block should be present at the end of this constructor
+			
 			$main_load = $this->load;
 			require_once($this->base_dir . "/library/plugin_options.php");
+			 //echo "We are here goooooo111"; exit; 
 		}
+		
 	}
 	function loadPage()
 	{
@@ -251,6 +253,7 @@ class FunnelIndex
 		return [$query, $category, $floderName];
 	}
 }
+
 $ob = new FunnelIndex();
 if (!isset($_GET['funnel_view']) || !(get_option('qfnl_router_mode') == '1') || isset($_GET['cf-admin']) || isset($_GET['cf-login'])) {
 	if (isset($_GET['cf-admin']) || isset($_GET['cf-login'])) {

@@ -791,19 +791,36 @@ function cf_media($show= true)
         return $media;
     }
 }
+
 /*====================================================================*/
 //--------------All Functions Should be defined before this------------ 
 /*=====================================================================*/
 $active_plugins=$GLOBALS['plugin_loader']->getPlugins('active');
 try
 {
-    foreach($active_plugins as $active_plugin)
+     foreach($active_plugins as $active_plugin)
     {
         ob_start();
-        require_once($active_plugin->start);
-        $active_plugins_output_data=ob_get_clean();
-        $active_plugins_output_data=trim(trim(trim($active_plugins_output_data,'\n'),'\r\n'));
-        echo $active_plugins_output_data;
+        
+        // проверить перед загрузкой
+        if(!file_exists($active_plugin->start))
+        {
+            throw new Exception("Plugin file not found");
+        }
+        else
+        {
+            if($active_plugin->start=="/home/smbfunnels.com/public_html/plugins/cf_plugin_for_payfast/index.php")           {  }
+            else
+            {  
+            require_once($active_plugin->start); 
+            $active_plugins_output_data=ob_get_clean();
+            $active_plugins_output_data=trim(trim(trim($active_plugins_output_data,'\n'),'\r\n'));
+            echo $active_plugins_output_data; 
+            }
+        }
+      
     }
 }catch(Exception $e){ echo $e->getMessage(); }
+
+//echo "exit plugin_options.php"; exit;
 ?>

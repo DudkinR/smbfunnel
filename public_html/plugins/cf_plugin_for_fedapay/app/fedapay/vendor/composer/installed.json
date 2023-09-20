@@ -1,0 +1,54 @@
+[
+    {
+        "name": "fedapay/fedapay-php",
+        "version": "0.3.2",
+        "version_normalized": "0.3.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fedapay/fedapay-php.git",
+            "reference": "40039fcde0ff3e5c8dfbefe383c0d2607125327a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fedapay/fedapay-php/zipball/40039fcde0ff3e5c8dfbefe383c0d2607125327a",
+            "reference": "40039fcde0ff3e5c8dfbefe383c0d2607125327a",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.5"
+        },
+        "require-dev": {
+            "fzaninotto/faker": "^1.7",
+            "phpunit/phpunit": "~4.0",
+            "squizlabs/php_codesniffer": "~2.0"
+        },
+        "time": "2020-08-30T07:34:04+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "FedaPay\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "FedaPay and contributors",
+                "homepage": "https://github.com/fedapay/fedapay-php/contributors"
+            }
+        ],
+        "description": "PHP library for FedaPay https://fedapay.com",
+        "homepage": "https://fedapay.com/",
+        "keywords": [
+            "api",
+            "fedapay",
+            "payment processing"
+        ]
+    }
+]
