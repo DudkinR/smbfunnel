@@ -14,9 +14,21 @@ class Cfpay_processor
         global $dbpref;
 
         $method= $mysqli->real_escape_string($this->method);
-
+        if(strpos($method, '_ipn')<1)
+        {
+            $method= $method.'_ipn';
+        }
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
         $table=$dbpref."payment_methods";
-        $qry=$mysqli->query("select * from `".$table."` where `method` in ('".$method."', '".$method."_ipn') order by `id` desc");
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."' order by `id` desc");
+        }
+        else
+        {
+            $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."' and `user_id`=".$user_id." order by `id` desc");
+        }
         
         if(!$qry || $qry->num_rows<1)
         {
@@ -62,8 +74,20 @@ class Cfpay_processor
         $table= $dbpref.'payment_methods';
 
         $method= $mysqli->real_escape_string($this->method);
-
-        $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."` where `method` in ('".$method."', '".$method."_ipn')");
+        if(strpos($method, '_ipn')<1)
+        {
+            $method= $method.'_ipn';
+        }
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `method`='".$method."'");
+        }
+        else
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `method`='".$method."' AND `user_id`='".$user_id."'");
+        }
         if($qry->num_rows>0)
         {
             $r=$qry->fetch_object();
@@ -99,7 +123,7 @@ class Cfpay_processor
 
         $arr=array();
 
-        $order_by="`id` desc";
+         $order_by="`id` desc";
         if(isset($_GET['arrange_records_order']))
         {
             $order_by=base64_decode($_GET['arrange_records_order']);
@@ -119,9 +143,23 @@ class Cfpay_processor
             }
         }
         $method= $mysqli->real_escape_string($this->method);
+        if(strpos($method, '_ipn')<1)
+        {
+            $method= $method.'_ipn';
+        }
         //echo "select * from `".$table."`".$search." order by ".$order_by.$limit_str;
-        $qry=$mysqli->query("select * from `".$table."` where `method` in ('".$method."', '".$method."_ipn')".$search." order by ".$order_by.$limit_str);
-
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $qry_mysqli="select * from `".$table."`".$search." order by ".$order_by.$limit_str;
+        }
+        else
+        {
+            $qry_mysqli="select * from `".$table."` where `method`='".$method."' and `user_id`=".$user_id.$search." order by ".$order_by.$limit_str;
+        }
+       // echo $qry_mysqli;
+        $qry=$mysqli->query($qry_mysqli);
         while($r=$qry->fetch_object())
         {
             array_push($arr,$r);
@@ -173,10 +211,11 @@ class Cfpay_processor
         {
             $method= $method.'_ipn';
         }
-
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+     //   $access=$_SESSION['access' . get_option('site_token')]; 
         if($id<1)
         {
-            $qry="insert into `".$table."` (`title`, `method`, `credentials`, `tax`, `createdon`) values ('".$title."','".$method."','".$credentials."','".$tax."','".date('Y-m-d H:i:s')."')";
+            $qry="insert into `".$table."` (`title`, `method`, `credentials`, `tax`, `createdon`,`user_id`) values ('".$title."','".$method."','".$credentials."','".$tax."','".date('Y-m-d H:i:s')."',".$user_id.")";
         }
         else
         {

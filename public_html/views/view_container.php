@@ -149,8 +149,8 @@ $dbpref = $info['dbpref'];
                         </script>
                         <li class="nav-item dropdown u-pro">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" id="profilepicopener" href="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewProfileContainer()"><img src="<?php
-                                                                                                                                                                                                                                                    $site_token_for_dashboard = get_option('site_token');
-                                                                                                                                                                                                                                                    echo $_SESSION['user_profile_picture' . $site_token_for_dashboard]; ?>" alt="user" class=""> <span class="hidden-md-down"><?php echo $_SESSION['user_name' . $site_token_for_dashboard]; ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                                $site_token_for_dashboard = get_option('site_token');
+                                echo $_SESSION['user_profile_picture' . $site_token_for_dashboard]; ?>" alt="user" class=""> <span class="hidden-md-down"><?php echo $_SESSION['user_name' . $site_token_for_dashboard]; ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY bg-dark text-white" id="profilecontroldiv" style="display:none;">
                                 <!-- text-->
                                 <a href="index.php?page=createmultiuser&id=<?php echo $_SESSION['user' . $site_token_for_dashboard] ?>" class="dropdown-item text-white"><i class="ti-user"></i> <?php w('My Profile'); ?></a>
@@ -260,6 +260,7 @@ $dbpref = $info['dbpref'];
 
                             </li>
                         <?php } ?>
+                       
                         <?php
                         $page_array2 = array("sales", "products");
                         if (!empty(array_intersect($page_array2, $dashboard_permission_page_arr)) || in_array('admin', $dashboard_permission_page_arr)) {
@@ -286,6 +287,7 @@ $dbpref = $info['dbpref'];
                                 </div>
                             </li>
                         <?php } ?>
+                                                                              
                         <?php
                         $page_array3 = array("listrecords", "compose_mail", "sequence_records", "sequence", 'sequences', "sentemailsdetails", "smtp_table", "createlist", "smtp_create");
                         if (!empty(array_intersect($page_array3, $dashboard_permission_page_arr)) || in_array('admin', $dashboard_permission_page_arr)) {
@@ -341,16 +343,39 @@ $dbpref = $info['dbpref'];
                         }
                         if (isset($plugin_menues) && is_array($plugin_menues) && count($plugin_menues)) {
                             $count = 50;
+                            $array_li_plugin_menues = array();
+                            $list=[];
+                          //  print_r($plugin_menues['cfautores_setups'][0]['cb']);
                             foreach ($plugin_menues as $plugin_menue_index => $plugin_menues_data) {
-
-                                //print_r($plugin_menues_data);
-                                if ((isset($plugin_menues_data[0]['menu_slug']) && $plugin_menues_data[0]['menu_slug'] === 'cfcourse_all_course') /*|| (isset($plugin_menues_data['parent_slug']) && $plugin_menues_data['parent_slug']==='cfcourse_all_course')*/) {
+                                $list[]=[
+                                    "item_title" => $plugin_menues_data[0]['menu_title'],
+                                   // "item_description" => $plugin_menues_data[0]['cb']->stdClass ,
+                                    ];
+                                // if $plugin_menues_data[$i]['menu_slug'] has  "mail" 
+                                if (strpos($plugin_menues_data[0]['menu_slug'], 'mail') !== false
+                                ||$plugin_menues_data[0]['menu_title']=='Zapier'
+                                ||$plugin_menues_data[0]['menu_title']=='Pabbly' 
+                                ) {
+                                 $menu_depart = "Integrations";
                                 }
-                                //   if(isset($plugin_page) && isset($plugin_page[0]['parent_slug']) && $plugin_page[0]['parent_slug']==$plugin_menue_index ||( isset($plugin_menues_data[0]['menu_slug']) && $plugin_menues_data[0]['menu_slug']==='cfcourse_all_course' ) )
-                                //     {
-                                //       $is_current_menu_submenu=true;
-                                //     }  
-                        ?>
+                                elseif (strpos($plugin_menues_data[0]['menu_slug'], 'pay') !== false) {
+                                    $menu_depart = "Payments";
+                                }
+                                else{
+                                    $menu_depart = "Tools";
+                                }
+                                $array_li_plugin_menues[$count] = [
+                                    "menu_depart" => $menu_depart,
+                                    "menu_title" => $plugin_menues_data[0]['menu_title'],
+                                    "menu_li" => "",
+                                    ];
+                                $menu_li="";
+                                //print_r($plugin_menues_data[0]['menu_title']);
+                                if ((isset($plugin_menues_data[0]['menu_slug']) && $plugin_menues_data[0]['menu_slug'] === 'cfcourse_all_course') /*|| (isset($plugin_menues_data['parent_slug']) && $plugin_menues_data['parent_slug']==='cfcourse_all_course')*/) 
+                                {
+
+                                }
+                                ?>
                                 <?php
                                 if (in_array($plugin_menue_index, $dashboard_permission_page_arr) || in_array('admin', $dashboard_permission_page_arr)) {
                                     if (isset($GLOBALS['user_screen_plugin_pages'])) {
@@ -363,34 +388,41 @@ $dbpref = $info['dbpref'];
                                             $cf_submenu_arr[] = $plugin_menues_data[$i]['menu_slug'];
                                         }
                                     }
-
+                                    $menu_li.=' <li id="li-zapier_integration'. $count;
                                 ?>
-                                    <li id="li-zapier_integration<?= $count ?> <?php if (isset($is_current_menu_submenu) && $is_current_menu_submenu) {
-                                                                                    echo " active";
-                                                                                } ?> cf-course-plugin-menu">
-                                        <a href='#submenu<?= $count ?>' data-bs-toggle="collapse" aria-expanded="false" class="waves-effect waves-dark sidebar-submenu-a   <?php if (isset($is_current_menu_submenu) && $is_current_menu_submenu) {
-                                                                                                                                                                                echo ' active';
-                                                                                                                                                                            } ?>">
-                                            <div class="d-flex w-100 justify-content-between align-items-center">
-                                                <span class="menu-collapsed">
-                                                    <?php if (strlen(trim($plugin_menues_data[0]['icon_url'])) > 0) {
-
-                                                        echo '<i><img src="' . $plugin_menues_data[0]['icon_url'] . '" style="max-height:16px;margin-bottom:5px;"></i>';
-                                                    } else { ?>
-                                                        <i class="fas fa-bullseye"></i>
-                                                    <?php } ?>
-                                                    <span class="hide-menu"><?php echo $plugin_menues_data[0]['menu_title']; ?></span>
-                                                </span>
-                                                <span class="hide-menu"> <i class="fas sidebar-submenu-i <?= ((isset($_GET['page']) && ($_GET['page'] == $plugin_menue_index || in_array($_GET['page'],  $cf_submenu_arr)))) ? 'fa-caret-up' : 'fa-caret-down'; ?>  pl-2"></i></span>
-                                            </div>
-                                        </a>
-
+                                    <?php if (isset($is_current_menu_submenu) && $is_current_menu_submenu) {
+                                        $menu_li.= " active";
+                                            //echo " active";
+                                        } 
+                                        $menu_li.='cf-course-plugin-menu">';
+                                        $menu_li.='<a href="#submenu' . $count . '" data-bs-toggle="collapse" aria-expanded="false" class="waves-effect waves-dark sidebar-submenu-a   ';
+                                        ?> 
+                                          <?php if (isset($is_current_menu_submenu) && $is_current_menu_submenu) {
+                                           } 
+                                             $menu_li.='">';
+                                             $menu_li.='<div class="d-flex w-100 justify-content-between align-items-center">
+                                                <span class="menu-collapsed">';
+                                             ?>  <?php if (strlen(trim($plugin_menues_data[0]['icon_url'])) > 0) {
+                                                        $menu_li.='<i><img src="' . $plugin_menues_data[0]['icon_url'] . '" style="max-height:16px;margin-bottom:5px;"></i>';
+                                                       /// echo '<i><img src="' . $plugin_menues_data[0]['icon_url'] . '" style="max-height:16px;margin-bottom:5px;"></i>';
+                                                    } else { 
+                                                        $menu_li.='<i class="fas fa-bullseye"></i>';
+                                                        ?>
+                    
+                                                    <?php }
+                                                    $menu_li.='<span class="hide-menu">'.$plugin_menues_data[0]['menu_title'].'</span> </span>';
+                                                    $menu_li.=' <span class="hide-menu"> <i class="fas sidebar-submenu-i';
+                                                     if((isset($_GET['page']) && ($_GET['page'] == $plugin_menue_index || in_array($_GET['page'],  $cf_submenu_arr))))
+                                                      $menu_li.='fa-caret-up'; 
+                                                      else
+                                                       $menu_li.='fa-caret-down'; 
+                                                      $menu_li.=' pl-2"></i></span></div></a>';
+                                                    ?>
+                          
                                         <?php
                                         $cf_submenu_show = ((isset($_GET['page']) && ($_GET['page'] == $plugin_menue_index || in_array($_GET['page'],  $cf_submenu_arr)))) ? 'show' : '';
-                                        echo '<div id="submenu' . $count . '"  class="collapse sidebar-submenu ' . $cf_submenu_show . '">';
-                                        // if((isset($is_current_menu_submenu) && $is_current_menu_submenu))
-                                        // {
-
+                                   //     echo '<div id="submenu' . $count . '"  class="collapse sidebar-submenu ' . $cf_submenu_show . '">';
+                                        $menu_li.='<div id="submenu' . $count . '"  class="collapse sidebar-submenu ' . $cf_submenu_show . '">';
                                         if (isset($plugin_menues_data[0]['submenu']) && $plugin_menues_data[0]['submenu']) {
 
                                             $cf_submenu_isactiveclass = "";
@@ -399,40 +431,59 @@ $dbpref = $info['dbpref'];
                                                 $cf_submenu_isactiveclass = 'active';
                                             }
                                         ?>
-                                            <a href='index.php?page=<?= $plugin_menue_index; ?>' class=" <?= $cf_submenu_isactiveclass; ?>">
-                                                <span class="hide-menu menu-collapsed"><?= $plugin_menues_data[0]['submenu']; ?></span>
-                                            </a>
-                                        <?php
-
+                                                             <?php
+                                        $menu_li.='<a href="index.php?page=' . $plugin_menue_index . '" class=" ' . $cf_submenu_isactiveclass . '"><span class="hide-menu menu-collapsed">' . $plugin_menues_data[0]['submenu'] . '</span></a>';
 
                                         }
-
-                                        // }
-                                        // if($is_current_menu_submenu )
-                                        // {
-
                                         for ($i = 1; $i < count($plugin_menues_data); $i++) {
                                             $cf_submenu_isactiveclass = "";
                                             if ($plugin_menues_data[$i]['menu_slug'] == $_GET['page']) {
                                                 $cf_submenu_isactiveclass = "active";
                                             }
                                         ?>
-                                            <a href="index.php?page=<?= $plugin_menues_data[$i]['menu_slug'] ?>" class=" <?= $cf_submenu_isactiveclass; ?>">
-                                                <span class="hide-menu menu-collapsed"><?= $plugin_menues_data[$i]['menu_title']; ?></span>
-                                            </a>
-                                        <?php
-
+                                             <?php
+                                        $menu_li.='<a href="index.php?page=' . $plugin_menues_data[$i]['menu_slug'] . '" class=" ' . $cf_submenu_isactiveclass . '"><span class="hide-menu menu-collapsed">' . $plugin_menues_data[$i]['menu_title'] . '</span></a>';
                                         }
-
-                                        // }
-                                        echo ' </div></li>';
+                                      //  echo ' </div></li>';
+                                        $menu_li.=' </div></li>';
                                         ?>
                                     <?php }
+                                $array_li_plugin_menues[$count]['menu_li'] = $menu_li;     
                                 $count++; ?>
-
-
                             <?php }
-                        } ?>
+                        }
+                        // sort by menu_depart
+                        usort($array_li_plugin_menues, function($a, $b) {
+                            return strcmp($a['menu_depart'], $b['menu_depart']);
+                        });
+                        $grouped_menues = [];
+                        foreach ($array_li_plugin_menues as $menu_item) {
+                            $menu_depart = $menu_item['menu_depart'];
+                            $menu_li = $menu_item['menu_li'];
+                            
+                            // Создайте подмассив для каждой группы menu_depart
+                            if (!isset($grouped_menues[$menu_depart])) {
+                                $grouped_menues[$menu_depart] = [];
+                            }
+                            
+                            // Добавьте menu_li в соответствующую группу
+                            $grouped_menues[$menu_depart][] = $menu_li;
+                        }
+                        
+                        foreach ($grouped_menues as $menu_depart => $menu_li_items) {
+                            echo "<h4 style=\"color:#FFF\">".$menu_depart."</h4> \n";
+                            foreach ($menu_li_items as $menu_li) {
+                                echo $menu_li;
+                            }
+                            echo "\n";
+                        }
+                        //print_r($list);
+
+                        
+                        ?>
+
+
+
                             <?php
                             $page_array5 = array("settings", "multiuser_table", "gdpr", "createmultiuser");
                             if (!empty(array_intersect($page_array5, $dashboard_permission_page_arr)) || in_array('admin', $dashboard_permission_page_arr)) {

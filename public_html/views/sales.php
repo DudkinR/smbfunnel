@@ -95,10 +95,11 @@ if(isset($_GET['page_count']))
 {
 	$hashcount=($_GET['page_count']*10)-10;
 }
-//print_r($sales['sales']);
+print_r($sales['sales']);
 while($r=$sales['sales']->fetch_object())
 {
-	
+	//print_r($r);
+//	echo "<br>";
 	++$hashcount;
 
 	$shippedclass="text-danger";

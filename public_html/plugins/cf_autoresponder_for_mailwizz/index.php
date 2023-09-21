@@ -16,7 +16,6 @@ if(!class_exists('Cfautoresaddon_index'))
             self::getConfig();
             self::createMenuandSubmenu();
             self::includeHeaderScripts();
-
             parent::__construct(array('pref'=>$this->pref));
             parent::registerAjaxRequest();
         }
@@ -60,7 +59,6 @@ if(!class_exists('Cfautoresaddon_index'))
                     {
                         $version=$this->config->version;
                     }
-
                     if($_GET['page']=='cfautores_setting_'.$this->autores)
                     {
                         echo "<script type='module' src='".plugins_url('/assets/js/script.js?v='.$version,__FILE__)."'></script>";

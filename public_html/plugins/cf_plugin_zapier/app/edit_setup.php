@@ -14,7 +14,10 @@
 <div class="card-header  theme-text bg-white border-bottom-0"><?php w("Zapier  Credentials") ?></div>
 <div class="card-body">
 <form action="" method="post">
-<?php if(get_option('zapier_auth_id')){ ?>
+
+<?php if(get_option('zapier_auth_id')){ 
+   // echo get_option('zapier_auth_id');
+    ?>
 <div class="form-group" data-toggle="tooltip" title="Copy To Clipboard" onclick="copyText('<?php echo get_option('zapier_auth_id'); ?>')" style='cursor:pointer;'>
 <input type="text" style="cursor:pointer;" class="form-control" value="<?php echo get_option('zapier_auth_id'); ?>" placeholder="<?php w("Zapier Integration Token"); ?>" data-toggle="tooltip" title="<?php w("Copy to clipboard"); ?>" disabled=true>
 </div>

@@ -372,6 +372,7 @@ elseif ($page == 'no_permission') {
 	$plugins_ob = $this->load->loadPlugins();
 
 	$tutorial_link = "https://cloudfunnels.in/membership/members#tutorials_plugins";
+
 	$this->load->view("Plugins", $header, $page . ".php", $footer, array('page_description' => $page_description, 'tutorial_link' => $tutorial_link, 'plugins_ob' => $plugins_ob));
 } elseif ($page == "products") {
 	$header = $this->load->loadBootstrap();
@@ -955,6 +956,8 @@ else {
 			if (isset($plugin_data[0]['page_title'])) {
 				$createoredit = $plugin_data[0]['page_title'] . " ";
 			}
+		//	print_r($plugin_data);
+
 			$this->load->view($createoredit, $header, "plugin_view.php", "", array('page_description' => $page_description, 'tutorial_link' => $tutorial_link), $plugin_data);
 		} 
 	}

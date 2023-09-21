@@ -1,8 +1,9 @@
 <?php
 $pabbly_webhook_data = get_option('pabbly_webhook_data') ? get_option('pabbly_webhook_data') : "";
 $pabbly_create = "https://connect.pabbly.com/share-app/XRVTYQBXBWZeFAVvBFcEIwAUV1MJUwQ5Bh9URlxTUytUGQRBVhcPZQhEAGoES1AxB04AalEOBmYOGldTBVMCcQMZU0YGGQVYADNSFwZZACpdP1MkAEsFP14PBTYETAQ-AA9XcAlEBFkGC1Q2XEdTFVQNBH9WGw8vCEgAaARLUHoHSgBpUQgGJg43";
-?>
 
+print_r($pabbly_webhook_data);
+?>
 <div class="container-fluid">
     <div class="row page-titles mb-4">
         <div class="col-md-5 align-self-center">
@@ -33,7 +34,6 @@ $pabbly_create = "https://connect.pabbly.com/share-app/XRVTYQBXBWZeFAVvBFcEIwAUV
         </div>
     </div>
 </div>
-
 <div id="cfpabbly_toast_success">
     <div id="img"><i class="fas fa-check" type="button"></i></div>
     <div id="desc">Form saved successfully</div>

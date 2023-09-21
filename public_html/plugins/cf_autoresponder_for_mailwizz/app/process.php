@@ -54,7 +54,16 @@ class Cfautores_processor
         global $dbpref;
         $table= $dbpref.'quick_autoresponders';
         $autores= $mysqli->real_escape_string($this->autores);
-        $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."'");
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."'");
+        }
+        else
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."'");
+        }
         if($qry->num_rows>0)
         {
             $r=$qry->fetch_object();
@@ -109,7 +118,17 @@ class Cfautores_processor
             }
         }
         $autores= $mysqli->real_escape_string($this->autores);
-        $qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' AND 1 ".$search." ORDER BY ".$order_by.$limit_str);
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $sql_text="SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' AND 1 ".$search." ORDER BY ".$order_by.$limit_str;
+        }
+        else
+        {
+            $sql_text="SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."' ".$search." ORDER BY ".$order_by.$limit_str;
+        }
+        $qry=$mysqli->query($sql_text);
         while($r=$qry->fetch_object())
         {
             array_push($arr,$r);
@@ -153,6 +172,8 @@ class Cfautores_processor
         $email = $mysqli->real_escape_string($email);
         $credentials_j= json_decode($credentials_js,true);
         $new_cred=[];
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+
         foreach($credentials_j as $key => $cred)
         {
                 $new_cred[$key]=$mysqli->real_escape_string( $cred );
@@ -173,7 +194,7 @@ class Cfautores_processor
             {
                 if($id<1)
                 {
-                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`) VALUES ('".$title."','".$autotype."','".$credentials."','".$exf."','".$date."')";
+                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`,`user_id`) VALUES ('".$title."','".$autotype."','".$credentials."','".$exf."','".$date."','".$user_id."')";
                 }
                 else
                 {

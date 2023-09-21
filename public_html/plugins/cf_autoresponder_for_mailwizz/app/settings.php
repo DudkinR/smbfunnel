@@ -13,8 +13,6 @@ if(isset($_POST['cfautoresdelsetup']))
                         <div class="d-flex justify-content-end align-items-center">Create, edit and manage your MailWizz Autoresponder</div>
                     </div>
 </div>
-
-
     <div class="row">
         <div class="col-sm-12">
             <div class="card pb-2  br-rounded">
@@ -61,17 +59,14 @@ if(isset($_POST['cfautoresdelsetup']))
                                 $records_to_show=get_option('qfnl_max_records_per_page');
                                 $records_to_show=(int) $records_to_show;
                                 $count=($count*$records_to_show)-$records_to_show;
-
                                 for($i=0; $i<count($all_data); $i++)
                                 {
                                     $data=$all_data[$i];
                                     $count_hash =$count+($i+1);
-
                                     $action="<table class='actionedittable'><tr>
                                     <td><a href='index.php?page=cfautores_setting_".$this->autores."&id=".$data->id."'><button class='btn unstyled-button' data-bs-toggle='tooltip' title='Edit'><i class='text-primary fas fa-edit'></i></button></a></td>
                                     <td><form action='' method='POST'><button type='submit' onClick='return confirm(\"Are you sure you want to delete this?\")' class='btn unstyled-button' data-bs-toggle='tooltip' title='Delete' name='cfautoresdelsetup' value='".$data->id."'><i class='text-danger fas fa-trash'></i></button></form></td>
                                     </tr></table>";
-
                                     echo "<tr>
                                     <td>".$count_hash."</td>
                                     <td><a href='index.php?page=cfautores_setting_".$this->autores."&id=".$data->id."'>".$data->autoresponder."</a></td>
