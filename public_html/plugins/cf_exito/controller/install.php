@@ -17,6 +17,7 @@ if(!function_exists('cfExitoDoInstall'))
             `is_global` int(1) not null default 0,
             `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
             `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+            `user_id` int(16) DEFAULT 1,
             PRIMARY KEY (`id`)
             )";
         $mysqli->query($form_table_query);
@@ -33,6 +34,7 @@ if(!function_exists('cfExitoDoInstall'))
             `required` int(11) DEFAULT NULL,
             `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
             `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+            `user_id` int(16) DEFAULT 1,
             PRIMARY KEY (`id`)
             )";
         $mysqli->query($input_table_query);
@@ -48,6 +50,7 @@ if(!function_exists('cfExitoDoInstall'))
             `url` text not null,
             `ip` text not null,
             `added_on` timestamp not null default current_timestamp(),
+            `user_id` int(16) DEFAULT 1,
             primary key(`id`)
         )
         ";

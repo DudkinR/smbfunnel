@@ -42,7 +42,7 @@ class CFDiscount_giftcard
 		$pref=$this->dbpref;
 		$table=$pref."quick_member";
 		$table1 = $pref."issue_gift";
-
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
 		$code = $mysqli->real_escape_string($data['country_code']);
 		$name = $mysqli->real_escape_string($data['customer_name']);
 		$email = $mysqli->real_escape_string($data['customer_email']);
@@ -56,8 +56,8 @@ class CFDiscount_giftcard
 			$check = $mysqli->query( $check_email );
 			if( $mysqli->affected_rows <= 0 )
 			{
-				$sql="INSERT INTO `".$table."` (`funnelid`, `pageid`, `name`, `email`, `password`, `verified`, `verifycode`, `date_verifycodegen`, `ip_created`, `ip_lastsignin`, `date_created`, `date_lastsignin`, `valid`, `exf`) 
-				VALUES (1,1,'".$name."','".$email."','".$password."','custom','custom','custom','".$this->ip."','".$this->ip."','".$date_created."','".$date_created."','1','custom')";
+				$sql="INSERT INTO `".$table."` (`funnelid`, `pageid`, `name`, `email`, `password`, `verified`, `verifycode`, `date_verifycodegen`, `ip_created`, `ip_lastsignin`, `date_created`, `date_lastsignin`, `valid`, `exf`, `user_id`) 
+				VALUES (1,1,'".$name."','".$email."','".$password."','custom','custom','custom','".$this->ip."','".$this->ip."','".$date_created."','".$date_created."','1','custom','".$user_id."')";
 				if( $mysqli->query($sql) )
 				{
 					return json_encode(array('status'=>1,'message'=>t('${1} added successfully',[ucfirst(t($this->students))]),'last_id'=>$mysqli->insert_id,'name'=>$name,'email'=>$email));
@@ -126,7 +126,9 @@ class CFDiscount_giftcard
 		$table1 = $pref."issue_gift";
 		$input=[];
 		$filter_data=['giftcard_id','savegiftcards','action'];
-
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
+		
+		$access=$_SESSION['access' . get_option('site_token')]; 
 		foreach( $data as $index => $dat  )
 		{
 			if( !in_array( $index, $filter_data ) )
@@ -174,19 +176,23 @@ class CFDiscount_giftcard
 		$input['updated_at'] = date("Y-m-d H:i:s",time());
 		
 		// first check if gift_code already availabe or not
+		if($access=='admin')
 		$check_gift = "SELECT `id` FROM `".$table."` WHERE `gift_code`='$giftcode' AND `discount_type`='giftcard'";
+		else
+		$check_gift = "SELECT `id` FROM `".$table."` WHERE `gift_code`='$giftcode' AND `discount_type`='giftcard' AND `user_id`=$user_id";
 		$check_gift_code = $mysqli->query( $check_gift );
+		
 		if( $check_gift_code->num_rows <= 0 )
 		{
 			$in_indexes= implode( ',', array_map( function( $pp ) { return "`".$pp."`"; }, array_keys( $input ) ) );
 			$in_values= implode( ',', array_map( function( $val ) { return '"'.$val.'"';}, array_values( $input ) ) );
-			$in=$mysqli->query("INSERT INTO `".$table."` (".$in_indexes.") VALUES (".$in_values.")");
+			$in=$mysqli->query("INSERT INTO `".$table."` (".$in_indexes.",`user_id`) VALUES (".$in_values.",$user_id)");
 			if( $in )
 			{
 				$lastid=$mysqli->insert_id;
 				$comment='You issued a new gift card.';
 				// insert row in timeline table
-				$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ('".$lastid."','".$comment."','".$date_created."')");
+				$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ('".$lastid."','".$comment."','".$date_created."',".$user_id.")");
 				
 				// if customer added in gift card then send a gift email
 				if( !empty($input['member_id']) && $input['member_id'] != -1 )
@@ -209,7 +215,7 @@ class CFDiscount_giftcard
 					
 					$comment1="You sent an email message containing the gift card to $email.";
 					// insert row in timeline table
-					$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ($lastid,'".$comment1."','".$date_created."')");
+					$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ($lastid,'".$comment1."','".$date_created."',".$user_id.")");
 				}
 				return json_encode(array('status'=>1,'message'=>t('gift added successfully'),'last_id'=>$lastid));
 			}else{
@@ -230,6 +236,7 @@ class CFDiscount_giftcard
 		$input=[];
 		$giftcard_id = $mysqli->real_escape_string($data['giftcard_id']);
 		$type = $mysqli->real_escape_string($data['type']);
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
 		$getgift = $mysqli->query("SELECT * FROM `".$table."` WHERE `id`='".$giftcard_id."'");
 		if( $getgift->num_rows > 0 )
 		{
@@ -300,7 +307,7 @@ class CFDiscount_giftcard
 					}else{
 						$comment = "You changed the discount expiration date from $change to $new.";
 					}
-					$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ( '".$giftcard_id."','".$comment."','".$date_created."')");
+					$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ( '".$giftcard_id."','".$comment."','".$date_created."',".$user_id.")");
 				}else if( $newnever == "set_expiration"  && $old1 != $new1 ){
 					if($type=="giftcard")
 					{
@@ -308,7 +315,7 @@ class CFDiscount_giftcard
 					}else{
 						$comment = "You changed the gift card expiration date from $change to $new.";
 					}
-					$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ( '".$giftcard_id."','".$comment."','".$date_created."')");
+					$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ( '".$giftcard_id."','".$comment."','".$date_created."',".$user_id.")");
 				}
 			}
 			$inp['updated_at'] = date( "Y-m-d H:i:s",time() );
@@ -323,7 +330,7 @@ class CFDiscount_giftcard
 			}else{
 				$comment = "You changed the discount";
 			}
-			$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ( '".$giftcard_id."','".$comment."','".$date_created."')");
+			$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ( '".$giftcard_id."','".$comment."','".$date_created."',".$user_id.")");
 			$in_index = $this->updateQuery( $inp );
 			$ins=$mysqli->query("UPDATE  `".$table."` SET ".$in_index." WHERE `id`=$giftcard_id")?1:-1;
 			if($ins){
@@ -349,6 +356,7 @@ class CFDiscount_giftcard
 		$name = $mysqli->real_escape_string($data['name']);
 		$type = $mysqli->real_escape_string($data['type']);
 		$email = $mysqli->real_escape_string($data['email']);
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
 		$data=$this->getOneGiftCard($giftcard_id,array('gift_code','percentage','initial_value','currency','expiration_type','expiration_date'));
 		$inivalue = $data['initial_value'];
 		$date_created  = date( "Y-m-d H:i:s",time() );
@@ -365,7 +373,7 @@ class CFDiscount_giftcard
 		];
 		$s=cf_mail($edata);
 		$comment1="You sent an Email message containing the gift card to $email.";
-		$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ('".$giftcard_id."','".$comment1."','".$date_created."')");
+		$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ('".$giftcard_id."','".$comment1."','".$date_created."',".$user_id.")");
 		if( $mysqli->affected_rows > 0 )
 		{
 			return json_encode(array('status'=>1,'message'=>t('Message has been sent successfully')));
@@ -385,6 +393,7 @@ class CFDiscount_giftcard
 
 	function createGiftCardProduct( $data )
 	{
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
 		$plugin_loader=false;
 		if(isset($GLOBALS['plugin_loader']))
 		{
@@ -520,7 +529,7 @@ class CFDiscount_giftcard
 			$inp['combinations']=$mysqli->real_escape_string(json_encode( (object)$combinations ));
 			$in_indexes= implode(',', array_map(function($pp){ return "`".$pp."`"; }, array_keys($inp)));
 			$in_values= implode(',', array_map(function($val){ return '"'.$val.'"';}, array_values($inp)));
-			$in=$mysqli->query("INSERT INTO `".$table."` (".$in_indexes.") VALUES (".$in_values.")");
+			$in=$mysqli->query("INSERT INTO `".$table."` (".$in_indexes.",`user_id`) VALUES (".$in_values.",$user_id)");
 			if($in){
 
 				$id= $mysqli->insert_id;
@@ -647,6 +656,7 @@ class CFDiscount_giftcard
 	public function addVariantDenominations( $denominations, $pid,$fid,$active,$def_product_page,$tags,$collections, $action="save",$currency="USD",$currency_symbol="$" )
 	{
 		//create product 0 for insert 1 for update
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
 		$mysqli=$this->mysqli;
 		$pref=$this->dbpref;
 		$table=$pref."all_products";
@@ -698,7 +708,7 @@ class CFDiscount_giftcard
 						$inp=array_merge($data_not_provided_inform,$proived_field);
 						$in_indexes = implode(',', array_map(function($pp){ return "`".$pp."`"; }, array_keys($inp)));
 						$in_values  = implode(',', array_map(function($val){ return '"'.$val.'"';}, array_values($inp)));
-						$in = $mysqli->query("INSERT INTO `".$table."` (".$in_indexes.") VALUES (".$in_values.")");
+						$in = $mysqli->query("INSERT INTO `".$table."` (".$in_indexes.",`user_id`) VALUES (".$in_values.",$user_id)");
 						if( $mysqli->affected_rows > 0 )
 						{
 							$id = $mysqli->insert_id;
@@ -785,6 +795,7 @@ class CFDiscount_giftcard
 		$mysqli=$this->mysqli;
 		$pref=$this->dbpref;
 		$product_variants=$pref."product_variants";
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
 		if($type=="add")
 		{
 			$mysqli->query("INSERT INTO `$product_variants` (`product`, `variant_name`, `variant_val`, `parent_product_id`) VALUES ('$id','$deno','$deno',$pid)");

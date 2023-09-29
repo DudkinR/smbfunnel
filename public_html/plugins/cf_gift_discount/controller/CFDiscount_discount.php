@@ -30,6 +30,8 @@ class CFDiscount_discount
 		$table1 = $pref."issue_gift";
 		$input=[];
 		$filter_data=['discount_id','savediscounts','action'];
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
+		$access=$_SESSION['access' . get_option('site_token')]; 
 		foreach( $data as $index => $dat  )
 		{
             if( !in_array( $index, $filter_data ) )
@@ -81,18 +83,23 @@ class CFDiscount_discount
             {
                 return json_encode(array('status'=>0,'message'=>t('Please enter unique discount codes')));
             }
+			if($access=='admin')
             $check_gift = "SELECT `id` FROM `".$table."` WHERE `gift_code`='$discount_code' AND `discount_type`='percentage'";
+			else
+			$check_gift = "SELECT `id` FROM `".$table."` WHERE `gift_code`='$discount_code' AND `discount_type`='percentage' AND `user_id`=$user_id";
+
             $check_gift_code = $mysqli->query( $check_gift );
             if( $check_gift_code->num_rows <= 0 )
             {
+				
                 $in_indexes= implode( ',', array_map( function( $pp ) { return "`".$pp."`"; }, array_keys( $input ) ) );
                 $in_values= implode( ',', array_map( function( $val ) { return '"'.$val.'"';}, array_values( $input ) ) );
-                $in=$mysqli->query("INSERT INTO `".$table."` (".$in_indexes.") VALUES (".$in_values.")");
+                $in=$mysqli->query("INSERT INTO `".$table."` (".$in_indexes.",`user_id`) VALUES (".$in_values.",$user_id)");
                 if( $in )
                 {
                     $lastid=$mysqli->insert_id;
                     $comment='You issued a discount code.';
-                    $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ('".$lastid."','".$comment."','".$date_created."')");
+                    $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ('".$lastid."','".$comment."','".$date_created."',".$user_id.")");
 					// if customer added in gift card then send a gift email
 					if( !empty($input['member_id']) && $input['member_id'] != -1 )
 					{
@@ -113,7 +120,8 @@ class CFDiscount_discount
 						
 						$comment1="You sent an email message containing the gift card to $email.";
 						// insert row in timeline table
-						$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ($lastid,'".$comment1."','".$date_created."')");
+						
+						$mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ($lastid,'".$comment1."','".$date_created."',".$user_id.")");
 					}
                     return json_encode(array('status'=>1,'message'=>t('Discount added successfully'),'last_id'=>$lastid));
                 }else{
@@ -133,7 +141,7 @@ class CFDiscount_discount
             {
                 $lastid=$discount_id;
                 $comment='You updated the discount code.';
-                $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`) VALUES ('".$lastid."','".$comment."','".$date_created."')");
+                $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`, `comment`, `created_at`,`user_id`) VALUES ('".$lastid."','".$comment."','".$date_created."',".$user_id.")");
 
                 return json_encode(array('status'=>1,'message'=>t('Discount updated successfully'),'last_id'=>$lastid));
             }else{
@@ -158,6 +166,8 @@ class CFDiscount_discount
 		$gemail_content =   $mysqli->real_escape_string( $data['gemail_content'] );
 		$demail_subject =    $mysqli->real_escape_string( $data['demail_subject'] );
 		$demail_content =   $mysqli->real_escape_string( $data['demail_content'] );
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
+		$access=$_SESSION['access' . get_option('site_token')]; 
 		foreach( $data['giftcard'] as $index => $dat  )
 		{
             if( !in_array( $index, $filter_data ) )
@@ -185,12 +195,17 @@ class CFDiscount_discount
 
 		$gift = $mysqli->real_escape_string( json_encode( $giftcard ) );
 		$dis = $mysqli->real_escape_string( json_encode( $discount ) );
-		$pr = $mysqli->query("SELECT * FROM `$table`");
+		if($access=='admin')
+		$teqt_sql="SELECT * FROM `$table`";
+		else
+		$teqt_sql="SELECT * FROM `$table` WHERE `user_id`=$user_id";
+
+		$pr = $mysqli->query($teqt_sql);
 		if( $pr->num_rows > 0 )
 		{
 			$mysqli->query("DELETE  FROM `$table`");
 		}
-		$mysqli->query("INSERT INTO `$table` (`giftcard`,`discount`,`gemail_subject`,`gemail_content`,`demail_subject`,`demail_content`)VALUE('".$gift."','".$dis."','".$gemail_subject."','".$gemail_content."','".$demail_subject."','".$demail_content."')");
+		$mysqli->query("INSERT INTO `$table` (`giftcard`,`discount`,`gemail_subject`,`gemail_content`,`demail_subject`,`demail_content`,`user_id`)VALUE('".$gift."','".$dis."','".$gemail_subject."','".$gemail_content."','".$demail_subject."','".$demail_content."',".$user_id.")");
 		if( $mysqli->affected_rows > 0 )
 		{
 			return json_encode(array('status'=>1,'message'=>t('Saved changes')));
@@ -202,8 +217,14 @@ class CFDiscount_discount
 	{
 		global $mysqli;
 		$pref=$this->dbpref;
+		$user_id=$_SESSION['user' . get_option('site_token')]; 
+		$access=$_SESSION['access' . get_option('site_token')]; 
 		$table = $pref."gift_cards_settings";
-		$row = $mysqli->query("SELECT * FROM `$table`");
+		if($access=='admin')
+		$teqt_sql="SELECT * FROM `$table`";
+		else
+		$teqt_sql="SELECT * FROM `$table` WHERE `user_id`=$user_id";
+		$row = $mysqli->query($teqt_sql;
 		if( $row->num_rows > 0 )
 		{
 			$r = $row->fetch_assoc();

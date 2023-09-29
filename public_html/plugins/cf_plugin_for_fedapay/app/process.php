@@ -14,8 +14,16 @@ class Cfpay_processor
         global $dbpref;
         $method= $mysqli->real_escape_string($this->method);
         $table=$dbpref."payment_methods";
-        $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."' order by `id` desc");
-        
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."' order by `id` desc");
+        }
+        else
+        {
+            $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."' and `user_id`=".$user_id." order by `id` desc");
+        }
         if(!$qry || $qry->num_rows<1)
         {
             return;
@@ -59,8 +67,16 @@ class Cfpay_processor
         global $dbpref;
         $table= $dbpref.'payment_methods';
         $method= $mysqli->real_escape_string($this->method);
-
-        $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."` where `method`='".$method."'");
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."` where `method`='".$method."'");
+        }
+        else
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."` where `method`='".$method."' and `user_id`=".$user_id."");
+        }
         if($qry->num_rows>0)
         {
             $r=$qry->fetch_object();
@@ -81,7 +97,8 @@ class Cfpay_processor
         $records_to_show=get_option('qfnl_max_records_per_page');
         $records_to_show=(int) $records_to_show;
         $page=($page*$records_to_show)-$records_to_show;
-
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
         $limit_str=" limit ".$page.",".$records_to_show;
 
         $search="";
@@ -116,8 +133,14 @@ class Cfpay_processor
             }
         }
         $method= $mysqli->real_escape_string($this->method);   
-        $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."'".$search." order by ".$order_by.$limit_str);
-
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."'".$search." order by ".$order_by.$limit_str);
+        }
+        else
+        {
+            $qry=$mysqli->query("select * from `".$table."` where `method`='".$method."' and `user_id`=".$user_id."".$search." order by ".$order_by.$limit_str);
+        }
         while($r=$qry->fetch_object())
         {
             array_push($arr,$r);
@@ -169,11 +192,12 @@ class Cfpay_processor
         $credentials =json_encode( array( "public_key" => $public_key,"secret_key" => $secret_key, "type" => $type ) );
         // print_r($credentials);
         // exit;
-
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        
         if( $id<1 )
         {
         
-            $qry="insert into `".$table."` (`title`, `method`, `credentials`, `tax`, `createdon`) values ('".$title."','".$method."','".$credentials."','".$tax."','".date('Y-m-d H:i:s')."')";
+            $qry="insert into `".$table."` (`title`, `method`, `credentials`, `tax`, `createdon`,`user_id`) values ('".$title."','".$method."','".$credentials."','".$tax."','".date('Y-m-d H:i:s')."',".$user_id.")";
         }
         else
         {

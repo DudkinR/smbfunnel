@@ -51,9 +51,17 @@ if(!class_exists('CFExito_forms_control'))
             }
             //////////////////////////////
             //echo "select * from `".$table."` where 1".$search." order by ".$order_by.$limit;
-
-            $qry=$mysqli->query("select * from `".$table."` where 1".$search." order by ".$order_by.$limit);
-
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if($access=='admin')
+            {
+                $qry=$mysqli->query("select * from `".$table."` where 1".$search." order by ".$order_by.$limit);
+            }
+            else
+            {
+                $qry=$mysqli->query("select * from `".$table."` where `user_id`=".$user_id."".$search." order by ".$order_by.$limit);
+            }
+            
             $arr=[];
             if($qry->num_rows>0)
             {
@@ -74,8 +82,16 @@ if(!class_exists('CFExito_forms_control'))
             $form_id= $mysqli->real_escape_string( $form_id );
 
             $table2=$dbpref."ext_popup_optins";
-
-            $user_counts=$mysqli->query("SELECT COUNT(*) AS `total_user` FROM `".$table2."` WHERE `form_id`=".$form_id);
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if($access=='admin')
+            {
+                $user_counts=$mysqli->query("SELECT COUNT(*) AS `total_user` FROM `".$table2."` WHERE `form_id`=".$form_id);
+            }
+            else
+            {
+                $user_counts=$mysqli->query("SELECT COUNT(*) AS `total_user` FROM `".$table2."` WHERE `form_id`=".$form_id." and `user_id`=".$user_id);
+            }
             
             $user_count=$user_counts->fetch_assoc();
         }
@@ -85,9 +101,17 @@ if(!class_exists('CFExito_forms_control'))
             global $mysqli;
             global $dbpref;
             $table= $dbpref.'ext_popup_form';
-
-            $qry=$mysqli->query("select count(`id`) as `total_forms` from `".$table."`");
-
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if($access=='admin')
+            {
+                $qry=$mysqli->query("select count(`id`) as `total_forms` from `".$table."`");
+            }
+            else
+            {
+                $qry=$mysqli->query("select count(`id`) as `total_forms` from `".$table."` where `user_id`=".$user_id);
+            }
+            
             $r=$qry->fetch_object();
             return $r->total_forms;
         }
@@ -106,8 +130,16 @@ if(!class_exists('CFExito_forms_control'))
                 $id=$mysqli->real_escape_string($id);
                 $cond=" where `id`=".$id;
             }
-            $qry=$mysqli->query("select `id`, `form_name` from `".$table."`".$cond." order by `id` desc");
-
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if($access=='admin')
+            {
+                $qry=$mysqli->query("select `id`, `form_name` from `".$table."`".$cond." order by `id` desc");
+            }
+            else
+            {
+                $qry=$mysqli->query("select `id`, `form_name` from `".$table."`".$cond." and `user_id`=".$user_id." order by `id` desc");
+            }
             while($r=$qry->fetch_object())
             {
                 $arr[$r->id]=$r->form_name;
@@ -123,8 +155,17 @@ if(!class_exists('CFExito_forms_control'))
 
             $arr=array();
             $table= $dbpref.'ext_popup_inputs';
-            $qry=$mysqli->query("select distinct(`name`) from `".$table."` where `form_id`=".$id."");
-
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if($access=='admin')
+            {
+                $qry=$mysqli->query("select * from `".$table."` where `form_id`=".$id." order by `position` asc");
+            }
+            else
+            {
+                $qry=$mysqli->query("select * from `".$table."` where `form_id`=".$id." and `user_id`=".$user_id." order by `position` asc");
+            }
+            
             while($r=$qry->fetch_object())
             {
                 array_push($arr,$r->name);
@@ -148,8 +189,12 @@ if(!class_exists('CFExito_forms_control'))
             $form_id = trim( $mysqli->real_escape_string( $form_id ) );
 
             $get=($setup_only)? '`form_setup`':'*';
-
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if($access=='admin')
              $r = $mysqli->query("SELECT ".$get." FROM `".$table."` WHERE `id`=".$form_id );
+            else
+                $r = $mysqli->query("SELECT ".$get." FROM `".$table."` WHERE `id`=".$form_id." and `user_id`=".$user_id );
 
              if( $r->num_rows > 0)
              {
@@ -170,8 +215,16 @@ if(!class_exists('CFExito_forms_control'))
         $table=$dbpref.'ext_popup_inputs';
 
         $form_id = trim($mysqli->real_escape_string( $form_id ));
-        $returnOptions = $mysqli->query("SELECT * FROM `".$table."` WHERE `form_id`=".$form_id." ORDER BY `position` ASC");
-
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $r = $mysqli->query("SELECT * FROM `".$table."` WHERE `form_id`=".$form_id." ORDER BY `position` ASC");
+        }
+        else
+        {
+            $r = $mysqli->query("SELECT * FROM `".$table."` WHERE `form_id`=".$form_id." and `user_id`=".$user_id." ORDER BY `position` ASC");
+        }
         if( $returnOptions->num_rows > 0)
         {
             return $returnOptions;
@@ -183,7 +236,17 @@ if(!class_exists('CFExito_forms_control'))
         global $mysqli;
         global $dbpref;
         $table=$dbpref.'ext_popup_form';
-        $qry=$mysqli->query("select `id` from `".$table."` where `is_global`=1");
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select `id` from `".$table."` where `is_global`=1");
+        }
+        else
+        {
+            $qry=$mysqli->query("select `id` from `".$table."` where `is_global`=1 and `user_id`=".$user_id);
+        }
+        
         while($r=$qry->fetch_object())
         {
             self::getFormUI($r->id, $config_version);
@@ -293,11 +356,10 @@ if(!class_exists('CFExito_forms_control'))
                 global $dbpref;
                 
                 $table=$dbpref.'ext_popup_form';
-                
-                $sql = "INSERT INTO `".$table."`(`form_name`,`header_text`, `footer_text`, `form_setup`,`form_css`,`is_global`) VALUES ('".$form_name."' ,'".$header."','".$footer."','".$form_setup."','".$form_css."',".$is_global.")";
-                
+                $user_id=$_SESSION['user' . get_option('site_token')]; 
+                //$access=$_SESSION['access' . get_option('site_token')]; 
+                $sql = "INSERT INTO `".$table."`(`form_name`,`header_text`, `footer_text`, `form_setup`,`form_css`,`is_global`,`user_id`) VALUES ('".$form_name."' ,'".$header."','".$footer."','".$form_setup."','".$form_css."',".$is_global.",".$user_id.")";
                 $return_insert = $mysqli->query( $sql )?1:-1;
-                
                 if( $return_insert == 1 ){
                     $last_id = $mysqli->insert_id;
                     $position=1;

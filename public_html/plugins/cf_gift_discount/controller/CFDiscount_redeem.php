@@ -19,7 +19,15 @@
             $currency = get_session('cfdisc_order_data')['payment_currency'];
             $date = $mysqli->real_escape_string( $data['currentdate'] );
             $currency=strtoupper($currency);
-            $row = $mysqli->query("SELECT `remaining_value`,`status`,`currency`,`id`,`expiration_type`,`expiration_date` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='giftcard'");
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if( $access=='admin' )
+            {
+                $row = $mysqli->query("SELECT `remaining_value`,`status`,`currency`,`id`,`expiration_type`,`expiration_date` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='giftcard'"); 
+            }else{
+                $row = $mysqli->query("SELECT `remaining_value`,`status`,`currency`,`id`,`expiration_type`,`expiration_date` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='giftcard' AND `user_id`=".$user_id.""); 
+            }
+
             $response = array("status"=>0,"error"=>"err", 'type'=>'error', 'message'=>'Error');
             if( $row->num_rows > 0 )
             {
@@ -66,7 +74,14 @@
             $table = $dbpref."gift_cards";
             $gift_code = $mysqli->real_escape_string( $data['discount_code'] );
             $date = $mysqli->real_escape_string( $data['currentdate'] );
-            $row = $mysqli->query("SELECT `status`,`id`,`redeem_no`,`expiration_type`,`expiration_date` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='percentage'");
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
+            if( $access=='admin' )
+            {
+                $row = $mysqli->query("SELECT `status`,`id`,`redeem_no`,`expiration_type`,`expiration_date` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='percentage'");
+            }else{
+                $row = $mysqli->query("SELECT `status`,`id`,`redeem_no`,`expiration_type`,`expiration_date` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='percentage' AND `user_id`=".$user_id."");
+            }
             $response = array("status"=>0,"error"=>"err", 'type'=>'error', 'message'=>'Error');
             if( $row->num_rows > 0 )
             {
@@ -112,6 +127,7 @@
             $table=$dbpref."gift_cards";
             $payment_id=$data['payment_data'][0]['payment_id'];
             $product_id=$data['payment_data'][0]['product_id'];
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
             $d = get_sales( array( 'payment_id'=>$payment_id ,'product_id'=>$product_id ));
             $sell_id =cf_enc( $d[0]['id'] );
             $payment_data=json_decode($data['payment_data'][0]['data']);
@@ -133,7 +149,7 @@
                 
             $comment=$mysqli->real_escape_string($commen);
             $mysqli->query("UPDATE `".$table."` SET `remaining_value`='".$remaining_value."' WHERE `id`='".$giftcard_id."'");
-            $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`,`order_id`, `comment`,`name`,`email`,`type`,`last_deduct_value` ,`created_at`) VALUES ( '".$giftcard_id."','".$payment_id."', '".$comment."', '".$name."','".$email."','giftcard','".$giftcard_balance."','".$date_created."')");
+            $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`,`order_id`, `comment`,`name`,`email`,`type`,`last_deduct_value` ,`created_at`,`user_id`) VALUES ( '".$giftcard_id."','".$payment_id."', '".$comment."', '".$name."','".$email."','giftcard','".$giftcard_balance."','".$date_created."',".$user_id.")");
             unset_session('cfredeem_giftcard_successfully');
             unset_session('cfdisc_oldallproductdetail');
             unset_session('cfdisc_order_data');
@@ -158,6 +174,7 @@
             $remaining_attempt = $giftcard['data']['remaining_attempt'];
             $giftcard_currency = $giftcard['data']['currency'];
             $date_created  = date( "Y-m-d H:i:s",time() );
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
             if( $app_variant =="shopfunnels" )
             {
                 $commen = "$name<a target='_blank' href='index.php?page=sales&store_id=$funneld_id&sell_id=".$sell_id."' class='text-primary'>($email)</a> paid $giftcard_balance $giftcard_currency with this discount code on order #<a target='_blank' href='index.php?page=sales&store_id=$funneld_id&sell_id=".$sell_id."' class='text-primary'>($payment_id)</a>.";
@@ -167,7 +184,7 @@
             }
             $comment=$mysqli->real_escape_string($commen);
             $mysqli->query("UPDATE `".$table."` SET `redeem_no`='".$remaining_attempt."' WHERE `id`='".$giftcard_id."'");
-            $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`,`order_id`, `comment`,`name`,`email`,`type`,`last_deduct_value` ,`created_at`) VALUES ( '".$giftcard_id."','".$payment_id."', '".$comment."', '".$name."','".$email."','discount','".$giftcard_balance."','".$date_created."')");
+            $mysqli->query("INSERT INTO `".$table1."` (`giftcard_id`,`order_id`, `comment`,`name`,`email`,`type`,`last_deduct_value` ,`created_at`,`user_id`) VALUES ( '".$giftcard_id."','".$payment_id."', '".$comment."', '".$name."','".$email."','discount','".$giftcard_balance."','".$date_created."',".$user_id.")");
             unset_session('cfredeem_discount_successfully');
             unset_session('cfdisc_oldallproductdetail');
             unset_session('cfdisc_order_data');
@@ -299,7 +316,8 @@
             $gift_code = $mysqli->real_escape_string(  $gift_code );
             $total_amount = $order['subtotal_price'];
             $currency =$order['payment_currency'];
-
+            $user_id=$_SESSION['user' . get_option('site_token')]; 
+            $access=$_SESSION['access' . get_option('site_token')]; 
             // if app is not a shopfunels
 
             if( isset($order_data['order_session']['product_id']) &&  $order_data['order_session']['optional_products']  )
@@ -315,7 +333,12 @@
                 $oproducts=false;
             }
             $currency=strtoupper($currency);
-            $row = $mysqli->query("SELECT `discount_type`,`status`,`apply_type`,`products`,`percentage`,`redeem_no`,`id` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='percentage'");
+            if( $access=='admin' )
+            {
+                $row = $mysqli->query("SELECT `discount_type`,`status`,`apply_type`,`products`,`percentage`,`redeem_no`,`id` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='percentage'");
+            }else{
+                $row = $mysqli->query("SELECT `discount_type`,`status`,`apply_type`,`products`,`percentage`,`redeem_no`,`id` FROM `".$table."` WHERE `gift_code`='".$gift_code."' AND `discount_type`='percentage' AND `user_id`=$user_id");
+            }
             $return_val=false;
             if( $row->num_rows > 0 )
             {
@@ -457,7 +480,6 @@
                         $data['type'] = "giftcard";
                         $giftob->sendCode( $data );
                         return true;
-
                     }else{
                         return false;
                     }

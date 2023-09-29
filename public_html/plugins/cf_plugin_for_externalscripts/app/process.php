@@ -56,8 +56,10 @@ class Cfint_processor
 
         $table = $dbpref . "qfnl_integrations";
         $add = 0;
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        
         if ($do == "insert") {
-            if ($mysqli->query("insert into `" . $table . "` (`title`,`type`,`data`,`position`,`added_on`) values ('" . $title . "','" . $type . "','" . $data . "','" . $pos . "','" . time() . "')")) {
+            if ($mysqli->query("insert into `" . $table . "` (`title`,`type`,`data`,`position`,`added_on`,`user_id`) values ('" . $title . "','" . $type . "','" . $data . "','" . $pos . "','" . time() . "','".$user_id."')")) {
                 $add = $mysqli->insert_id;
             }
         } else {
@@ -82,6 +84,8 @@ class Cfint_processor
         global  $mysqli;
         global $dbpref;
         $table = $dbpref . "qfnl_integrations";
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
         if (is_numeric($get)) {
             $id = $mysqli->real_escape_string($get);
             $qry = $mysqli->query("select * from `" . $table . "` where `id`=" . $id . "");
@@ -99,7 +103,14 @@ class Cfint_processor
             }
             if (isset($_POST["onpage_search"]) && strlen($_POST['onpage_search']) > 0) {
                 $search_keywords = $mysqli->real_escape_string($_POST["onpage_search"]);
-                $query_str = "select * from `" . $table . "` where `title` like '%" . $search_keywords . "%' or `type` like '%" . $search_keywords . "%' or `data` like '%" . $search_keywords . "%' or `position` like '%" . $search_keywords . "%' order by `id` desc";
+                if($access=='admin')
+                {
+                    $query_str = "select * from `" . $table . "` where `title` like '%" . $search_keywords . "%' or `type` like '%" . $search_keywords . "%' or `data` like '%" . $search_keywords . "%' or `position` like '%" . $search_keywords . "%' order by `id` desc";
+                }
+                else
+                {
+                    $query_str = "select * from `" . $table . "` where `title` like '%" . $search_keywords . "%' or `type` like '%" . $search_keywords . "%' or `data` like '%" . $search_keywords . "%' or `position` like '%" . $search_keywords . "%' and `user_id`=".$user_id." order by `id` desc";
+                }
             } else {
                 $timelimit_condition = 1;
                 $date_between = dateBetween('added_on');
@@ -110,8 +121,15 @@ class Cfint_processor
                 if (isset($_GET['arrange_records_order'])) {
                     $order_by = base64_decode($_GET['arrange_records_order']);
                 }
-
-                $query_str = "select * from `" . $table . "` where " . $timelimit_condition . " order by " . $order_by . " limit " . $page . "," . get_option('qfnl_max_records_per_page') . "";
+                if($access=='admin')
+                {
+                    $query_str = "select * from `" . $table . "` where " . $timelimit_condition . " order by " . $order_by . " limit " . $page . "," . get_option('qfnl_max_records_per_page') . "";
+                }
+                else
+                {
+                    $query_str = "select * from `" . $table . "` where " . $timelimit_condition . " and `user_id`=".$user_id." order by " . $order_by . " limit " . $page . "," . get_option('qfnl_max_records_per_page') . "";
+                }
+                
             }
 
             return $mysqli->query($query_str);
@@ -121,8 +139,14 @@ class Cfint_processor
             if (strlen($date_between[0]) > 1) {
                 $timelimit_condition = $date_between[0];
             }
-
-            $qry = $mysqli->query("select count(`id`) as `countid` from `" . $table . "` where " . $timelimit_condition . "");
+            if($access=='admin')
+            {
+                $qry = $mysqli->query("select count(`id`) as `countid` from `" . $table . "` where " . $timelimit_condition . "");
+            }
+            else
+            {
+                $qry = $mysqli->query("select count(`id`) as `countid` from `" . $table . "` where " . $timelimit_condition . " and `user_id`=".$user_id."");
+            }
             if ($r = $qry->fetch_object()) {
                 return $r->countid;
             }
@@ -196,8 +220,17 @@ class Cfint_processor
         global $dbpref;
         $table = $dbpref . "quick_pagefunnel";
         $id = $mysqli->real_escape_string($id);
-        $qry = $mysqli->query("select count(distinct(`funnelid`)) as `countid` from `" . $table . "` where `settings` like '%\"snippet_integrations\":[%\"" . $id . "\"%]%'");
-
+        $user_id=$_SESSION['user' . get_option('site_token')]; 
+        $access=$_SESSION['access' . get_option('site_token')]; 
+        if($access=='admin')
+        {
+            $qry = $mysqli->query("select count(distinct(`funnelid`)) as `countid` from `" . $table . "` where `settings` like '%\"snippet_integrations\":[%\"" . $id . "\"%]%'");
+        }
+        else
+        {
+            $qry = $mysqli->query("select count(distinct(`funnelid`)) as `countid` from `" . $table . "` where `settings` like '%\"snippet_integrations\":[%\"" . $id . "\"%]%'");
+        }
+        
         $count = 0;
         if ($r = $qry->fetch_object()) {
             $count = $r->countid;

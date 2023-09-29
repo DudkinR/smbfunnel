@@ -97,7 +97,10 @@ if(!class_exists('CFExito_optin_control'))
 
                 if($qry->num_rows<1)
                 {
-                    $in=$mysqli->query("insert into `".$table."` (`form_id`,`name`,`email`,`exf`,`url`,`ip`,`added_on`) values (".$form_id.",'".$name."','".$email."','".$data."','".$url."','".$ip."','".$date."')");
+                    $user_id=$_SESSION['user' . get_option('site_token')]; 
+                    //$access=$_SESSION['access' . get_option('site_token')]; 
+
+                    $in=$mysqli->query("insert into `".$table."` (`form_id`,`name`,`email`,`exf`,`url`,`ip`,`added_on`,`user_id`) values (".$form_id.",'".$name."','".$email."','".$data."','".$url."','".$ip."','".$date."',".$user_id.")");
                 
                     if($in)
                     {

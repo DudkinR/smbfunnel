@@ -39,6 +39,7 @@ if(!function_exists('CFDiscount_Install'))
       `notes` text DEFAULT NULL,
       `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
       `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+      `user_id` bigint(16) DEFAULT 1,
       PRIMARY KEY (`id`),
       KEY `member_id` (`member_id`)
      ) $charset;   
@@ -57,6 +58,7 @@ if(!function_exists('CFDiscount_Install'))
       `last_deduct_value` decimal(16,4) DEFAULT NULL,
       `type` enum('giftcard','discount') NOT NULL DEFAULT 'giftcard',
       `created_at` datetime NOT NULL,
+      `user_id` bigint(20) DEFAULT 1,
       PRIMARY KEY (`id`)
        ) $charset;";
     $mysqli->query($optin_table_query);
@@ -68,10 +70,12 @@ if(!function_exists('CFDiscount_Install'))
         `gemail_subject` text DEFAULT NULL,
         `gemail_content` text DEFAULT NULL,
         `demail_subject` text DEFAULT NULL,
-        `demail_content` text DEFAULT NULL
+        `demail_content` text DEFAULT NULL,
+        `user_id` bigint(20) DEFAULT 1
           ) $charset;";
       $mysqli->query($optin_table_query1);
-      $qry1="INSERT INTO `".$table2."` (`giftcard`,`discount`,`gemail_subject`,`gemail_content`,`demail_subject`,`demail_content`)VALUE('{\"label_text\":\"Enter Gift Code\",\"button_text\":\"Apply\",\"button_bcolor\":\"023059\",\"button_color\":\"FFFFFF\",\"error_color\":\"FF0000\",\"result_bcolor\":\"CEECF2\",\"result_color\":\"777777\",\"customCSS\":\"\"}','{\"label_text\":\"Enter Discount Code\",\"button_text\":\"Apply\",\"button_bcolor\":\"023059\",\"button_color\":\"FFFFFF\",\"error_color\":\"FF0000\",\"result_bcolor\":\"CEECF2\",\"result_color\":\"777777\",\"customCSS\":\"\"}','Someone Sent {initial_value} {currency} Gift card','<p>Hi {name},</p>\r\n<p>Your {initial_value} {currency} gift card is active. Keep this email or write down your gift card number.</p>\r\n<p><strong>{giftcode}</strong></p>\r\n<p>If you did not raise the request please write to our support team.</p>\r\n<p>Thanks</p>','Someone Sent {percentage}% Discount Code','<p>Hi {name},</p>\r\n<p>Your {percentage} discount code is active. Keep this email or write down your discount code number.</p>\r\n<p><strong>{discount}</strong></p>\r\n<p>If you did not raise the request please write to our support team.</p>\r\n<p>Thanks</p>')";
+      $user_id=$_SESSION['user' . get_option('site_token')]; 
+      $qry1="INSERT INTO `".$table2."` (`giftcard`,`discount`,`gemail_subject`,`gemail_content`,`demail_subject`,`demail_content`,`user_id`)VALUE('{\"label_text\":\"Enter Gift Code\",\"button_text\":\"Apply\",\"button_bcolor\":\"023059\",\"button_color\":\"FFFFFF\",\"error_color\":\"FF0000\",\"result_bcolor\":\"CEECF2\",\"result_color\":\"777777\",\"customCSS\":\"\"}','{\"label_text\":\"Enter Discount Code\",\"button_text\":\"Apply\",\"button_bcolor\":\"023059\",\"button_color\":\"FFFFFF\",\"error_color\":\"FF0000\",\"result_bcolor\":\"CEECF2\",\"result_color\":\"777777\",\"customCSS\":\"\"}','Someone Sent {initial_value} {currency} Gift card','<p>Hi {name},</p>\r\n<p>Your {initial_value} {currency} gift card is active. Keep this email or write down your gift card number.</p>\r\n<p><strong>{giftcode}</strong></p>\r\n<p>If you did not raise the request please write to our support team.</p>\r\n<p>Thanks</p>','Someone Sent {percentage}% Discount Code','<p>Hi {name},</p>\r\n<p>Your {percentage} discount code is active. Keep this email or write down your discount code number.</p>\r\n<p><strong>{discount}</strong></p>\r\n<p>If you did not raise the request please write to our support team.</p>\r\n<p>Thanks</p>',".$user_id.")";
       $mysqli->query($qry1);
       
       $qry2 ="ALTER TABLE `$table` ADD `is_gift_product` ENUM('yes','no') NOT NULL DEFAULT 'no' AFTER `discount_type`";

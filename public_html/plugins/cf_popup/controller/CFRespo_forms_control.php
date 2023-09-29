@@ -290,7 +290,6 @@ if(!class_exists('CFRespo_forms_control')) {
             $form_table = $dbpref.'respo_popup_form';
             $form_extra_settings = $dbpref.'respo_extra_settings';
             $form_inputs = $dbpref.'respo_popup_inputs';
-
             $formName = $mysqli -> real_escape_string($ajax_data['form_name']);
             $formId = $mysqli -> real_escape_string($ajax_data['form_id']);
             $headerText = $mysqli -> real_escape_string( trim($ajax_data['header_text']));
