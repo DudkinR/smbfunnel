@@ -85,6 +85,7 @@ if(!class_exists('Cfautoresponder_index'))
                   `autoresponder_detail` text NOT NULL,
                   `exf` text NOT NULL,
                   `date_created` varchar(255) NOT NULL,
+                    `user_id` int(11)  default 1,
                     PRIMARY KEY (id)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
                             

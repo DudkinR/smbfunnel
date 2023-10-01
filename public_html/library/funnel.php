@@ -39,7 +39,7 @@ class Funnel
 		// $this->template_url = "http://cloudfunnels.in/resources/index.php";
 		// $this->template_url = "http://localhost/CloudFunnels_Templates/templates.php";
 	}
-	function createFunnel($url, $name, $type, $modify_index = 0,$cname)
+	function createFunnel($url, $name, $type, $modify_index = 0,$cname,$url_path)
 	{
 		//create funnel
 		global $document_root;
@@ -47,7 +47,7 @@ class Funnel
 		$total_funnels = $this->getTotalFunnel();
 		if($cname==1)
 		{			
-		$this->insertSubdomain($name);
+		$this->insertSubdomain($name,$url_path);
 		}
 			
 		
@@ -198,11 +198,9 @@ class Funnel
 		}
 		return $return;
 	}
-	function insertSubdomain($name){
+	function insertSubdomain($name,$url){ 
 		$mysqli = $this->mysqli;
 		$pref = $this->dbpref;	
-		$trans_install_url =str_replace(["https://","www"],"",$_SERVER['HTTP_HOST']);
-		$url=$name.".".$trans_install_url;
 		$type = 0;
 		$user_id = $_SESSION['user' . get_option('site_token')];
 		$sql_insert="INSERT INTO `".$pref."subdomians`(`name`, `url`, `type`, `user_id`) VALUES ('".$name."','".$url."','".$type."','".$user_id."')";

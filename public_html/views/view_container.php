@@ -477,7 +477,11 @@ $dbpref = $info['dbpref'];
                             }
                             echo "\n";
                         }
-                        //print_r($list);
+                       // print_r($list);
+                       foreach ($list as $key => $value) {
+                      //  echo $value['item_title'];
+                       // echo "<br>";
+                       }
 
                         
                         ?>

@@ -47,7 +47,7 @@ function cfpabblyMangeInputs() {
 
         let inp_html = `<div id="lvl-${this.current_inp_count}" class="row mx-auto">
             <div class="text-left mx-3 my-auto del-close" id="del-${this.current_inp_count}"><i class="fas fa-times-circle delinp"></i></div>
-            <div class="pdr-1 m-2">
+            <div class="pdr-1 m-2">1111111111
                 <input type="text" class="inpname form-control" placeholder="${t('Enter Webhook Name')}" required value="${name}">
                 </div>
             <div class="pdr-0 m-2">

@@ -12,8 +12,14 @@ class Cfautores_processor
         global $mysqli;
         global $dbpref;
         $table=$dbpref.'cfplugin_autoresponders';
-
-        $qry=$mysqli->query("select * from `".$table."` order by `id` desc");
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access == 'admin'){
+            $qry = $mysqli->query("SELECT * FROM `".$table."` ORDER  BY `id` DESC");
+        }
+        else{
+            $qry = $mysqli->query("SELECT * FROM `".$table."` WHERE `user_id`='".$user_id."' ORDER  BY `id` DESC");
+        }
         
         if(!$qry || $qry->num_rows<1)
         {
@@ -53,8 +59,14 @@ class Cfautores_processor
         global $mysqli;
         global $dbpref;
         $table= $dbpref.'cfplugin_autoresponders';
-
-        $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`");
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access == 'admin'){
+            $qry = $mysqli->query("SELECT * FROM `".$table."` ORDER  BY `id` DESC");
+        }
+        else{
+            $qry = $mysqli->query("SELECT * FROM `".$table."` WHERE `user_id`='".$user_id."' ORDER  BY `id` DESC");
+        }
         if($qry->num_rows>0)
         {
             $r=$qry->fetch_object();
@@ -109,8 +121,14 @@ class Cfautores_processor
             }
         }
         //echo "select * from `".$table."`".$search." order by ".$order_by.$limit_str;
-        $qry=$mysqli->query("select * from `".$table."`".$search." order by ".$order_by.$limit_str);
-
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access == 'admin'){
+            $qry=$mysqli->query("select * from `".$table."`".$search." order by ".$order_by.$limit_str);
+        }
+        else{
+            $qry=$mysqli->query("select * from `".$table."` WHERE `user_id`='".$user_id."'".$search." order by ".$order_by.$limit_str);
+        }
         while($r=$qry->fetch_object())
         {
             array_push($arr,$r);
@@ -151,6 +169,9 @@ class Cfautores_processor
         $id=(int)$id;
         $title = $mysqli->real_escape_string($title);
         $date=time();
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        //$access=$_SESSION['access' . get_option('site_token')];
+
         $jsonarr = json_decode($jsonencode);
             $japikey = $jsonarr->api_token;
             $jlistid = $jsonarr->list_id;
@@ -166,7 +187,7 @@ class Cfautores_processor
             {
                 if($id<1)
                 {
-                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`) VALUES ('".$title."','".$autotype."','".$jsonencode."','','".$date."')";
+                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`,`user_id`) VALUES ('".$title."','".$autotype."','".$jsonencode."','','".$date."','".$user_id."')";
                 }
                 else
                 {

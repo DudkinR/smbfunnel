@@ -13,10 +13,15 @@ class Cfkirim_processor
         global $dbpref;
         $autores= $mysqli->real_escape_string($this->autores);
         $table=$dbpref.'quick_autoresponders';
-
-
-        $qry=$mysqli->query("SELECT * FROM `".$table."` WHERE `autoresponder_name`='".$autores."' ORDER  BY `id` DESC");
-        if(!$qry || $qry->num_rows<1)
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access == 'admin'){
+            $qry=$mysqli->query("select * from `".$table."` WHERE `autoresponder_name`='".$autores."' order by `id` desc");
+        }
+        else{
+            $qry=$mysqli->query("select * from `".$table."` WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."' order by `id` desc");
+        }
+         if(!$qry || $qry->num_rows<1)
         {
             return;
         }
@@ -51,7 +56,14 @@ class Cfkirim_processor
         global $dbpref;
         $table= $dbpref.'quick_autoresponders';
         $autores= $mysqli->real_escape_string($this->autores);
-        $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."'");
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access == 'admin'){
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."'");
+        }
+        else{
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."'");
+        }
         if($qry->num_rows>0)
         {
             $r=$qry->fetch_object();
@@ -72,7 +84,8 @@ class Cfkirim_processor
         $records_to_show=get_option('qfnl_max_records_per_page');
         $records_to_show=(int) $records_to_show;
         $page=($page*$records_to_show)-$records_to_show;
-
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
         $limit_str=" limit ".$page.",".$records_to_show;
 
         $search="";
@@ -106,8 +119,12 @@ class Cfkirim_processor
             }
         }
         $autores= $mysqli->real_escape_string($this->autores);
-        $qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' AND 1 ".$search." ORDER BY ".$order_by.$limit_str);
-
+        if($access == 'admin'){
+            $qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' ".$search." ORDER BY ".$order_by.$limit_str);
+        }
+        else{
+            $qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."' ".$search." ORDER BY ".$order_by.$limit_str);
+        }
         while($r=$qry->fetch_object())
         {
             array_push($arr,$r);
@@ -149,7 +166,8 @@ class Cfkirim_processor
         $id=(int)$id;
         $title = $mysqli->real_escape_string($title);
         $email = $mysqli->real_escape_string($email);
-
+        $user_id=$_SESSION['user' . get_option('site_token')];
+      //  $access=$_SESSION['access' . get_option('site_token')];
 
 
         $date=time();
@@ -171,7 +189,7 @@ class Cfkirim_processor
             {
                 if($id<1)
                 {
-                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`) VALUES ('".$title."','".$autotype."','".$jsonencode."','','".$date."')";
+                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`,`user_id`) VALUES ('".$title."','".$autotype."','".$jsonencode."','','".$date."','".$user_id."')";
                 }
                 else
                 {

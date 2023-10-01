@@ -14,9 +14,15 @@ class Cfautores_processor
         global $dbpref;
         $autores= $mysqli->real_escape_string($this->autores);
         $table=$dbpref.'quick_autoresponders';
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
 
-
-        $qry=$mysqli->query("SELECT * FROM `".$table."` WHERE `autoresponder_name`='".$autores."' ORDER  BY `id` DESC");
+        if($access == 'admin'){
+            $qry=$mysqli->query("select * from `".$table."` WHERE `autoresponder_name`='".$autores."' order by `id` desc");
+        }
+        else{
+            $qry=$mysqli->query("select * from `".$table."` WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."' order by `id` desc");
+        }
 
         if(!$qry || $qry->num_rows<1)
         {
@@ -54,7 +60,14 @@ class Cfautores_processor
         global $dbpref;
         $table= $dbpref.'quick_autoresponders';
         $autores= $mysqli->real_escape_string($this->autores);
-        $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."'");
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access == 'admin'){
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."'");
+        }
+        else{
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`  WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."'");
+        }
         if($qry->num_rows>0)
         {
             $r=$qry->fetch_object();
@@ -75,7 +88,8 @@ class Cfautores_processor
         $records_to_show=get_option('qfnl_max_records_per_page');
         $records_to_show=(int) $records_to_show;
         $page=($page*$records_to_show)-$records_to_show;
-
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
         $limit_str=" limit ".$page.",".$records_to_show;
 
         $search="";
@@ -109,7 +123,12 @@ class Cfautores_processor
             }
         }
         $autores= $mysqli->real_escape_string($this->autores);
-        $qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' AND 1 ".$search." ORDER BY ".$order_by.$limit_str);
+        if($access == 'admin'){
+            $qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' ".$search." ORDER BY ".$order_by.$limit_str);
+        }
+        else{
+            $qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."' ".$search." ORDER BY ".$order_by.$limit_str);
+        }
         while($r=$qry->fetch_object())
         {
             array_push($arr,$r);
@@ -154,6 +173,8 @@ class Cfautores_processor
         $credentials_j= json_decode($credentials_js,true);
         $listid = (int)$credentials_j['listid'];
         $new_cred=[];
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        //$access=$_SESSION['access' . get_option('site_token')];
         foreach($credentials_j as $key => $cred)
         {
                 $new_cred[$key]=$mysqli->real_escape_string( $cred );
@@ -174,7 +195,7 @@ class Cfautores_processor
             {
                 if($id<1)
                 {
-                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`) VALUES ('".$title."','".$autotype."','".$credentials."','".$exf."','".$date."')";
+                    $sql="INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`,`user_id`) VALUES ('".$title."','".$autotype."','".$credentials."','".$exf."','".$date."','".$user_id."')";
                 }
                 else
                 {

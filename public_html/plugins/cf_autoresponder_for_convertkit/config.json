@@ -1,0 +1,12 @@
+{
+    "name": "ConvertKit Autoresponder Integration",
+    "version": "1.1",
+    "description": "This is a plugin to add ConvertKit Autoresponders to cloudfunnels",
+    "start": "index.php",
+    "author": "Teknikforce",
+    "author_url": "https://teknikforce.com",
+    "plugin_url": "https://teknikforce.com",
+    "logo": "assets/img/logo.png",
+    "required_version": "4.2.3",
+    "auto_update_callback_url": "https://marketplace.cloudfunnels.in/plugin/check_update/cf_autoresponder_for_convertkit"
+}

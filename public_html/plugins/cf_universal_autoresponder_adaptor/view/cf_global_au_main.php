@@ -3,8 +3,14 @@ global $mysqli;
 global $dbpref;
 $table= $dbpref.'quick_autoresponders';
 $autores= 'cfglobalautoresponder';
-
-$qry=$mysqli->query("SELECT * FROM `".$table."`  WHERE `autoresponder_name`='".$autores."' ORDER BY `id` DESC");
+$user_id=$_SESSION['user' . get_option('site_token')];
+$access=$_SESSION['access' . get_option('site_token')];
+if($access == 'admin'){
+    $qry = $mysqli->query("SELECT * FROM `".$table."` WHERE `autoresponder_name`='".$autores."' ORDER  BY `id` DESC");
+}
+else{
+    $qry = $mysqli->query("SELECT * FROM `".$table."` WHERE `autoresponder_name`='".$autores."' AND `user_id`='".$user_id."' ORDER  BY `id` DESC");
+}
 ?>
 
 <div class="container-fluid bg-white px-lg-4">

@@ -3,7 +3,8 @@ $forms_ob = $this -> load('form_controller');
 global $mysqli;
 global $dbpref;
 $table=$dbpref.'quick_autoresponders';
-
+$user_id=$_SESSION['user' . get_option('site_token')];
+$access=$_SESSION['access' . get_option('site_token')];
 if(isset($_GET['cfglobal_au_id']))
 {
     if( is_numeric( $_GET['cfglobal_au_id'] ) ) $getFormId = $_GET['cfglobal_au_id'];
@@ -14,7 +15,14 @@ if(isset($_GET['cfglobal_au_id']))
     }
 
     $getFormId = $mysqli->real_escape_string($getFormId);
-    $result = $mysqli->query( "SELECT * FROM `".$table."` WHERE `id`=$getFormId" );
+    if($access == 'admin')
+    {
+        $result = $mysqli->query( "SELECT * FROM `".$table."` WHERE `id`=$getFormId" );
+    }
+    else
+    {
+        $result = $mysqli->query( "SELECT * FROM `".$table."` WHERE `id`=$getFormId AND `user_id`=$user_id" );
+    }
 
     if( mysqli_num_rows($result)>0 )
     {

@@ -46,7 +46,9 @@ if(!class_exists('CFAddStudent_setup'))
       global $mysqli;
       global $dbpref;
       $table= $dbpref."quick_funnels";
-
+      $user_id=$_SESSION['user' . get_option('site_token')];
+      $access=$_SESSION['access' . get_option('site_token')];
+      
       if($funnel_id)
       {
         $id = $mysqli->real_escape_string($funnel_id);

@@ -122,8 +122,14 @@ if (!class_exists('CF_Global_AutoResponder_base'))
             global $dbpref;
             $table = $dbpref.'quick_autoresponders';
             $autoresponder_name = "cfglobalautoresponder";
-            
-            $qry = $mysqli->query("SELECT * FROM `".$table."` WHERE `autoresponder_name`='".$autoresponder_name."' ORDER  BY `id` DESC");
+            $user_id=$_SESSION['user' . get_option('site_token')];
+            $access=$_SESSION['access' . get_option('site_token')];
+            if($access == 'admin'){
+                $qry = $mysqli->query("SELECT * FROM `".$table."` WHERE `autoresponder_name`='".$autoresponder_name."' ORDER  BY `id` DESC");
+            }
+            else{
+                $qry = $mysqli->query("SELECT * FROM `".$table."` WHERE `autoresponder_name`='".$autoresponder_name."' AND `user_id`='".$user_id."' ORDER  BY `id` DESC");
+            }
             
             if(!$qry || $qry->num_rows<1) return;
             $incr = 0;

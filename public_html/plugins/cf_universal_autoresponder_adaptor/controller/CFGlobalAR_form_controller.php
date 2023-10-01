@@ -29,6 +29,8 @@ if(!class_exists('CFGlobalAR_form_controller'))
             global $mysqli;
             global $dbpref;
             $table= $dbpref.'quick_autoresponders';
+            $user_id=$_SESSION['user' . get_option('site_token')];
+           // $access=$_SESSION['access' . get_option('site_token')];
 
             $form_title = $mysqli->real_escape_string(( !empty($ajax_data['cfglobal_title'])) ?$ajax_data['cfglobal_title']:'');
             $form_event = $mysqli->real_escape_string(( !empty($ajax_data['cfglobalau_update_insert'])) ? $ajax_data['cfglobalau_update_insert']:'');
@@ -79,7 +81,7 @@ if(!class_exists('CFGlobalAR_form_controller'))
                 array_push($custom_form_input, array('api_url'=>$api_url, 'form_method'=>$form_methods));
                 if($id<1)
                 {
-                    $sql_status=($mysqli->query("INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`) VALUES ('".$form_title."','".$autoresponder_name."','".json_encode($custom_header_form_input)."','".json_encode($custom_form_input)."','".$date."')"))?1:0;
+                    $sql_status=($mysqli->query("INSERT INTO `".$table."` (`autoresponder`, `autoresponder_name`, `autoresponder_detail`, `exf`, `date_created`,`user_id`) VALUES ('".$form_title."','".$autoresponder_name."','".json_encode($custom_header_form_input)."','".json_encode($custom_form_input)."','".$date."','".$user_id."' )"))?1:0;
                     $id_new = $mysqli->insert_id;
                 }
 
