@@ -92,6 +92,8 @@ if(!class_exists('CFProofConvert_base'))
 			add_action("cf_sale", function($data,$provided_data){
 				global $mysqli;
 				global $dbpref;
+				$user_id=$_SESSION['user' . get_option('site_token')];
+				$access=$_SESSION['access' . get_option('site_token')];
 				$table1=$dbpref.$this->pref."notification_data";
 				if($data['success']==1 || $data['success']=="1")
 				{
@@ -114,7 +116,7 @@ if(!class_exists('CFProofConvert_base'))
 						$address="";
 					}
 					$add_times=time();
-          		$sql="INSERT INTO `".$table1."`(`name`, `email`,  `address`,`product_id`, `time`) VALUES ('".$name."','".$email."','".$address."',".$product_id.",'".$add_times."')";
+          		$sql="INSERT INTO `".$table1."`(`name`, `email`,  `address`,`product_id`, `time`,`user_id`) VALUES ('".$name."','".$email."','".$address."',".$product_id.",'".$add_times."',".$user_id.")";
          		$mysqli->query($sql);
 				}
 

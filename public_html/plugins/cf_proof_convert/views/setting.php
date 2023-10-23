@@ -10,7 +10,8 @@ if(isset($_GET['cfproof_convert_setup_id']))
   }
 
   $setup_id=$mysqli->real_escape_string($setup_id);
-  $table =$dbpref."cfproof_convert_setup"; 
+  $table =$dbpref."cfproof_convert_setup";
+   
   $returnOptions = $mysqli->query("SELECT * FROM `".$table."` WHERE `id`=".$setup_id );
 
   $data = $returnOptions->fetch_assoc( );

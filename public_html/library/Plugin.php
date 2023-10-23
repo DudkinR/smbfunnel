@@ -81,7 +81,7 @@ class Plugin{
         $plugin=$mysqli->real_escape_string($plugin);
         $file=$folder."/config.json";
         $base_url=rtrim(get_option('install_url'),"/");
-        $base_url .="/plugins/".$plugin;
+        $base_url .="/plugins/".$plugin; 
 
         if(is_file($file) && filesize($file)>0)
         {
@@ -502,6 +502,7 @@ class Plugin{
                 //if($output && $data!==null){echo $data;}
             }
         }
+  
     }
     function playCallbacksForFilter($cbs,$content,$settings=array())
     {
@@ -542,7 +543,9 @@ class Plugin{
     }
     function processInit($type='init')
     {
+        //echo "<h1>".$type."</h1><br>";
         $cbs=$this->action_callbacks[$type];
+        //echo "<h1>".$cbs."</h1><br>";
         self::playCallbacks($cbs,array());
     }
     function processAdminMenu($page=false)
@@ -620,7 +623,7 @@ class Plugin{
                     $params[$param[0]]=trim($param[1],"\"\'");
                 }
             }
-            //print_r($params);
+          // print_r($params);
             if(is_array($s_cb) && count($s_cb)>0)
             {
                 if(is_array($s_cb[0]))

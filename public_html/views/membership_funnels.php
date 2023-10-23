@@ -6,23 +6,23 @@ $pref=$info['dbpref'];
 <div class="card pb-2  br-rounded" id="hidecard1">
     <div class="card-body pb-2" id="hidecard2">
 <div class="row">
-					<div class="col-md-2 mb-2">
-					<?php echo createSearchBoxBydate(); ?>
-					</div>
-					<div class="col-md-3">
-					<?php echo showRecordCountSelection(); ?>
-					</div>
-					<div class="col-md-3">
-					<?php echo arranger(array('`b`.id'=>'date','`count_members`'=>'Number Of Members')); ?>
-					</div>
-					<div class="col-md-4">
-					<div class="input-group input-group-sm mb-3">
-							<div class="input-group-prepend ">
-								<span class="input-group-text"><i class="fas fa-search"></i></span>
-							</div>
-							 <input type="text" class="form-control form-control-sm" placeholder="<?php w('Enter funnel or page name or category'); ?>" onkeyup="searchMembershipFunnel(this.value)">
-						</div>
-					</div>
+	<div class="col-md-2 mb-2">
+	<?php echo createSearchBoxBydate(); ?>
+	</div>
+	<div class="col-md-3">
+	<?php echo showRecordCountSelection(); ?>
+	</div>
+	<div class="col-md-3">
+	<?php echo arranger(array('`b`.id'=>'date','`count_members`'=>'Number Of Members')); ?>
+	</div>
+	<div class="col-md-4">
+	<div class="input-group input-group-sm mb-3">
+			<div class="input-group-prepend ">
+				<span class="input-group-text"><i class="fas fa-search"></i></span>
+			</div>
+				<input type="text" class="form-control form-control-sm" placeholder="<?php w('Enter funnel or page name or category'); ?>" onkeyup="searchMembershipFunnel(this.value)">
+		</div>
+	</div>
 </div>
 
 <div class="col-sm-12 nopadding">

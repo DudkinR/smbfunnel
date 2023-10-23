@@ -20,6 +20,7 @@
       `answer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
       `status` int(255) NOT NULL,
       `added_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+      `user_id` int(16) default 1,
        primary key(`id`)
       ) 
       ";
@@ -36,6 +37,7 @@
           `ans_tcolor` text COLLATE utf8mb4_unicode_ci NOT NULL,
           `que_bg` text COLLATE utf8mb4_unicode_ci NOT NULL,
           `ans_bg` text COLLATE utf8mb4_unicode_ci NOT NULL,
+          `user_id` int(16) default 1,
            primary key(`ui_id`)
         ) 
         ";

@@ -13,6 +13,8 @@ if (!class_exists('CFQuestion_form_control')) {
             global $dbpref;
             $table = $dbpref . "cfproduct_question_records";
             $page = $mysqli->real_escape_string($page);
+            $user_id=$_SESSION['user' . get_option('site_token')];
+            $access=$_SESSION['access' . get_option('site_token')];
             if (!$max_limit) {
                 $max_limit = $mysqli->real_escape_string($max_limit);
             }
@@ -44,8 +46,12 @@ if (!class_exists('CFQuestion_form_control')) {
             if( $product_id ){            
                 $search .=" AND `product_id`=$product_id";
             }
-            $qry = $mysqli->query("SELECT * FROM `$table` WHERE 1 " . $search . " ORDER BY " . $order_by . $limit);
-            $arr = [];
+            if ($access == 'admin') {
+                $qry = $mysqli->query("SELECT * FROM `$table` WHERE 1 " . $search . " ORDER BY " . $order_by . $limit);
+            } else {
+                $qry = $mysqli->query("SELECT * FROM `$table` WHERE " . $search . " AND  `user_id`=" . $user_id . " " . $search . " ORDER BY " . $order_by . $limit);
+            }
+              $arr = [];
             if ($qry->num_rows > 0) {
                 while ( $data = $qry->fetch_assoc() ) {
                     $arr[] = $data;
@@ -58,7 +64,14 @@ if (!class_exists('CFQuestion_form_control')) {
             global $mysqli;
             global $dbpref;
             $table = $dbpref . 'all_products';
-            $sql   = "SELECT `id`,`title` FROM `$table` WHERE `parent_product`=0";
+            $user_id=$_SESSION['user' . get_option('site_token')];
+            $access=$_SESSION['access' . get_option('site_token')];
+            if($access=='admin')
+            {
+                $sql   = "SELECT `id`,`title` FROM `$table` WHERE `parent_product`=0";
+            }else{
+                $sql   = "SELECT `id`,`title` FROM `$table` WHERE `parent_product`=0 AND `user_id`=$user_id";
+            }
             $qry   = $mysqli->query( $sql );
             $arr   = [];
             if( $qry->num_rows > 0 ) {
@@ -72,7 +85,14 @@ if (!class_exists('CFQuestion_form_control')) {
             global $mysqli;
             global $dbpref;
             $table = $dbpref . 'all_products';
-            $sql = "SELECT `id`,`title` FROM `$table` WHERE `productid`='$pid'";
+            $user_id=$_SESSION['user' . get_option('site_token')];
+            $access=$_SESSION['access' . get_option('site_token')];
+            if($access=='admin')
+            {
+                $sql   = "SELECT `id`,`title` FROM `$table` WHERE `id`='$pid'";
+            }else{
+                $sql   = "SELECT `id`,`title` FROM `$table` WHERE `id`='$pid' AND `user_id`=$user_id";
+            }
             $qry = $mysqli->query($sql);
             if( $qry->num_rows > 0 && $data = $qry->fetch_assoc() )
             {
@@ -86,7 +106,13 @@ if (!class_exists('CFQuestion_form_control')) {
             global $mysqli;
             global $dbpref;
             $table = $dbpref . "cfproduct_question_records";
-            $qry = $mysqli->query("select count(`id`) as `total_setup` from `" . $table . "`");
+            $user_id=$_SESSION['user' . get_option('site_token')];
+            $access=$_SESSION['access' . get_option('site_token')];
+            if ($access == 'admin') {
+                $qry = $mysqli->query("select count(`id`) as `total_setup` from `" . $table . "`");
+            } else {
+                $qry = $mysqli->query("select count(`id`) as `total_setup` from `" . $table . "` where `user_id`=" . $user_id . "");
+            }
             if ($qry->num_rows > 0) {
                 $r = $qry->fetch_object();
                 return $r->total_setup;
@@ -99,17 +125,27 @@ if (!class_exists('CFQuestion_form_control')) {
             global $dbpref;
             $table = $dbpref . 'cfproduct_question_records';
             $table2 = $dbpref . 'cfproduct_question_setting';
+            $user_id=$_SESSION['user' . get_option('site_token')];
+            $access=$_SESSION['access' . get_option('site_token')];
+
             $data = self::getProductId($prdid);
             if($data)
             {
                 $pro_title  = $data['title'];
                 $pid = $data['id'];
                 // counting total number of posts
-                $count_result = $mysqli->query("SELECT count(*) as 'allcount' FROM  `$table`  WHERE product_id='$pid' ");
+                if($access=='admin')
+                {
+                    $count_result = $mysqli->query("SELECT count(*) as 'allcount' FROM  `$table`  WHERE product_id='$pid' ");
+                }else{
+                    $count_result = $mysqli->query("SELECT count(*) as 'allcount' FROM  `$table`  WHERE product_id='$pid' AND `user_id`=$user_id");
+                }
                 $count_fetch =  $count_result->fetch_assoc();
                 $postCount = $count_fetch['allcount'];
                 $limit=5;
+                
                 $sql = $mysqli->query("SELECT * FROM `$table` WHERE `product_id`='$pid' ORDER BY `id` desc LIMIT 0," .$limit);        
+
                 $sql2 = $mysqli->query("SELECT * FROM  `$table2`");
                 
                 require CFQUESTION_PLUGIN_DIR_PATH . "/view/shortcode.php";
@@ -132,7 +168,9 @@ if (!class_exists('CFQuestion_form_control')) {
             $question = $mysqli->real_escape_string(strip_tags($post_data['question']));
             $status = "0";
             $date = date("y-m-d h:m:s");
-            $sql_status = ($mysqli->query("INSERT INTO `" . $table . "` (`product_id`,`product_title`,`name`, `email`, `question`,`status`,`added_on`) VALUES ('" . $product_id . "','" . $product_title . "','" . $name . "','" . $email . "','" . $question . "','" . $status . "' ,'" . $date . "' )")) ? 1 : 0;
+            $user_id=$_SESSION['user' . get_option('site_token')];
+            //$access=$_SESSION['access' . get_option('site_token')];
+            $sql_status = ($mysqli->query("INSERT INTO `" . $table . "` (`product_id`,`product_title`,`name`, `email`, `question`,`status`,`added_on`,`user_id`) VALUES ('" . $product_id . "','" . $product_title . "','" . $name . "','" . $email . "','" . $question . "','" . $status . "' ,'" . $date . "', '".$user_id."' )")) ? 1 : 0;
 
             if ($sql_status) $msg = "Form saved successfully.";
             else $msg = "Smething went wrong! Please try again";

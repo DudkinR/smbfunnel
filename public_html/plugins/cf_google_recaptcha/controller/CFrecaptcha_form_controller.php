@@ -20,8 +20,16 @@ class CFrecaptcha_form_controller
         global $mysqli;
         global $dbpref;
         $table= $dbpref.'google_recaptcha';
-       
-        $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`");
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."`");
+        }
+        else
+        {
+            $qry=$mysqli->query("select count(`id`) as `count_id` from `".$table."` where `user_id`=".$user_id."");
+        }
         if($qry->num_rows>0)
         {
             $r=$qry->fetch_object();
@@ -42,7 +50,8 @@ class CFrecaptcha_form_controller
         $records_to_show=get_option('qfnl_max_records_per_page');
         $records_to_show=(int) $records_to_show;
         $page=($page*$records_to_show)-$records_to_show;
-
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
         $limit_str=" limit ".$page.",".$records_to_show;
 
         $search="";
@@ -76,9 +85,14 @@ class CFrecaptcha_form_controller
                 $search =" where".$date_between[0];
             }
         }
-        
-        $qry=$mysqli->query("select * from `".$table."` ".$search." order by ".$order_by.$limit_str);
-
+        if($access=='admin')
+        {
+            $qry=$mysqli->query("select * from `".$table."` ".$search." order by ".$order_by.$limit_str);
+        }
+        else
+        {
+            $qry=$mysqli->query("select * from `".$table."` where `user_id`=".$user_id." ".$search." order by ".$order_by.$limit_str);
+        }
         while($r=$qry->fetch_object())
         {
             array_push($arr,$r);
@@ -119,7 +133,8 @@ class CFrecaptcha_form_controller
         global $mysqli;
         global $dbpref;
         $table= $dbpref.'google_recaptcha';
-
+        $user_id=$_SESSION['user' . get_option('site_token')];
+        $access=$_SESSION['access' . get_option('site_token')];
 
         $id=$mysqli->real_escape_string($data['pespal_id']);
         $id=(int)$id;
@@ -139,7 +154,7 @@ class CFrecaptcha_form_controller
         if( $id<1 )
         {
         
-            $qry="insert into `".$table."` (`g_title`, `g_version`, `credentials`, `createdon`) values ('".$title."','".$version."','".$credentials."','".$dateTime."')";
+            $qry="insert into `".$table."` (`g_title`, `g_version`, `credentials`, `createdon`,`user_id`) values ('".$title."','".$version."','".$credentials."','".$dateTime."','".$user_id."')";
         }
         else
         {

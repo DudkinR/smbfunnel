@@ -41,7 +41,6 @@ class Funnel
 	}
 	function createFunnel($url, $name, $type, $modify_index = 0,$cname,$url_path)
 	{
-		//create funnel
 		global $document_root;
 		$site_token_for_dashboard=get_option('site_token');
 		$total_funnels = $this->getTotalFunnel();
@@ -49,8 +48,6 @@ class Funnel
 		{			
 		$this->insertSubdomain($name,$url_path);
 		}
-			
-		
 		if($_SESSION['user_plan_type' . $site_token_for_dashboard]==2 && $total_funnels>=1 ) {
 			return 0;
 		}
@@ -228,6 +225,7 @@ class Funnel
 		 VALUES 
 		 ('" . $name . "','" . $routed_path . "','" . $url . "','0','','" . $type . "','','firstname,lastname,name,email,password,reenterpassword,phone,remember_user,payment_method','phpmailer','" . $date . "','" . $token . "' )";
 		$in = $mysqli->query($sql);
+
 		if ($in) {
         if (isset($_SESSION['user' . get_option('site_token')])) {
             $user_id = $_SESSION['user' . get_option('site_token')];
@@ -598,6 +596,8 @@ class Funnel
 	}
 function getAllFunnelForView($from = 0, $type = "", $limit = null)
 	{ 
+		
+		
 		//get all funnel for view
 		if ($limit === null || !is_numeric($limit)) {
 			$limit = (int)get_option('qfnl_max_records_per_page');
@@ -606,16 +606,12 @@ function getAllFunnelForView($from = 0, $type = "", $limit = null)
 		$pref = $this->dbpref;
 		$table = $pref . "quick_funnels";
 		$page_table = $pref . "quick_pagefunnel";
-
 		$from = $mysqli->real_escape_string($from);
-
 		$arr = array('rows' => 0, 'total_rows' => 0);
-
 		$totalrows = 0;
-
 		$date_search_for_total = dateBetween('date_created');
 		$user_id=$_SESSION['user' . get_option('site_token')];
-			
+		$access=$_SESSION['access' . get_option('site_token')];	
 		if($this->funnel_access_user($user_id))
 		{
 		echo "Admin<br>";
@@ -682,19 +678,22 @@ function getAllFunnelForView($from = 0, $type = "", $limit = null)
 		else
 		{
 			echo " User <br>";
-				if (strlen($type) > 2) {
-			 $sql_text="SELECT COUNT(DISTINCT qf.id) AS rowcount
+			if (strlen($type) > 2) {
+			$sql_text="SELECT COUNT(DISTINCT qf.id) AS rowcount
 			FROM `" . $table . "` AS qf
-			INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id =  '".$user_id."' AND  `type`='" . $type . "'" . $date_search_for_total[1];
-		
+			INNER JOIN smbf_user_funnel AS uf 
+			ON qf.id = uf.funnel_id 
+			AND uf.user_id =  '".$user_id."' 
+			AND  qf.type='" . $type . "'
+			" . $date_search_for_total[1];
 			$totalrows_qry = $mysqli->query($sql_text);
 		} else {
 			if (strlen($date_search_for_total[0]) > 0) {
 				$date_search_for_total[0] = " where" . $date_search_for_total[0];
 			}
 			$sql_text=$sql_text="SELECT COUNT(DISTINCT qf.id) AS rowcount
-FROM `" . $table . "` AS qf
-INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$user_id."'" . $date_search_for_total[0];
+			FROM `" . $table . "` AS qf
+			INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$user_id."'" . $date_search_for_total[0];
 			$totalrows_qry = $mysqli->query($sql_text);
 		}
 
@@ -749,7 +748,7 @@ INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$u
                            WHERE `type`='a' AND `funnelid`=`b`.id) 
              AND (`uf`.user_id = ".$user_id.")
              ORDER BY `b`.id DESC";
-	$qry = $mysqli->query($sql_text);
+		$qry = $mysqli->query($sql_text);
 
 		} else {
 			$date_search = dateBetween('date_created', 'b');
@@ -784,7 +783,7 @@ INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$u
              AND (`uf`.user_id = ".$user_id.")
              ORDER BY " . $order_by . " 
              LIMIT " . $from . "," . $limit . "";
-	$qry = $mysqli->query($sql_text);
+			$qry = $mysqli->query($sql_text);
 			} else {
 			 $sql_text = "SELECT a.*,
                 `b`.id AS `funnel_id`,
@@ -1062,9 +1061,7 @@ INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$u
 				if ($varient_qry->num_rows > 0) {
 					$varient_r = $varient_qry->fetch_object();
 					$varient = $varient_r->varient;
-
 					$created = self::createTemplate($varient, $funnel_folder_name, $data['html'], $data['css'], $data['js'], $type, $funnel_id, $page);
-
 					$plugin_loader->processPageContentChange($funnel_id, $pageid, $lavel, $type);
 				}
 			}
@@ -1112,7 +1109,6 @@ INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$u
 			if (!cf_dir_exists($to)) {
 				mkdir($to);
 			}
-
 			$from_open_ref = opendir($from);
 			$to_open_ref = opendir($to);
 
@@ -2267,7 +2263,8 @@ INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$u
 	{
 		$page_data = $page_settings;
 		$page_settings = json_decode($page_settings['settings']);
-
+		print_r($page_settings);
+		echo "<br> page settings <br>";
 		$html = self::addAutoLinking($html);
 		$html = self::addCoundownTimerScript($html);
 		$html = self::addBsCollapseHandler($html);
@@ -2287,7 +2284,7 @@ INNER JOIN smbf_user_funnel AS uf ON qf.id = uf.funnel_id AND uf.user_id = '".$u
 			if ($plugin_footer_contents !== null) {
 				$html = str_replace("</body>", $plugin_footer_contents . "</body>", $html);
 			}
-
+			print_r($page_data);
 			$html = $plugin_ob->processFilter('the_content', $html, $page_data);
 
 			$html = $plugin_ob->doShortcode(false, $html);

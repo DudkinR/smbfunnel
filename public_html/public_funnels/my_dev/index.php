@@ -1,5 +1,5 @@
 <?php
-	  
+	
 	  $ob=new Library();
 	  //auth cloud_funnels_no_conlict_index
 	  $ob->setInfo('mysqli',$mysqli);
@@ -15,7 +15,8 @@
 	  {
 	  $curren_loaded_url=str_replace('//','/',$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'/'.$redirectto);
 	  $redirectto=getProtocol();
-	  $redirectto .=$curren_loaded_url;	
+	   $redirectto .=$curren_loaded_url;	
       header('Location:'.$redirectto.'/');
 	  }
 	  ?>
+	  

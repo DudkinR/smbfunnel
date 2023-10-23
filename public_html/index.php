@@ -157,6 +157,7 @@ class FunnelIndex
 		$plugin_loader = false;
 		if (isset($GLOBALS['plugin_loader'])) {
 			//init code
+			
 			$plugin_loader = $GLOBALS['plugin_loader'];
 			$plugin_loader->processInit();
 		}
@@ -168,6 +169,7 @@ class FunnelIndex
 
 		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
 		if (isset($parsed_url['query'])) {
+
 			parse_str($parsed_url['query'], $get_query_args);
 			foreach ($get_query_args as $get_query_args_index => $get_query_args_data) {
 				$_GET[$get_query_args_index] = $get_query_args_data;
@@ -178,8 +180,7 @@ class FunnelIndex
 			if ($autoloadbase_index === 1) {
 				$_GET['get_funnel'] = "";
 			}
-
-			$_GET['get_funnel'] = rtrim($_GET['get_funnel'], "/");
+			 $_GET['get_funnel'] = rtrim($_GET['get_funnel'], "/");
 
 			$isjscss = 0;
 
@@ -200,6 +201,7 @@ class FunnelIndex
 					}
 				}
 			} else {
+			
 				$getMembershipDataLoad = self::membershipdataload($hasfunnelsId);
 				$get_funnel_page = $_GET['get_funnel'];
 				if ($getMembershipDataLoad[1] === "register") {
@@ -212,10 +214,18 @@ class FunnelIndex
 			$required_file = str_replace("//", "/", $required_file);
 			if (is_file($required_file)) {
 				++$index_exists;
+/*				echo $required_file;
+				$allFunctions = get_defined_functions();
+				$userFunctions = $allFunctions['user'];
+				foreach ($userFunctions as $functionName) {
+					echo $functionName . "<br>";
+				}*/
+				echo $required_file." 8888888888 get_funnel<br> ";
 				require_once($required_file);
 			}
 		}
 		if ($index_exists < 1) {
+
 			//echo "<h1>--Something Wrong--</h1>";
 			$this->load->loadFourHunderdFour();
 		}
@@ -263,7 +273,6 @@ if (!isset($_GET['funnel_view']) || !(get_option('qfnl_router_mode') == '1') || 
 		 $currenturl;
 		header("location: " . $currenturl . "");
 	}
-
 	$ob->loadPage();
 } elseif (isset($_GET['funnel_view'])) {
 	$ob->loadFunnelView(0);

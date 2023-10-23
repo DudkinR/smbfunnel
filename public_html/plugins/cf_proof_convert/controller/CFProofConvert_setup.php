@@ -15,6 +15,9 @@ if(!class_exists('CFProofConvert_setup'))
       global $dbpref;
       $table= $dbpref.$this->pref."setup";
       $page=$mysqli->real_escape_string($page);
+      $user_id=$_SESSION['user' . get_option('site_token')];
+      $access=$_SESSION['access' . get_option('site_token')];
+
       if(!$max_limit)
       {$max_limit=$mysqli->real_escape_string($max_limit);}
 
@@ -49,8 +52,14 @@ if(!class_exists('CFProofConvert_setup'))
           $search .=$date_between[1];
       }
       //////////////////////////////
-      $qry=$mysqli->query("select * from `".$table."` where 1".$search." order by ".$order_by.$limit);
-
+      if($access=='admin')
+      {
+        $qry=$mysqli->query("select * from `".$table."` where 1".$search." order by ".$order_by.$limit);
+      }
+      else
+      {
+        $qry=$mysqli->query("select * from `".$table."` where `user_id`=".$user_id." ".$search." order by ".$order_by.$limit);
+      }
       $arr=[];
       if($qry->num_rows>0)
       {
@@ -70,9 +79,16 @@ if(!class_exists('CFProofConvert_setup'))
       $setup_id= $mysqli->real_escape_string( $setup_id );
 
       $table=$dbpref.$this->pref."setup";
-
-      $impression=$mysqli->query("SELECT `impressions` FROM `".$table."` WHERE `id`=".$setup_id);
-            
+      $user_id=$_SESSION['user' . get_option('site_token')];
+      $access=$_SESSION['access' . get_option('site_token')];
+      if($access=='admin')
+      {
+        $qry=$mysqli->query("select `impressions` from `".$table."` where `id`=".$setup_id);
+      }
+      else
+      {
+        $qry=$mysqli->query("select `impressions` from `".$table."` where `id`=".$setup_id." and `user_id`=".$user_id);
+      }     
       $total_impression=$impression->fetch_assoc();
       return $total_impression['impressions'];
     }
@@ -82,8 +98,16 @@ if(!class_exists('CFProofConvert_setup'))
       global $mysqli;
       global $dbpref;
       $table= $dbpref.$this->pref.'setup';
-
-      $qry=$mysqli->query("select count(`id`) as `total_setup` from `".$table."`");
+      $user_id=$_SESSION['user' . get_option('site_token')];
+      $access=$_SESSION['access' . get_option('site_token')];
+      if($access=='admin')
+      {
+        $qry=$mysqli->query("select count(`id`) as `total_setup` from `".$table."`");
+      }
+      else
+      {
+        $qry=$mysqli->query("select count(`id`) as `total_setup` from `".$table."` where `user_id`=".$user_id);
+      }
 
       $r=$qry->fetch_object();
       return $r->total_setup;
@@ -114,7 +138,16 @@ if(!class_exists('CFProofConvert_setup'))
       global $dbpref;
       $url=rtrim($url, '/\\');
       $table=$dbpref.$this->pref.'setup';
-      $qry=$mysqli->query("select * from `".$table."` limit ".$limit.",1 ");
+      $user_id=$_SESSION['user' . get_option('site_token')];
+      $access=$_SESSION['access' . get_option('site_token')];
+      if($access=='admin')
+      {
+        $qry=$mysqli->query("select * from `".$table."` order by `id` desc limit ".$limit.",1");
+      }
+      else
+      {
+        $qry=$mysqli->query("select * from `".$table."` where `user_id`=".$user_id." order by `id` desc limit ".$limit.",1");
+      }
       if($qry->num_rows>0){
         $r=$qry->fetch_object(); 
         $f_setup=explode(",", $r->funnels);
@@ -472,6 +505,8 @@ if(!class_exists('CFProofConvert_setup'))
       $setup =[];
       $setup_css=[];
       $setup_fake_data=[];
+      $user_id=$_SESSION['user' . get_option('site_token')];
+      $access=$_SESSION['access' . get_option('site_token')];
 
       $title=$mysqli->real_escape_string(trim($setup_datas['cfproof_convert_title']));
       $param=$mysqli->real_escape_string(trim($setup_datas['cfproof_convert_param']));
@@ -511,7 +546,7 @@ if(!class_exists('CFProofConvert_setup'))
       $setup_css=json_encode($setup_css);
       if( $setup_datas['cfproof_convert_param'] == "save_setup"  )
       {
-        $sql = "INSERT INTO `".$table."`(`title`, `setup`,`fake_data`,`setup_css`,`notification`, `funnels`,`impressions`) VALUES ('".$title."' ,'".$setup."','".$add_fake."','".$setup_css."','".$notification."','".$funnels."',".$impressions.")";
+        $sql = "INSERT INTO `".$table."`(`title`, `setup`,`fake_data`,`setup_css`,`notification`, `funnels`,`impressions`,`user_id`) VALUES ('".$title."' ,'".$setup."','".$add_fake."','".$setup_css."','".$notification."','".$funnels."',".$impressions.",".$user_id.")";
         $return_insert = $mysqli->query( $sql )?1:-1;
                 
         if( $return_insert == 1 ){

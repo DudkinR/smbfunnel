@@ -1,72 +1,68 @@
 <?php
 session_start();
-set_time_limit(0);
-$current_base_dir=str_replace("\\","/",__DIR__);
-require_once($current_base_dir."/library/esc_html.php");
-
-if(isset($_GET["cfhttp"]))
-{
-	foreach($_GET as $cfhttp_data_index=>$cfhttp_data_val)
-	{
-		$_GET[$cfhttp_data_index]= js_html_entity_decode(base64_decode($cfhttp_data_val));
-		$_REQUEST[$cfhttp_data_index]= js_html_entity_decode(base64_decode($cfhttp_data_val));
-	}
-}
-if(isset($_POST["cfhttp"]))
-{
-	foreach($_POST as $cfhttp_data_index=>$cfhttp_data_val)
-	{
-		$_POST[$cfhttp_data_index]= js_html_entity_decode(base64_decode($cfhttp_data_val));
-		$_REQUEST[$cfhttp_data_index]= js_html_entity_decode(base64_decode($cfhttp_data_val));
-	}
-}
-
-require($current_base_dir."/gcp/gcp.php");
-
-require_once($current_base_dir."/library/library.php");
-$load=new Library();
-$cf_product_code="mailenginepro";
-if(is_file($GLOBALS["config_file"]))
-{
-
-require_once($GLOBALS["config_file"]);
-require_once($current_base_dir."/library/options.php");
-
-
-$load->setInfo('mysqli',$mysqli);
-$load->setInfo('dbpref',$dbpref);
-$load->setInfo('base_dir',str_replace("\\","/",__DIR__));
-$userobforcheck=$load->loadUser();
-}
-$csrf_msg="Session timeout please refresh page and try again";
-
-$security=$load->secure();
-
-
-if(function_exists('get_option'))
-{
-$main_load=$load;
-require_once($current_base_dir."/library/plugin_options.php");
-}
-
-//-------------config file generation-------------
-if(isset($_POST['createsubdomain']))
-{
-		// create new subdomain
-		$mysqli = $info['mysqli'];
-		$dbpref = $info['dbpref'];
-		$table = $dbpref . "subdomians";
-		//clear text
-		$name=$_POST['subdomain_name'];
-		$url=$_POST['subdomain_url'];
-		$type = $_POST['subdomain_type'];
-		$user_id = $_SESSION['user' . get_option('site_token')];
-		$sql_insert="
-		INSERT INTO `".$table."`(`id`, `name`, `url`, `type`, `user_id`) VALUES
-		(NULL,'$name','$url','$type','$user_id')";
-		$mysqli->query($sql_insert);
-		echo $sql_insert;
-
-
-}
+//$url, $name, $type, $modify_index = 0,$cname,$url_path
+//$create=$funnel->createFunnel($_POST['funnel_url'],$_POST['funnel_name'],$_POST['funnel_type'],$_POST['modify_index'],$_POST['cname']);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+<form action="req.php" method="post">
+<div class="col-sm-6 mw120 mx-auto">
+	<div class="card visual-pnl shadow">
+	<div class="card-header theme-text bg-white border-bottom-0">
+		Create project</div>
+		 <div class="card-body">
+			<span class="text-danger small mt-1">
+			<input type="hidden" name="createfunnel" value="createfunnel">
+			<input type="hidden" name="modify_index" value="0">
+			</span> <div class="mb-3"><label>Funnel name</label>
+			<input type="text" name="funnel_name"  placeholder="Add a title" class="form-control" value="ssssaa">
+			</div> 
+			<div class="mb-3">
+				<label>Funnel type</label> 
+			<select name="funnel_type" class="form-select">
+			<option value="0">Select funnel type</option> 
+			<option value="webinar">Webinar</option> 
+			<option value="membership" selected>Membership</option> 
+			<option value="sales">Sales</option> 
+			<option value="blank">Custom</option>
+			</select>
+		</div> 
+		<div class="mb-3">
+			<label>Funnel URL</label>
+			 <div class="input-group">
+				<div data-bs-toggle="tooltip" title="" class="input-group-prepend" data-bs-original-title="Base URL">
+					<span class="input-group-text">https://smbfunnels.com/</span>
+				</div> 
+				<input type="text" name="funnel_url" data-bs-toggle="tooltip" title="" placeholder="Enter path" class="form-control" data-bs-original-title="Path for the funnel" aria-label="Path for the funnel" value="https://smbfunnels.com/ssssaa">
+			</div>
+		</div> 
+		<div class="mb-3"><label>CNAME</label>
+		 <input type="checkbox" name="cname" value="1"> 
+		 <div class="input-group">
+			<div data-bs-toggle="tooltip" title="" class="input-group-prepend" data-bs-original-title="Base URL">
+				<span class="input-group-text">https://</span></div> 
+				<input type="text" name="url_path" data-bs-toggle="tooltip" title="" placeholder="Enter path" class="form-control" data-bs-original-title="Path for the CNAME" aria-label="Path for the CNAME" value="https://ssssaa.smbfunnels.com"> 
+				<div data-bs-toggle="tooltip" title="" class="input-group-prepend" data-bs-original-title="Base URL">
+					
+				</div>
+			</div>
+		</div> 
+		submit
+		<input type="submit" name="submit" value="submit">
+		
+		Create funnel
+		
+		</div>
+	</div>
+</div>
+</form>
+
+</body>
+</html>

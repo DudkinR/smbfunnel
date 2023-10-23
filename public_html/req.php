@@ -404,7 +404,8 @@ if(isset($_POST['createfunnel']))
 {
 if(!$userobforcheck->isLoggedin()){die ('@not-logged-in@');}
 $funnel=$load->loadFunnel(); 
-$create=$funnel->createFunnel($_POST['funnel_url'],$_POST['funnel_name'],$_POST['funnel_type'],$_POST['modify_index'],$_POST['cname']);
+//print_r($_POST);
+$create=$funnel->createFunnel($_POST['funnel_url'],$_POST['funnel_name'],$_POST['funnel_type'],$_POST['modify_index'],$_POST['cname'],$_POST['url_path']);
 echo $create;
 }
 //------------create subdomain---------------------

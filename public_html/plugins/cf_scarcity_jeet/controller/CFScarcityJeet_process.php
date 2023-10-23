@@ -132,17 +132,17 @@ if (isset($_POST['Submit'])) {
     if ($existingRecordCount > 0) {
 
 
-        $sql = "UPDATE `" . $table . "` SET apply_to='$apply_to',cfscarcity_page_url='$cfscarcity_page_url',funnels='$funnels', Position='$Position', Bar_Gradient1='$Bar_Gradient1',Bar_Gradient1_1='$Bar_Gradient1_1', CatchLine='$CatchLine', catch_line_color='$catch_line_color', Catch_line_font='$Catch_line_font', Catch_line_style='$Catch_line_style', show_action_button='$show_action_button', action_Background_color='$action_Background_color', 
+    echo    $sql = "UPDATE `" . $table . "` SET apply_to='$apply_to',cfscarcity_page_url='$cfscarcity_page_url',funnels='$funnels', Position='$Position', Bar_Gradient1='$Bar_Gradient1',Bar_Gradient1_1='$Bar_Gradient1_1', CatchLine='$CatchLine', catch_line_color='$catch_line_color', Catch_line_font='$Catch_line_font', Catch_line_style='$Catch_line_style', show_action_button='$show_action_button', action_Background_color='$action_Background_color', 
  action_button_text='$action_button_text', action_button_text_color='$action_button_text_color', button_link='$button_link', product_box_show='$product_box_show', 
  product_box_image='$product_box_image',product_link='$product_link',timezone='$timezone', end_date='$end_date', 
  timer_text_color='$timer_text_color', expiry_action='$expiry_action', expiry_url='$expiry_url',effect='$effect', effect_delay='$effect_delay', 
  effect_transition='$effect_transition', theme='$theme'  WHERE id='$row_id'";
 
         $return_update = $mysqli->query($sql) ? 1 : -1;
-        header("Refresh:0");
+      //  header("Refresh:0");
     } else {
 
-        $sql = "INSERT INTO `" . $table . "`(`apply_to`,`cfscarcity_page_url`,`funnels`, `Position`, `Bar_Gradient1`, `Bar_Gradient1_1`,  `CatchLine`, `catch_line_color`, `Catch_line_font`, `Catch_line_style`,  `show_action_button`,
+      echo   $sql = "INSERT INTO `" . $table . "`(`apply_to`,`cfscarcity_page_url`,`funnels`, `Position`, `Bar_Gradient1`, `Bar_Gradient1_1`,  `CatchLine`, `catch_line_color`, `Catch_line_font`, `Catch_line_style`,  `show_action_button`,
 `action_Background_color`, `action_button_text`, `action_button_text_color`, `button_link`, `product_box_show`, `product_box_image`,`product_link`,
  `timezone`, `end_date`, `timer_text_color`,`expiry_action`, `expiry_url`,`effect`, 
    `effect_delay`, `effect_transition`, `theme`) VALUES ('" . $apply_to . "','" . $cfscarcity_page_url . "','" . $funnels . "','" . $Position . "','" . $Bar_Gradient1 . "','" . $Bar_Gradient1_1 . "', '" . $CatchLine . "', '" . $catch_line_color . "',
@@ -150,6 +150,6 @@ if (isset($_POST['Submit'])) {
   '" . $button_link . "','" . $product_box_show . "','" . $product_box_image . "','" . $product_link . "', '" . $timezone . "', '" . $end_date . "', '" . $timer_text_color . "','" . $expiry_action . "', '" . $expiry_url . "','" . $effect . "', '" . $effect_delay . "', '" . $effect_transition . "','" . $theme . "')";
 
         $return_insert = $mysqli->query($sql) ? 1 : -1;
-        header("Refresh:0");
+     //   header("Refresh:0");
     }
 }
